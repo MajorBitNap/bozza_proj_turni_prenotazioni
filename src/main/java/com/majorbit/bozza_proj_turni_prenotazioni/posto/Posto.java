@@ -16,6 +16,9 @@ public class Posto {
     @Column
     private String nome;
 
+    @Column
+    private boolean disponibile;
+
 
     @Column(name = "stanza_id")
     private int stanzaId;
