@@ -13,7 +13,7 @@ public class Piano {
 
     @Id
     @GeneratedValue
-    private int id; //asd
+    private int id;//ciao
 
     @Column
     private String nome;
