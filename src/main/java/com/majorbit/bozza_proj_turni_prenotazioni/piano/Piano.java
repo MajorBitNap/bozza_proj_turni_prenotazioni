@@ -1,5 +1,6 @@
-package com.majorbit.bozza_proj_turni_prenotazioni.persistance.entity;
+package com.majorbit.bozza_proj_turni_prenotazioni.piano;
 
+import com.majorbit.bozza_proj_turni_prenotazioni.stanza.Stanza;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

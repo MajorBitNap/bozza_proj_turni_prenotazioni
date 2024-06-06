@@ -1,4 +1,4 @@
-package com.majorbit.bozza_proj_turni_prenotazioni.persistance.entity;
+package com.majorbit.bozza_proj_turni_prenotazioni.utente;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
