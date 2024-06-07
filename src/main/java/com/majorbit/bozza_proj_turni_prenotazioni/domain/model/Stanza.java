@@ -4,9 +4,15 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 public class Stanza {
 
@@ -24,55 +30,5 @@ public class Stanza {
     private int pianoId;
 
     private List<Posto> posti;
-
-    public Stanza() {
-    }
-
-    public Stanza(int id, String nome, int capienza, int pianoId) {
-        this.id = id;
-        this.nome = nome;
-        this.capienza = capienza;
-        this.pianoId = pianoId;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public int getCapienza() {
-        return capienza;
-    }
-
-    public void setCapienza(int capienza) {
-        this.capienza = capienza;
-    }
-
-    public List<Posto> getPosti() {
-        return posti;
-    }
-
-    public void setPosti(List<Posto> posti) {
-        this.posti = posti;
-    }
-
-    public int getPianoId() {
-        return pianoId;
-    }
-
-    public void setPianoId(int pianoId) {
-        this.pianoId = pianoId;
-    }
 
 }
