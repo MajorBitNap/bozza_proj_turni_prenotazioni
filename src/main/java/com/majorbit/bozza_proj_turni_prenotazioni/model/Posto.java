@@ -1,4 +1,4 @@
-package com.majorbit.bozza_proj_turni_prenotazioni.posto;
+package com.majorbit.bozza_proj_turni_prenotazioni.model;
 
 
 import jakarta.persistence.Column;

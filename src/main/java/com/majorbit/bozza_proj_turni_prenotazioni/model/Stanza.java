@@ -1,6 +1,5 @@
-package com.majorbit.bozza_proj_turni_prenotazioni.stanza;
+package com.majorbit.bozza_proj_turni_prenotazioni.model;
 
-import com.majorbit.bozza_proj_turni_prenotazioni.posto.Posto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
