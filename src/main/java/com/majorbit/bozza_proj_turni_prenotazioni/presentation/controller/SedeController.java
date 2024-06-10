@@ -39,7 +39,7 @@ public class SedeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SedeDTO> updateSede(@PathVariable Long id, @RequestBody @RequestBody SedeDTO sede) {
+    public ResponseEntity<SedeDTO> updateSede(@PathVariable Long id, @RequestBody SedeDTO sede) {
         SedeDTO updatedSede = sedeService.updateSede(id, sede);
         return ResponseEntity.ok(updatedSede);
     }
