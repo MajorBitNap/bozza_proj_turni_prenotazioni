@@ -4,10 +4,13 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.LoginDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.LoginMapper;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.service.spec.LoginService;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Login;
+import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.LoginRepository;
+import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ILoginService implements LoginService {
@@ -20,7 +23,7 @@ public class ILoginService implements LoginService {
 
     @Override
     public LoginDTO createLogin(LoginDTO loginDTO) {
-        Login login = loginMapper.toEntity(loginDTO);
+        Login login = LoginMapper.toEntity(loginDTO);
         Login savedLogin = loginRepository.save(login);
         return loginMapper.toDTO(savedLogin);
     }
@@ -28,7 +31,7 @@ public class ILoginService implements LoginService {
     @Override
     public LoginDTO getLoginById(Long id) {
         Login login = loginRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Login not found"));
-        return loginMapper.toDTO(login);
+        return LoginMapper.toDTO(login);
     }
 
     @Override
