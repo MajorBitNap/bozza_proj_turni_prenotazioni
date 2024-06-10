@@ -1,4 +1,4 @@
-package com.majorbit.bozza_proj_turni_prenotazioni.application.dto.service.impl;
+package com.majorbit.bozza_proj_turni_prenotazioni.application.service.impl;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.UtenteDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.service.spec.UtenteService;
