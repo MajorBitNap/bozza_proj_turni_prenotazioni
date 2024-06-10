@@ -11,7 +11,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
-public class Stanza {
+public class
+Stanza {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
