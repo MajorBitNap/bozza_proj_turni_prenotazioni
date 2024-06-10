@@ -44,7 +44,7 @@ public class ILoginService implements LoginService {
     public LoginDTO updateLogin(Long id, LoginDTO loginDTO) {
         Login login = loginRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Login not found"));
         login.setPasswordUtente(loginDTO.utentePassword());
-        login.setUtente(loginDTO.utenteId());
+        login.setUtenteId(loginDTO.utenteId());
         Login updatedLogin = loginRepository.save(login);
         return loginMapper.toDTO(updatedLogin);
     }
