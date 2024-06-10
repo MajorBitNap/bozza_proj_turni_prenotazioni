@@ -17,7 +17,7 @@ import org.springframework.data.annotation.Id;
 public class Posto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @Column
     private String nome;
@@ -27,6 +27,6 @@ public class Posto {
 
 
     @Column(name = "stanza_id")
-    private int stanzaId;
+    private Long stanzaId;
 
 }

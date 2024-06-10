@@ -15,7 +15,7 @@ public class Sede {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @Column
     private String nome;

@@ -15,7 +15,7 @@ public class Prenotazione {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    private long id;
+    private Long id;
 
     @Column
     private Date dataInizio;
@@ -27,10 +27,10 @@ public class Prenotazione {
     private String stato;
 
     @Column
-    private long postoId;
+    private Long postoId;
 
     @Column
-    private long utenteId;
+    private Long utenteId;
 
 
 }
