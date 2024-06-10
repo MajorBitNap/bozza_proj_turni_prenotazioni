@@ -41,7 +41,7 @@ public class IPianoService implements PianoService {
     @Override
     public PianoDTO updatePiano(Long id, PianoDTO pianoDTO) {
         Piano piano = pianoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Piano not found"));
-        piano.setNome(pianoDTO.getNome());
+        piano.setNome(pianoDTO.nome());
         piano.setNumero(pianoDTO.getNumero());
         piano.setSede(pianoMapper.toEntity(pianoDTO.getSede()));
         Piano updatedPiano = pianoRepository.save(piano);
