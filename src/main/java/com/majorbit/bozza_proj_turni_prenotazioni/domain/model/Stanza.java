@@ -15,7 +15,7 @@ public class Stanza {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @Column
     private String nome;
@@ -24,7 +24,7 @@ public class Stanza {
     private int capienza;
 
     @Column(name = "piano_id")
-    private long pianoId;
+    private Long pianoId;
 
     private List<Posto> posti;
 
