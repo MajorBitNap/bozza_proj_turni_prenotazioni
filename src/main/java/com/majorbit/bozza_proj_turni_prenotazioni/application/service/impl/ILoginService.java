@@ -25,7 +25,7 @@ public class ILoginService implements LoginService {
     public LoginDTO createLogin(LoginDTO loginDTO) {
         Login login = LoginMapper.toEntity(loginDTO);
         Login savedLogin = loginRepository.save(login);
-        return loginMapper.toDTO(savedLogin);
+        return LoginMapper.toDTO(savedLogin);
     }
 
     @Override
@@ -37,16 +37,16 @@ public class ILoginService implements LoginService {
     @Override
     public List<LoginDTO> getAllLogins() {
         List<Login> logins = loginRepository.findAll();
-        return logins.stream().map(loginMapper::toDTO).collect(Collectors.toList());
+        return logins.stream().map(LoginMapper::toDTO).collect(Collectors.toList());
     }
 
     @Override
     public LoginDTO updateLogin(Long id, LoginDTO loginDTO) {
         Login login = loginRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Login not found"));
         login.setPasswordUtente(loginDTO.utentePassword());
-        login.setUtente(loginDTO.utenteId());
+        login.setUtenteId(loginDTO.utenteId());
         Login updatedLogin = loginRepository.save(login);
-        return loginMapper.toDTO(updatedLogin);
+        return LoginMapper.toDTO(updatedLogin);
     }
 
     @Override

@@ -23,21 +23,21 @@ public class IUtenteService implements UtenteService {
 
     @Override
     public UtenteDTO createUtente(UtenteDTO utenteDTO) {
-        Utente utente = utenteMapper.toEntity(utenteDTO);
+        Utente utente = UtenteMapper.toEntity(utenteDTO);
         Utente savedUtente = utenteRepository.save(utente);
-        return utenteMapper.toDTO(savedUtente);
+        return UtenteMapper.toDTO(savedUtente);
     }
 
     @Override
     public UtenteDTO getUtenteById(Long id) {
         Utente utente = utenteRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Utente not found"));
-        return utenteMapper.toDTO(utente);
+        return UtenteMapper.toDTO(utente);
     }
 
     @Override
     public List<UtenteDTO> getAllUtenti() {
         List<Utente> utenti = utenteRepository.findAll();
-        return utenti.stream().map(utenteMapper::toDTO).collect(Collectors.toList());
+        return utenti.stream().map(UtenteMapper::toDTO).collect(Collectors.toList());
     }
 
     @Override
@@ -49,7 +49,7 @@ public class IUtenteService implements UtenteService {
         utente.setEmail(utenteDTO.email());
         utente.setRuolo(utenteDTO.ruolo());
         Utente updatedUtente = utenteRepository.save(utente);
-        return utenteMapper.toDTO(updatedUtente);
+        return UtenteMapper.toDTO(updatedUtente);
     }
 
     @Override

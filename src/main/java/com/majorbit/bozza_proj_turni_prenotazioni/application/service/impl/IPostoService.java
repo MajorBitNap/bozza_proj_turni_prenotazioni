@@ -23,21 +23,21 @@ public class IPostoService implements PostoService {
 
     @Override
     public PostoDTO createPosto(PostoDTO postoDTO) {
-        Posto posto = postoMapper.toEntity(postoDTO);
+        Posto posto = PostoMapper.toEntity(postoDTO);
         Posto savedPosto = postoRepository.save(posto);
-        return postoMapper.toDTO(savedPosto);
+        return PostoMapper.toDTO(savedPosto);
     }
 
     @Override
     public PostoDTO getPostoById(Long id) {
         Posto posto = postoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Posto not found"));
-        return postoMapper.toDTO(posto);
+        return PostoMapper.toDTO(posto);
     }
 
     @Override
     public List<PostoDTO> getAllPosti() {
         List<Posto> posti = postoRepository.findAll();
-        return posti.stream().map(postoMapper::toDTO).collect(Collectors.toList());
+        return posti.stream().map(PostoMapper::toDTO).collect(Collectors.toList());
     }
 
     @Override
@@ -47,7 +47,7 @@ public class IPostoService implements PostoService {
         posto.setNome(postoDTO.nome());
         posto.setStanzaId(postoDTO.stanzaId());
         Posto updatedPosto = postoRepository.save(posto);
-        return postoMapper.toDTO(updatedPosto);
+        return PostoMapper.toDTO(updatedPosto);
     }
 
     @Override
