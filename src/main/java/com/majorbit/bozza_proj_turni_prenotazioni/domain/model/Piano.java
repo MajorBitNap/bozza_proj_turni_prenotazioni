@@ -15,7 +15,7 @@ public class Piano {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
 
     @Column
     private String nome;
@@ -24,7 +24,7 @@ public class Piano {
     private int numero;
 
     @Column(name = "sede_id")
-    private int sedeId;
+    private long sedeId;
 
     private List<Stanza> stanze;
 

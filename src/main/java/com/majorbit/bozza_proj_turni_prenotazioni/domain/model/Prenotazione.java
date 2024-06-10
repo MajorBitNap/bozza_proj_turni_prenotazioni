@@ -5,27 +5,32 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.sql.Date;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-public class Stanza {
+public class Prenotazione {
 
-    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
     private long id;
 
     @Column
-    private String nome;
+    private Date dataInizio;
 
     @Column
-    private int capienza;
+    private Date dataFine;
 
-    @Column(name = "piano_id")
-    private long pianoId;
+    @Column
+    private String stato;
 
-    private List<Posto> posti;
+    @Column
+    private long postoId;
+
+    @Column
+    private long utenteId;
+
 
 }
