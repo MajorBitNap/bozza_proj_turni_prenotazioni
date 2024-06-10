@@ -5,10 +5,12 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.PostoMapper
 import com.majorbit.bozza_proj_turni_prenotazioni.application.service.spec.PostoService;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Posto;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PostoRepository;
+import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class IPostoService implements PostoService {
@@ -41,8 +43,9 @@ public class IPostoService implements PostoService {
     @Override
     public PostoDTO updatePosto(Long id, PostoDTO postoDTO) {
         Posto posto = postoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Posto not found"));
-        posto.setNome(postoDTO.getNome());
-        posto.setStanza(postoMapper.toEntity(postoDTO.getStanza()));
+        posto.setId(postoDTO.id());
+        posto.setNome(postoDTO.nome());
+        posto.setStanzaId(postoDTO.stanzaId());
         Posto updatedPosto = postoRepository.save(posto);
         return postoMapper.toDTO(updatedPosto);
     }

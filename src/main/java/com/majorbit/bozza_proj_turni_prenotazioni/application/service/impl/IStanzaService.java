@@ -5,10 +5,12 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.StanzaMappe
 import com.majorbit.bozza_proj_turni_prenotazioni.application.service.spec.StanzaService;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Stanza;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.StanzaRepository;
+import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class IStanzaService implements StanzaService {
@@ -41,10 +43,10 @@ public class IStanzaService implements StanzaService {
     @Override
     public StanzaDTO updateStanza(Long id, StanzaDTO stanzaDTO) {
         Stanza stanza = stanzaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Stanza not found"));
-        stanza.setNome(stanzaDTO.getNome());
-        stanza.setCapienza(stanzaDTO.getCapienza());
-        stanza.setMappaStanza(stanzaDTO.getMappaStanza());
-        stanza.setPiano(stanzaMapper.toEntity(stanzaDTO.getPiano()));
+        stanza.setId(stanzaDTO.id());
+        stanza.setNome(stanzaDTO.nome());
+        stanza.setCapienza(stanzaDTO.capienza());
+        stanza.setPianoId(stanzaDTO.pianoId());
         Stanza updatedStanza = stanzaRepository.save(stanza);
         return stanzaMapper.toDTO(updatedStanza);
     }

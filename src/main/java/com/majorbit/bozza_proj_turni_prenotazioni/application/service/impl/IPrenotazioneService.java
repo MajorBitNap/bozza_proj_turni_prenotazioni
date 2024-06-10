@@ -5,10 +5,12 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.Prenotazion
 import com.majorbit.bozza_proj_turni_prenotazioni.application.service.spec.PrenotazioneService;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Prenotazione;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PrenotazioneRepository;
+import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class IPrenotazioneService implements PrenotazioneService {
@@ -41,11 +43,12 @@ public class IPrenotazioneService implements PrenotazioneService {
     @Override
     public PrenotazioneDTO updatePrenotazione(Long id, PrenotazioneDTO prenotazioneDTO) {
         Prenotazione prenotazione = prenotazioneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Prenotazione not found"));
-        prenotazione.setDataInizio(prenotazioneDTO.getDataInizio());
-        prenotazione.setDataFine(prenotazioneDTO.getDataFine());
-        prenotazione.setStato(prenotazioneDTO.getStato());
-        prenotazione.setPosto(prenotazioneMapper.toEntity(prenotazioneDTO.getPosto()));
-        prenotazione.setUtente(prenotazioneMapper.toEntity(prenotazioneDTO.getUtente()));
+        prenotazione.setId(prenotazioneDTO.postoId());
+        prenotazione.setDataInizio(prenotazioneDTO.dataInizio());
+        prenotazione.setDataFine(prenotazioneDTO.dataFine());
+        prenotazione.setStato(prenotazioneDTO.stato());
+        prenotazione.setPostoId(prenotazioneDTO.postoId());
+        prenotazione.setUtenteId(prenotazioneDTO.utenteId());;
         Prenotazione updatedPrenotazione = prenotazioneRepository.save(prenotazione);
         return prenotazioneMapper.toDTO(updatedPrenotazione);
     }

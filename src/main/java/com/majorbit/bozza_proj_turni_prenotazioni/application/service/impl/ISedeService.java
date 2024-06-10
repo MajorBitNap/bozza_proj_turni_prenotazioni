@@ -5,6 +5,7 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.SedeMapper;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.service.spec.SedeService;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Sede;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.SedeRepository;
+import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,8 +43,9 @@ public class ISedeService implements SedeService {
     @Override
     public SedeDTO updateSede(Long id, SedeDTO sedeDTO) {
         Sede sede = sedeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Sede not found"));
-        sede.setNome(sedeDTO.getNome());
-        sede.setIndirizzo(sedeDTO.getIndirizzo());
+        sede.setId(sedeDTO.id());
+        sede.setNome(sedeDTO.nome());
+        sede.setIndirizzo(sedeDTO.indirizzo());
         Sede updatedSede = sedeRepository.save(sede);
         return sedeMapper.toDTO(updatedSede);
     }

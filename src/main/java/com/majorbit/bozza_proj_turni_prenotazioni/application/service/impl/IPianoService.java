@@ -5,10 +5,12 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.PianoMapper
 import com.majorbit.bozza_proj_turni_prenotazioni.application.service.spec.PianoService;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Piano;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PianoRepository;
+import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class IPianoService implements PianoService {
@@ -41,9 +43,10 @@ public class IPianoService implements PianoService {
     @Override
     public PianoDTO updatePiano(Long id, PianoDTO pianoDTO) {
         Piano piano = pianoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Piano not found"));
+        piano.setId(pianoDTO.id());
         piano.setNome(pianoDTO.nome());
-        piano.setNumero(pianoDTO.getNumero());
-        piano.setSede(pianoMapper.toEntity(pianoDTO.getSede()));
+        piano.setNumero(pianoDTO.numero());
+        piano.setSedeId(pianoDTO.sedeId());
         Piano updatedPiano = pianoRepository.save(piano);
         return pianoMapper.toDTO(updatedPiano);
     }

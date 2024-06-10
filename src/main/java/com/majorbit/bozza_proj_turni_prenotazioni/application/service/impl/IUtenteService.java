@@ -5,10 +5,12 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.UtenteMappe
 import com.majorbit.bozza_proj_turni_prenotazioni.application.service.spec.UtenteService;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Utente;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.UtenteRepository;
+import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class IUtenteService implements UtenteService {
@@ -41,11 +43,11 @@ public class IUtenteService implements UtenteService {
     @Override
     public UtenteDTO updateUtente(Long id, UtenteDTO utenteDTO) {
         Utente utente = utenteRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Utente not found"));
-        utente.setNome(utenteDTO.getNome());
-        utente.setCognome(utenteDTO.getCognome());
-        utente.setEmail(utenteDTO.getEmail());
-        utente.setPassword(utenteDTO.getPassword());
-        utente.setRuolo(utenteDTO.getRuolo());
+        utente.setId(utenteDTO.id());
+        utente.setNome(utenteDTO.nome());
+        utente.setCognome(utenteDTO.cognome());
+        utente.setEmail(utenteDTO.email());
+        utente.setRuolo(utenteDTO.ruolo());
         Utente updatedUtente = utenteRepository.save(utente);
         return utenteMapper.toDTO(updatedUtente);
     }
