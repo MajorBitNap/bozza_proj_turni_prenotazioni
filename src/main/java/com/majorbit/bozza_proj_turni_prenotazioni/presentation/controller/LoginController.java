@@ -1,8 +1,7 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.LoginDTO;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.service.impl.ILoginService;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.service.spec.LoginService;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.IGestioneLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +13,10 @@ import java.util.List;
 @RequestMapping("/api/v1/login")
 public class LoginController {
 
-    private final ILoginService loginService;
+    private final IGestioneLogin loginService;
 
     @Autowired
-    public LoginController(ILoginService loginService) {
+    public LoginController(IGestioneLogin loginService) {
         this.loginService = loginService;
     }
 

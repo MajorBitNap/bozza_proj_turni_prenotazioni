@@ -1,8 +1,8 @@
-package com.majorbit.bozza_proj_turni_prenotazioni.application.service.impl;
+package com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PianoDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.PianoMapper;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.service.spec.PianoService;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.spec.GestionePiano;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Piano;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PianoRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class IPianoService implements PianoService {
+public class IGestionePiano implements GestionePiano {
 
     @Autowired
     private PianoRepository pianoRepository;

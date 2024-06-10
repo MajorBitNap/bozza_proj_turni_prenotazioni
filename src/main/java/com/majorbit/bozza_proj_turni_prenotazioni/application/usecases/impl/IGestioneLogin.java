@@ -1,8 +1,8 @@
-package com.majorbit.bozza_proj_turni_prenotazioni.application.service.impl;
+package com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.LoginDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.LoginMapper;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.service.spec.LoginService;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.spec.GestioneLogin;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Login;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.LoginRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ILoginService implements LoginService {
+public class IGestioneLogin implements GestioneLogin {
 
     @Autowired
     private LoginRepository loginRepository;

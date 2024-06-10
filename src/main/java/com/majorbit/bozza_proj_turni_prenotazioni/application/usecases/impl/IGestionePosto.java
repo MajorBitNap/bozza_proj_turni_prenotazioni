@@ -1,8 +1,8 @@
-package com.majorbit.bozza_proj_turni_prenotazioni.application.service.impl;
+package com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PostoDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.PostoMapper;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.service.spec.PostoService;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.spec.GestionePosto;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Posto;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PostoRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class IPostoService implements PostoService {
+public class IGestionePosto implements GestionePosto {
 
     @Autowired
     private PostoRepository postoRepository;

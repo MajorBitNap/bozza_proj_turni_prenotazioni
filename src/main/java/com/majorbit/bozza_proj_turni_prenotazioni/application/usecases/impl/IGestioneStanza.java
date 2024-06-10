@@ -1,8 +1,8 @@
-package com.majorbit.bozza_proj_turni_prenotazioni.application.service.impl;
+package com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.StanzaDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.StanzaMapper;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.service.spec.StanzaService;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.spec.GestioneStanza;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Stanza;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.StanzaRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class IStanzaService implements StanzaService {
+public class IGestioneStanza implements GestioneStanza {
 
     @Autowired
     private StanzaRepository stanzaRepository;

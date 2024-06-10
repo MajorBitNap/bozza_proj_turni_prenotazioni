@@ -1,10 +1,10 @@
-package com.majorbit.bozza_proj_turni_prenotazioni.application.service.spec;
+package com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.spec;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.SedeDTO;
 
 import java.util.List;
 
-public interface SedeService {
+public interface GestioneSede {
     SedeDTO createSede(SedeDTO sedeDTO);
     SedeDTO getSedeById(Long id);
     List<SedeDTO> getAllSedi();

@@ -1,8 +1,8 @@
-package com.majorbit.bozza_proj_turni_prenotazioni.application.service.impl;
+package com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.SedeDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.SedeMapper;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.service.spec.SedeService;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.spec.GestioneSede;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Sede;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.SedeRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ISedeService implements SedeService {
+public class IGestioneSede implements GestioneSede {
 
     @Autowired
     private SedeRepository sedeRepository;

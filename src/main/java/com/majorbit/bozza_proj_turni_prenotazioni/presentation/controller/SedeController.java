@@ -1,7 +1,6 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PianoDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.SedeDTO;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.service.spec.SedeService;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.spec.GestioneSede;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,40 +12,40 @@ import java.util.List;
 @RequestMapping("/api/v1/sedi")
 public class SedeController {
 
-    private final SedeService sedeService;
+    private final GestioneSede gestioneSede;
 
     @Autowired
-    public SedeController(SedeService sedeService) {
-        this.sedeService = sedeService;
+    public SedeController(GestioneSede gestioneSede) {
+        this.gestioneSede = gestioneSede;
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<SedeDTO> getSedeById(@PathVariable Long id) {
-        SedeDTO sede = sedeService.getSedeById(id);
+        SedeDTO sede = gestioneSede.getSedeById(id);
         return ResponseEntity.ok(sede);
     }
 
     @GetMapping
     public ResponseEntity<List<SedeDTO>> getAllSedi() {
-        List<SedeDTO> sedi = sedeService.getAllSedi();
+        List<SedeDTO> sedi = gestioneSede.getAllSedi();
         return ResponseEntity.ok(sedi);
     }
 
     @PostMapping
     public ResponseEntity<SedeDTO> createSede(@RequestBody SedeDTO sede) {
-        SedeDTO newSede = sedeService.createSede(sede);
+        SedeDTO newSede = gestioneSede.createSede(sede);
         return ResponseEntity.status(HttpStatus.CREATED).body(newSede);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<SedeDTO> updateSede(@PathVariable Long id, @RequestBody SedeDTO sede) {
-        SedeDTO updatedSede = sedeService.updateSede(id, sede);
+        SedeDTO updatedSede = gestioneSede.updateSede(id, sede);
         return ResponseEntity.ok(updatedSede);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteSede(@PathVariable Long id) {
-        sedeService.deleteSede(id);
+        gestioneSede.deleteSede(id);
         return ResponseEntity.noContent().build();
     }
 

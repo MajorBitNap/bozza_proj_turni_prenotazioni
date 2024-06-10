@@ -1,8 +1,8 @@
-package com.majorbit.bozza_proj_turni_prenotazioni.application.service.impl;
+package com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.UtenteDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.UtenteMapper;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.service.spec.UtenteService;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.spec.GestioneUtente;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Utente;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.UtenteRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class IUtenteService implements UtenteService {
+public class IGestioneUtente implements GestioneUtente {
 
     @Autowired
     private UtenteRepository utenteRepository;
