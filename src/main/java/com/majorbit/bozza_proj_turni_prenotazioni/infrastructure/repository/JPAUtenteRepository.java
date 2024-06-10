@@ -1,4 +1,4 @@
-package com.majorbit.bozza_proj_turni_prenotazioni.adapter.repository;
+package com.majorbit.bozza_proj_turni_prenotazioni.infrastructure.repository;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Utente;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.UtenteRepository;
