@@ -23,21 +23,21 @@ public class IStanzaService implements StanzaService {
 
     @Override
     public StanzaDTO createStanza(StanzaDTO stanzaDTO) {
-        Stanza stanza = stanzaMapper.toEntity(stanzaDTO);
+        Stanza stanza = StanzaMapper.toEntity(stanzaDTO);
         Stanza savedStanza = stanzaRepository.save(stanza);
-        return stanzaMapper.toDTO(savedStanza);
+        return StanzaMapper.toDTO(savedStanza);
     }
 
     @Override
     public StanzaDTO getStanzaById(Long id) {
         Stanza stanza = stanzaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Stanza not found"));
-        return stanzaMapper.toDTO(stanza);
+        return StanzaMapper.toDTO(stanza);
     }
 
     @Override
     public List<StanzaDTO> getAllStanze() {
         List<Stanza> stanze = stanzaRepository.findAll();
-        return stanze.stream().map(stanzaMapper::toDTO).collect(Collectors.toList());
+        return stanze.stream().map(StanzaMapper::toDTO).collect(Collectors.toList());
     }
 
     @Override
@@ -48,7 +48,7 @@ public class IStanzaService implements StanzaService {
         stanza.setCapienza(stanzaDTO.capienza());
         stanza.setPianoId(stanzaDTO.pianoId());
         Stanza updatedStanza = stanzaRepository.save(stanza);
-        return stanzaMapper.toDTO(updatedStanza);
+        return StanzaMapper.toDTO(updatedStanza);
     }
 
     @Override

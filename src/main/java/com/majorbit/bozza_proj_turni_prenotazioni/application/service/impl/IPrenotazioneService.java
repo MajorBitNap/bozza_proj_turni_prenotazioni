@@ -23,21 +23,21 @@ public class IPrenotazioneService implements PrenotazioneService {
 
     @Override
     public PrenotazioneDTO createPrenotazione(PrenotazioneDTO prenotazioneDTO) {
-        Prenotazione prenotazione = prenotazioneMapper.toEntity(prenotazioneDTO);
+        Prenotazione prenotazione = PrenotazioneMapper.toEntity(prenotazioneDTO);
         Prenotazione savedPrenotazione = prenotazioneRepository.save(prenotazione);
-        return prenotazioneMapper.toDTO(savedPrenotazione);
+        return PrenotazioneMapper.toDTO(savedPrenotazione);
     }
 
     @Override
     public PrenotazioneDTO getPrenotazioneById(Long id) {
         Prenotazione prenotazione = prenotazioneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Prenotazione not found"));
-        return prenotazioneMapper.toDTO(prenotazione);
+        return PrenotazioneMapper.toDTO(prenotazione);
     }
 
     @Override
     public List<PrenotazioneDTO> getAllPrenotazioni() {
         List<Prenotazione> prenotazioni = prenotazioneRepository.findAll();
-        return prenotazioni.stream().map(prenotazioneMapper::toDTO).collect(Collectors.toList());
+        return prenotazioni.stream().map(PrenotazioneMapper::toDTO).collect(Collectors.toList());
     }
 
     @Override
@@ -50,7 +50,7 @@ public class IPrenotazioneService implements PrenotazioneService {
         prenotazione.setPostoId(prenotazioneDTO.postoId());
         prenotazione.setUtenteId(prenotazioneDTO.utenteId());;
         Prenotazione updatedPrenotazione = prenotazioneRepository.save(prenotazione);
-        return prenotazioneMapper.toDTO(updatedPrenotazione);
+        return PrenotazioneMapper.toDTO(updatedPrenotazione);
     }
 
     @Override

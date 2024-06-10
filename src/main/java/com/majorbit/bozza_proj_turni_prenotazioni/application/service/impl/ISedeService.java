@@ -23,21 +23,21 @@ public class ISedeService implements SedeService {
 
     @Override
     public SedeDTO createSede(SedeDTO sedeDTO) {
-        Sede sede = sedeMapper.toEntity(sedeDTO);
+        Sede sede = SedeMapper.toEntity(sedeDTO);
         Sede savedSede = sedeRepository.save(sede);
-        return sedeMapper.toDTO(savedSede);
+        return SedeMapper.toDTO(savedSede);
     }
 
     @Override
     public SedeDTO getSedeById(Long id) {
         Sede sede = sedeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Sede not found"));
-        return sedeMapper.toDTO(sede);
+        return SedeMapper.toDTO(sede);
     }
 
     @Override
     public List<SedeDTO> getAllSedi() {
         List<Sede> sedi = sedeRepository.findAll();
-        return sedi.stream().map(sedeMapper::toDTO).collect(Collectors.toList());
+        return sedi.stream().map(SedeMapper::toDTO).collect(Collectors.toList());
     }
 
     @Override
@@ -47,7 +47,7 @@ public class ISedeService implements SedeService {
         sede.setNome(sedeDTO.nome());
         sede.setIndirizzo(sedeDTO.indirizzo());
         Sede updatedSede = sedeRepository.save(sede);
-        return sedeMapper.toDTO(updatedSede);
+        return SedeMapper.toDTO(updatedSede);
     }
 
     @Override

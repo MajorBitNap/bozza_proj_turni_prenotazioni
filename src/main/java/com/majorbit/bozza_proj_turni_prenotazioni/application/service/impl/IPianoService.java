@@ -23,21 +23,21 @@ public class IPianoService implements PianoService {
 
     @Override
     public PianoDTO createPiano(PianoDTO pianoDTO) {
-        Piano piano = pianoMapper.toEntity(pianoDTO);
+        Piano piano = PianoMapper.toEntity(pianoDTO);
         Piano savedPiano = pianoRepository.save(piano);
-        return pianoMapper.toDTO(savedPiano);
+        return PianoMapper.toDTO(savedPiano);
     }
 
     @Override
     public PianoDTO getPianoById(Long id) {
         Piano piano = pianoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Piano not found"));
-        return pianoMapper.toDTO(piano);
+        return PianoMapper.toDTO(piano);
     }
 
     @Override
     public List<PianoDTO> getAllPiani() {
         List<Piano> piani = pianoRepository.findAll();
-        return piani.stream().map(pianoMapper::toDTO).collect(Collectors.toList());
+        return piani.stream().map(PianoMapper::toDTO).collect(Collectors.toList());
     }
 
     @Override
@@ -48,7 +48,7 @@ public class IPianoService implements PianoService {
         piano.setNumero(pianoDTO.numero());
         piano.setSedeId(pianoDTO.sedeId());
         Piano updatedPiano = pianoRepository.save(piano);
-        return pianoMapper.toDTO(updatedPiano);
+        return PianoMapper.toDTO(updatedPiano);
     }
 
     @Override
