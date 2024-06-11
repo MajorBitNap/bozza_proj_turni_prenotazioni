@@ -2,11 +2,14 @@ package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller;
 
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PianoDTO;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.StanzaDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.spec.GestionePiano;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/piani")
@@ -23,6 +26,11 @@ public class PianoController {
     public ResponseEntity<PianoDTO> getPianoById(@PathVariable Long id) {
         PianoDTO piano = gestionePiano.getPianoById(id);
         return ResponseEntity.ok(piano);
+    }
+    @GetMapping
+    public ResponseEntity<List<PianoDTO>> getAllPiani() {
+        List<PianoDTO> piani = gestionePiano.getAllPiani();
+        return ResponseEntity.ok(piani);
     }
 
     @PostMapping
