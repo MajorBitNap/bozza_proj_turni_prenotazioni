@@ -30,7 +30,7 @@ public class Utente {
     private String password;
 
     @Column
-    private String ruolo;
+    private Ruolo ruolo;
 
     @OneToMany(mappedBy = "utente", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference

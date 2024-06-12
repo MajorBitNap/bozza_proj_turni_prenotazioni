@@ -43,12 +43,12 @@ public class IGestionePrenotazione implements GestionePrenotazione {
     @Override
     public PrenotazioneDTO updatePrenotazione(Long id, PrenotazioneDTO prenotazioneDTO) {
         Prenotazione prenotazione = prenotazioneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Prenotazione not found"));
-        prenotazione.setId(prenotazioneDTO.postoId());
+        prenotazione.setId(prenotazioneDTO.id());
         prenotazione.setDataInizio(prenotazioneDTO.dataInizio());
         prenotazione.setDataFine(prenotazioneDTO.dataFine());
         prenotazione.setStato(prenotazioneDTO.stato());
-        prenotazione.setPostoId(prenotazioneDTO.postoId());
-        prenotazione.setUtenteId(prenotazioneDTO.utenteId());;
+        prenotazione.setPosto(prenotazioneDTO.posto());
+        prenotazione.setUtente(prenotazioneDTO.utente());;
         Prenotazione updatedPrenotazione = prenotazioneRepository.save(prenotazione);
         return PrenotazioneMapper.toDTO(updatedPrenotazione);
     }
