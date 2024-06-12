@@ -44,7 +44,7 @@ public class IGestioneLogin implements GestioneLogin {
     public LoginDTO updateLogin(Long id, LoginDTO loginDTO) {
         Login login = loginRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Login not found"));
         login.setPasswordUtente(loginDTO.utentePassword());
-        login.setUtente(loginDTO.utenteId());
+        login.setUtente(loginDTO.utente());
         Login updatedLogin = loginRepository.save(login);
         return LoginMapper.toDTO(updatedLogin);
     }
