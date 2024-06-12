@@ -10,7 +10,7 @@ public class StanzaMapper {
                 stanza.getId(),
                 stanza.getNome(),
                 stanza.getCapienza(),
-                stanza.getPianoId()
+                stanza.getPiano()
         );
     }
 
@@ -19,7 +19,7 @@ public class StanzaMapper {
         stanza.setId(stanzaDTO.id());
         stanza.setNome(stanzaDTO.nome());
         stanza.setCapienza(stanzaDTO.capienza());
-        stanza.setPianoId(stanzaDTO.pianoId());
+        stanza.setPiano(stanzaDTO.piano());
         return stanza;
     }
 

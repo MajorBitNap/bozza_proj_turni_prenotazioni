@@ -10,7 +10,7 @@ public class PostoMapper {
             posto.getId(),
             posto.getNome(),
             posto.isDisponibile(),
-            posto.getStanzaId()
+            posto.getStanza()
         );
     }
 
@@ -19,7 +19,7 @@ public class PostoMapper {
         posto.setId(postoDTO.id());
         posto.setDisponibile(postoDTO.disponibile());
         posto.setNome(postoDTO.nome());
-        posto.setStanzaId(postoDTO.stanzaId());
+        posto.setStanza(postoDTO.stanza());
         return posto;
     }
 }

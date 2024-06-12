@@ -19,7 +19,7 @@ public class PianoMapper {
         piano.setId(pianoDTO.id());
         piano.setNome(pianoDTO.nome());
         piano.setNumero(pianoDTO.numero());
-        piano.setSedeId(pianoDTO.sedeId());
+        piano.setSede(pianoDTO.sede());
         return piano;
     }
 }

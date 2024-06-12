@@ -11,8 +11,8 @@ public class PrenotazioneMapper {
                 prenotazione.getDataInizio(),
                 prenotazione.getDataFine(),
                 prenotazione.getStato(),
-                prenotazione.getPostoId(),
-                prenotazione.getUtenteId()
+                prenotazione.getPosto(),
+                prenotazione.getUtente()
         );
     }
 
@@ -22,8 +22,8 @@ public class PrenotazioneMapper {
         prenotazione.setDataInizio(prenotazioneDTO.dataInizio());
         prenotazione.setDataFine(prenotazioneDTO.dataFine());
         prenotazione.setStato(prenotazioneDTO.stato());
-        prenotazione.setPostoId(prenotazioneDTO.postoId());
-        prenotazione.setUtenteId(prenotazioneDTO.utenteId());
+        prenotazione.setPosto(prenotazioneDTO.posto());
+        prenotazione.setUtente(prenotazioneDTO.utente());
         return prenotazione;
     }
 
