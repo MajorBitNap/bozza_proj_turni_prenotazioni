@@ -23,9 +23,12 @@ Stanza {
     @Column
     private int capienza;
 
-    @Column(name = "piano_id")
-    private Long pianoId;
+    @ManyToOne
+    @JoinColumn(name = "piano_id")
+    private Piano piano;
 
+    //forse da introdure JSON Ignore
+    @OneToMany(mappedBy = "stanza", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Posto> posti;
 
 }

@@ -22,6 +22,7 @@ public class Sede {
     @Column
     private String indirizzo;
 
+    @OneToMany(mappedBy = "sede", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Piano> piani;
 
 }
