@@ -32,7 +32,7 @@ public class Utente implements UserDetails {
     private String email;
 
     @Column
-    private String password;
+    private String pass;
 
     @Enumerated(EnumType.STRING)
     private Ruolo ruolo;
@@ -55,8 +55,13 @@ public class Utente implements UserDetails {
     }
 
     @Override
+    public String getPassword() {
+        return pass;
+    }
+
+    @Override
     public String getUsername() {
-        return "";
+        return email; //per semplificare l'accesso dell'utente
     }
 
     @Override
