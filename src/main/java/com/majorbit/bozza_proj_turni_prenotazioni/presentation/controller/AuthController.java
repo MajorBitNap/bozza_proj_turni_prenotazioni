@@ -30,9 +30,9 @@ public class AuthController {
     @PostMapping("/login")
     public String authenticateUser(@RequestBody LoginRequestDTO loginRequest) throws AuthenticationException {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+                new UsernamePasswordAuthenticationToken(loginRequest.nome(), loginRequest.cognome()));
 
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUsername());
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.nome());
         return generateToken(userDetails);
     }
 
