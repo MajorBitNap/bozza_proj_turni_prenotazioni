@@ -45,7 +45,7 @@ public class IGestionePosto implements GestionePosto {
         Posto posto = postoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Posto not found"));
         posto.setId(postoDTO.id());
         posto.setNome(postoDTO.nome());
-        posto.setStanzaId(postoDTO.stanzaId());
+        posto.setStanza(postoDTO.stanza());
         Posto updatedPosto = postoRepository.save(posto);
         return PostoMapper.toDTO(updatedPosto);
     }
