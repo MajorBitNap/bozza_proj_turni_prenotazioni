@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -32,16 +34,24 @@ public class Utente implements UserDetails {
     @Column
     private String password;
 
-    @Column
+    @Enumerated(EnumType.STRING)
     private Ruolo ruolo;
 
     @OneToMany(mappedBy = "utente", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Prenotazione> prenotazioni;
 
+    @ElementCollection(targetClass = Ruolo.class)
+    @Enumerated(EnumType.STRING)
+    private List<Ruolo> ruoli;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        for (Ruolo ruolo : ruoli) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + ruolo.name()));
+        }
+        return authorities;
     }
 
     @Override
