@@ -51,7 +51,7 @@ public class IGestionePiano implements GestionePiano {
         piano.setId(pianoDTO.id());
         piano.setNome(pianoDTO.nome());
         piano.setNumero(pianoDTO.numero());
-        piano.setSede(sedeRepository.findSedeById(pianoDTO.sedeId()));
+        piano.setSede(sedeRepository.findSedeById(pianoDTO.sede().getId()));
         Piano updatedPiano = pianoRepository.save(piano);
         return PianoMapper.toDTO(updatedPiano);
     }
