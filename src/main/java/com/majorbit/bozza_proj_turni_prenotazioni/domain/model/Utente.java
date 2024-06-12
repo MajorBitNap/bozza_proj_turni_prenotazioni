@@ -33,7 +33,7 @@ public class Utente implements UserDetails {
     private String password;
 
     @Column
-    private String ruolo;
+    private Role ruolo;
 
     @OneToMany(mappedBy = "utente", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
