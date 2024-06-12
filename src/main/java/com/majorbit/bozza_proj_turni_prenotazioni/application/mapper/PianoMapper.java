@@ -2,7 +2,9 @@ package com.majorbit.bozza_proj_turni_prenotazioni.application.mapper;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PianoDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Piano;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PianoMapper {
 
     public static PianoDTO toDTO(Piano piano) {

@@ -2,7 +2,9 @@ package com.majorbit.bozza_proj_turni_prenotazioni.application.mapper;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PostoDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Posto;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PostoMapper {
 
     public static PostoDTO toDTO(Posto posto) {

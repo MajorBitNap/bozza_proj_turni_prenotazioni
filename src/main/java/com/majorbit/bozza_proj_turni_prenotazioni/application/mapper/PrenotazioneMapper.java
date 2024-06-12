@@ -2,7 +2,9 @@ package com.majorbit.bozza_proj_turni_prenotazioni.application.mapper;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PrenotazioneDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Prenotazione;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PrenotazioneMapper {
 
     public static PrenotazioneDTO toDTO(Prenotazione prenotazione) {
