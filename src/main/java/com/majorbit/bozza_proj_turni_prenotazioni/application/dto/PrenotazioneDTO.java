@@ -1,5 +1,8 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.application.dto;
 
+import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Posto;
+import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Utente;
+
 import java.sql.Date;
 
 public record PrenotazioneDTO(
@@ -7,6 +10,6 @@ public record PrenotazioneDTO(
         Date dataInizio,
         Date dataFine,
         String stato,
-        Long postoId,
-        Long utenteId
+        Posto posto,
+        Utente utente
 ){}
