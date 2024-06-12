@@ -5,6 +5,8 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.PianoMapper
 import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.spec.GestionePiano;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Piano;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PianoRepository;
+import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.SedeRepository;
+import com.majorbit.bozza_proj_turni_prenotazioni.infrastructure.repository.JPASedeRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,9 @@ public class IGestionePiano implements GestionePiano {
 
     @Autowired
     private PianoRepository pianoRepository;
+
+    @Autowired
+    private SedeRepository sedeRepository;
 
     @Autowired
     private PianoMapper pianoMapper;
@@ -46,7 +51,7 @@ public class IGestionePiano implements GestionePiano {
         piano.setId(pianoDTO.id());
         piano.setNome(pianoDTO.nome());
         piano.setNumero(pianoDTO.numero());
-        piano.setSedeId(pianoDTO.sedeId());
+        piano.setSede(sedeRepository.findSedeById(pianoDTO.sedeId()));
         Piano updatedPiano = pianoRepository.save(piano);
         return PianoMapper.toDTO(updatedPiano);
     }
