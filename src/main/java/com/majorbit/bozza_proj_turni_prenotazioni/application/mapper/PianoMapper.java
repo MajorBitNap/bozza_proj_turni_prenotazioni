@@ -10,7 +10,7 @@ public class PianoMapper {
                 piano.getId(),
                 piano.getNome(),
                 piano.getNumero(),
-                piano.getSedeId()
+                piano.getSede()
         );
     }
 
