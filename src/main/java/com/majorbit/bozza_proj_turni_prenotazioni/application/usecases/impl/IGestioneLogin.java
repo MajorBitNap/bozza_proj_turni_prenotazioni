@@ -5,6 +5,7 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.LoginMapper
 import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.spec.GestioneLogin;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Login;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.LoginRepository;
+import com.majorbit.bozza_proj_turni_prenotazioni.infrastructure.repository.JPALoginRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
