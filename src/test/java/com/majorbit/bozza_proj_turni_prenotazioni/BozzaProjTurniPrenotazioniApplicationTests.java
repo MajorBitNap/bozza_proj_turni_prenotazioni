@@ -5,9 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class BozzaProjTurniPrenotazioniApplicationTests {
-
 	@Test
-	void contextLoads() {
+	void itShouldAddNumbers() {
 	}
-
 }

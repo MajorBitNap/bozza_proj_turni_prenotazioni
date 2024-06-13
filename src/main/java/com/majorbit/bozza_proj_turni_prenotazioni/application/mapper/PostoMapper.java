@@ -2,7 +2,9 @@ package com.majorbit.bozza_proj_turni_prenotazioni.application.mapper;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PostoDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Posto;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PostoMapper {
 
     public static PostoDTO toDTO(Posto posto) {
@@ -10,7 +12,7 @@ public class PostoMapper {
             posto.getId(),
             posto.getNome(),
             posto.isDisponibile(),
-            posto.getStanzaId()
+            posto.getStanza()
         );
     }
 
@@ -19,7 +21,7 @@ public class PostoMapper {
         posto.setId(postoDTO.id());
         posto.setDisponibile(postoDTO.disponibile());
         posto.setNome(postoDTO.nome());
-        posto.setStanzaId(postoDTO.stanzaId());
+        posto.setStanza(postoDTO.stanza());
         return posto;
     }
 }

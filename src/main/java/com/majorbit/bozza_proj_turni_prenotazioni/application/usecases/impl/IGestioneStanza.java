@@ -46,7 +46,7 @@ public class IGestioneStanza implements GestioneStanza {
         stanza.setId(stanzaDTO.id());
         stanza.setNome(stanzaDTO.nome());
         stanza.setCapienza(stanzaDTO.capienza());
-        stanza.setPianoId(stanzaDTO.pianoId());
+        stanza.setPiano(stanzaDTO.piano());
         Stanza updatedStanza = stanzaRepository.save(stanza);
         return StanzaMapper.toDTO(updatedStanza);
     }

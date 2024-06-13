@@ -2,7 +2,9 @@ package com.majorbit.bozza_proj_turni_prenotazioni.application.mapper;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PrenotazioneDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Prenotazione;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PrenotazioneMapper {
 
     public static PrenotazioneDTO toDTO(Prenotazione prenotazione) {
@@ -11,8 +13,8 @@ public class PrenotazioneMapper {
                 prenotazione.getDataInizio(),
                 prenotazione.getDataFine(),
                 prenotazione.getStato(),
-                prenotazione.getPostoId(),
-                prenotazione.getUtenteId()
+                prenotazione.getPosto(),
+                prenotazione.getUtente()
         );
     }
 
@@ -22,8 +24,8 @@ public class PrenotazioneMapper {
         prenotazione.setDataInizio(prenotazioneDTO.dataInizio());
         prenotazione.setDataFine(prenotazioneDTO.dataFine());
         prenotazione.setStato(prenotazioneDTO.stato());
-        prenotazione.setPostoId(prenotazioneDTO.postoId());
-        prenotazione.setUtenteId(prenotazioneDTO.utenteId());
+        prenotazione.setPosto(prenotazioneDTO.posto());
+        prenotazione.setUtente(prenotazioneDTO.utente());
         return prenotazione;
     }
 

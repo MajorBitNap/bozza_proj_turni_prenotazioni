@@ -2,7 +2,9 @@ package com.majorbit.bozza_proj_turni_prenotazioni.application.mapper;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.SedeDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Sede;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SedeMapper {
 
     public static SedeDTO toDTO(Sede sede) {

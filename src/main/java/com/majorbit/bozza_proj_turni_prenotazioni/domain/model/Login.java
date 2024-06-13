@@ -16,7 +16,7 @@ public class Login {
 
     @ManyToOne
     @JoinColumn(name = "id_utente", nullable = false)
-    private Long utenteId;
+    private Utente utente;
 
     @Column(name = "password_utente", nullable = false)
     private String passwordUtente;

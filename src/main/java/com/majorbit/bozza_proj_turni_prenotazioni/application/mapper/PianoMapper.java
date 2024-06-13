@@ -2,7 +2,9 @@ package com.majorbit.bozza_proj_turni_prenotazioni.application.mapper;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PianoDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Piano;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PianoMapper {
 
     public static PianoDTO toDTO(Piano piano) {
@@ -10,7 +12,7 @@ public class PianoMapper {
                 piano.getId(),
                 piano.getNome(),
                 piano.getNumero(),
-                piano.getSedeId()
+                piano.getSede()
         );
     }
 
@@ -19,7 +21,7 @@ public class PianoMapper {
         piano.setId(pianoDTO.id());
         piano.setNome(pianoDTO.nome());
         piano.setNumero(pianoDTO.numero());
-        piano.setSedeId(pianoDTO.sedeId());
+        piano.setSede(pianoDTO.sede());
         return piano;
     }
 }
