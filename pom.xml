@@ -53,7 +53,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -72,8 +71,15 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>
+						com.majorbit.bozza_proj_turni_prenotazioni.BozzaProjTurniPrenotazioniApplication
+					</mainClass>
+				</configuration>
 			</plugin>
+
 		</plugins>
+
 	</build>
 
 </project>
