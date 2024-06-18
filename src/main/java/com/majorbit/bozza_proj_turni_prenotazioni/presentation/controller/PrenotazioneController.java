@@ -1,6 +1,7 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PrenotazioneDTO;
 
+import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.IPrenotazioneFissa;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.spec.GestionePrenotazione;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,9 +16,13 @@ public class PrenotazioneController {
 
     private final GestionePrenotazione gestionePrenotazione;
 
+    private final IPrenotazioneFissa prenotazioneFissa;
+
     @Autowired
-    public PrenotazioneController(GestionePrenotazione gestionePrenotazione) {
+    public PrenotazioneController(GestionePrenotazione gestionePrenotazione,
+                                  IPrenotazioneFissa prenotazioneFissa) {
         this.gestionePrenotazione = gestionePrenotazione;
+        this.prenotazioneFissa = prenotazioneFissa;
     }
 
     @GetMapping("/{id}")
@@ -35,7 +40,7 @@ public class PrenotazioneController {
     @PostMapping
     public ResponseEntity<PrenotazioneDTO> createPrenotazione(@RequestBody PrenotazioneDTO prenotazione) {
         PrenotazioneDTO newPrenotazione = gestionePrenotazione.createPrenotazione(prenotazione);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newPrenotazione);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping("/{id}")
@@ -48,6 +53,12 @@ public class PrenotazioneController {
     public ResponseEntity<Void> deletePrenotazione(@PathVariable Long id) {
         gestionePrenotazione.deletePrenotazione(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/prenotazione_fissa")
+    public ResponseEntity<Void> prenotazioneFissa(@RequestBody PrenotazioneDTO prenotazioneDTO) {
+        PrenotazioneDTO newPrenotazione = prenotazioneFissa.prenotazioneFissa(prenotazioneDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
 

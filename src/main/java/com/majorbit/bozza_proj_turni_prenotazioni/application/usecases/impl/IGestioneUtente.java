@@ -22,7 +22,7 @@ public class IGestioneUtente implements GestioneUtente {
     private UtenteMapper utenteMapper;
 
     @Override
-    public UtenteDTO createUtente(UtenteDTO utenteDTO) {
+        public UtenteDTO createUtente(UtenteDTO utenteDTO) {
         Utente utente = UtenteMapper.toEntity(utenteDTO);
         Utente savedUtente = utenteRepository.save(utente);
         return UtenteMapper.toDTO(savedUtente);
