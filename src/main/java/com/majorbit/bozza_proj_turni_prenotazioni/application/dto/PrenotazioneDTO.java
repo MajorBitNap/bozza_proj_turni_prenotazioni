@@ -8,12 +8,10 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.sql.Date;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class PrenotazioneDTO implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     private Long id;
@@ -22,5 +20,4 @@ public class PrenotazioneDTO implements Serializable {
     private String stato;
     private Posto posto;
     private Utente utente;
-
 }

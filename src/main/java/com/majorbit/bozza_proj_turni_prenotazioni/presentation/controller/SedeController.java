@@ -19,6 +19,12 @@ public class SedeController {
         this.gestioneSede = gestioneSede;
     }
 
+    @PostMapping
+    public ResponseEntity<SedeDTO> createSede(@RequestBody SedeDTO sede) {
+        SedeDTO newSede = gestioneSede.createSede(sede);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newSede);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<SedeDTO> getSedeById(@PathVariable Long id) {
         SedeDTO sede = gestioneSede.getSedeById(id);
@@ -31,11 +37,6 @@ public class SedeController {
         return ResponseEntity.ok(sedi);
     }
 
-    @PostMapping
-    public ResponseEntity<SedeDTO> createSede(@RequestBody SedeDTO sede) {
-        SedeDTO newSede = gestioneSede.createSede(sede);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newSede);
-    }
 
     @PutMapping("/{id}")
     public ResponseEntity<SedeDTO> updateSede(@PathVariable Long id, @RequestBody SedeDTO sede) {

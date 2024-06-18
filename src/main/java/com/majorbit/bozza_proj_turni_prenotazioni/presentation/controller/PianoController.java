@@ -2,7 +2,8 @@ package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller;
 
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PianoDTO;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.service.GestionePiano;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.StanzaDTO;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.spec.GestionePiano;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

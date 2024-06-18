@@ -1,10 +1,11 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PrenotazioneDTO;
 
+import com.majorbit.bozza_proj_turni_prenotazioni.application.service.GestionePrenotazione;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.IApprovaPrenotazione;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.IModCreaPrenotazione;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.IPrenotazioneFissa;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.spec.GestionePrenotazione;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.IPrenotazioneSingoloGiorno;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,12 +21,14 @@ public class PrenotazioneController {
 
     private final IPrenotazioneFissa prenotazioneFissa;
 
+    private final IPrenotazioneSingoloGiorno prenotazioneSingoloGiorno;
+
     private final IModCreaPrenotazione modCreaPrenotazione;
 
     private final IApprovaPrenotazione approvaPrenotazione;
 
     @Autowired
-    public PrenotazioneController(GestionePrenotazione gestionePrenotazione,
+    public PrenotazioneController(GestionePrenotazione gestionePrenotazione, IPrenotazioneSingoloGiorno prenotazioneSingoloGiorno ,
                                   IPrenotazioneFissa prenotazioneFissa,
                                   IModCreaPrenotazione modCreaPrenotazione,
                                   IApprovaPrenotazione approvaPrenotazione) {
@@ -33,7 +36,7 @@ public class PrenotazioneController {
         this.prenotazioneFissa = prenotazioneFissa;
         this.modCreaPrenotazione = modCreaPrenotazione;
         this.approvaPrenotazione = approvaPrenotazione;
-
+        this.prenotazioneSingoloGiorno = prenotazioneSingoloGiorno;
     }
 
     @GetMapping("/{id}")
@@ -71,16 +74,5 @@ public class PrenotazioneController {
         PrenotazioneDTO newPrenotazione = prenotazioneFissa.prenotazioneFissa(prenotazioneDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-    @PostMapping
-    public ResponseEntity<PrenotazioneDTO> modCreatePrenotazione(@RequestBody PrenotazioneDTO prenotazione) {
-        PrenotazioneDTO newPrenotazione = modCreaPrenotazione.createPrenotazione(prenotazione);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
-    @PutMapping("/{id}")
-    public ResponseEntity<PrenotazioneDTO> approvaPrenotazione(@PathVariable Long id, @RequestBody PrenotazioneDTO prenotazione) {
-        PrenotazioneDTO prenotazioneApprovata = approvaPrenotazione.approvaPrenotazione(id);
-        return ResponseEntity.ok(prenotazioneApprovata);
-    }
-
 }
 
