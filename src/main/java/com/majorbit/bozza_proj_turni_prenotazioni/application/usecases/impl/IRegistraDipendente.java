@@ -1,6 +1,7 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.UtenteDTO;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.service.GestioneUtente;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.spec.RegistraDipendente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,10 +10,10 @@ import org.springframework.stereotype.Service;
 public class IRegistraDipendente implements RegistraDipendente {
 
     @Autowired
-    private IGestioneUtente iGestioneUtente;
+    private GestioneUtente gestioneUtente;
 
     @Override
     public void registraDipendente(UtenteDTO utenteDTO) {
-        iGestioneUtente.createUtente(utenteDTO);
+        gestioneUtente.createUtente(utenteDTO);
     }
 }
