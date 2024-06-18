@@ -31,7 +31,8 @@ public class PrenotazioneController {
     private final IApprovaPrenotazione approvaPrenotazione;
 
     @Autowired
-    public PrenotazioneController(GestionePrenotazione gestionePrenotazione, IPrenotazioneSingoloGiorno prenotazioneSingoloGiorno ,
+    public PrenotazioneController(GestionePrenotazione gestionePrenotazione,
+                                  IPrenotazioneSingoloGiorno prenotazioneSingoloGiorno ,
                                   IPrenotazioneFissa prenotazioneFissa,
                                   IModCreaPrenotazione modCreaPrenotazione,
                                   IApprovaPrenotazione approvaPrenotazione) {
