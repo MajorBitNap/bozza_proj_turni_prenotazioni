@@ -44,8 +44,8 @@ public class IGestioneLogin implements GestioneLogin {
     @Override
     public LoginDTO updateLogin(Long id, LoginDTO loginDTO) {
         Login login = loginRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Login not found"));
-        login.setPasswordUtente(loginDTO.utentePassword());
-        login.setUtente(loginDTO.utente());
+        login.setPasswordUtente(loginDTO.getUtentePassword());
+        login.setUtente(loginDTO.getUtente());
         Login updatedLogin = loginRepository.save(login);
         return LoginMapper.toDTO(updatedLogin);
     }

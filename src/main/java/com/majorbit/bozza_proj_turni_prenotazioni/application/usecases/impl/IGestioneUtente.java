@@ -43,11 +43,11 @@ public class IGestioneUtente implements GestioneUtente {
     @Override
     public UtenteDTO updateUtente(Long id, UtenteDTO utenteDTO) {
         Utente utente = utenteRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Utente not found"));
-        utente.setId(utenteDTO.id());
-        utente.setNome(utenteDTO.nome());
-        utente.setCognome(utenteDTO.cognome());
-        utente.setEmail(utenteDTO.email());
-        utente.setRuolo(utenteDTO.ruolo());
+        utente.setId(utenteDTO.getId());
+        utente.setNome(utenteDTO.getNome());
+        utente.setCognome(utenteDTO.getCognome());
+        utente.setEmail(utenteDTO.getEmail());
+        utente.setRuolo(utenteDTO.getRuolo());
         Utente updatedUtente = utenteRepository.save(utente);
         return UtenteMapper.toDTO(updatedUtente);
     }

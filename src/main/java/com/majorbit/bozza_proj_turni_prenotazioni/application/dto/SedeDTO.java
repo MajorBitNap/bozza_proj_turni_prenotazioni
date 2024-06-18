@@ -1,8 +1,20 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.application.dto;
 
-public record SedeDTO(
-        Long id,
-        String nome,
-        String indirizzo
-)
-{}
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class SedeDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private Long id;
+    private String nome;
+    private String indirizzo;
+
+}

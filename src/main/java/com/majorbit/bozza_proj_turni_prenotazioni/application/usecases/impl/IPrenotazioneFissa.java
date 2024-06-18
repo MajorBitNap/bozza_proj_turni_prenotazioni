@@ -40,10 +40,10 @@ public class IPrenotazioneFissa implements PrenotazioneFissa {
     @Override
     public PrenotazioneDTO prenotazioneFissa(PrenotazioneDTO prenotazioneDTO) {
         Prenotazione prenotazione = new Prenotazione();
-        prenotazione.setDataFine(prenotazioneDTO.dataInizio());
+        prenotazione.setDataFine(prenotazioneDTO.getDataFine());
         prenotazione.setStato("INSERITA");
-        prenotazione.setUtente(prenotazioneDTO.utente());
-        prenotazione.setPosto(prenotazioneDTO.posto());
+        prenotazione.setUtente(prenotazioneDTO.getUtente());
+        prenotazione.setPosto(prenotazioneDTO.getPosto());
         prenotazioneRepository.save(prenotazione);
         return PrenotazioneMapper.toDTO(prenotazione);
     }
