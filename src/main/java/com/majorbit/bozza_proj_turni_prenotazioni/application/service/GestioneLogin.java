@@ -38,7 +38,7 @@ public class GestioneLogin {
 
     public LoginDTO updateLogin(Long id, LoginDTO loginDTO) {
         Login login = loginRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Login not found"));
-        login.setPasswordUtente(loginDTO.getUtentePassword());
+        login.setPassword(loginDTO.getPassword());
         login.setUtente(loginDTO.getUtente());
         Login updatedLogin = loginRepository.save(login);
         return LoginMapper.toDTO(updatedLogin);

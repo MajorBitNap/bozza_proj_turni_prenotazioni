@@ -19,7 +19,7 @@ public class Login {
     private Utente utente;
 
     @Column(name = "password_utente", nullable = false)
-    private String passwordUtente;
+    private String password;
 
 }
 
