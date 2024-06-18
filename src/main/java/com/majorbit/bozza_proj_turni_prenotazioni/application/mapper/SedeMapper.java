@@ -13,9 +13,9 @@ public class SedeMapper {
 
     public static Sede toEntity(SedeDTO sedeDTO) {
         Sede sede = new Sede();
-        sede.setId(sedeDTO.id());
-        sede.setNome(sedeDTO.nome());
-        sede.setIndirizzo(sedeDTO.indirizzo());
+        sede.setId(sedeDTO.getId());
+        sede.setNome(sedeDTO.getNome());
+        sede.setIndirizzo(sedeDTO.getIndirizzo());
         return sede;
     }
 }

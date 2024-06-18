@@ -1,11 +1,22 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.application.dto;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Sede;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public record PianoDTO(
-        Long id,
-        String nome,
-        int numero,
-        Sede sede
-)
-{}
+import java.io.Serializable;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class PianoDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private Long id;
+    private String nome;
+    private int numero;
+    private Sede sede;
+
+}
