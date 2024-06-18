@@ -75,29 +75,8 @@ public class PrenotazioneController {
 //  prenotazione fissa ciclica per il giorno della settimana corrispondente a quella della prenotazione
     @PostMapping("/prenotazione_fissa")
     public ResponseEntity<Void> prenotaGiornoFisso(@RequestBody PrenotazioneDTO prenotazioneDTO) {
-        List<PrenotazioneDTO> prenotazioni = creaPrenotazioniRicorrenti(prenotazioneDTO);
-        prenotazioni.forEach(prenotazioneFissa::prenotaGiornoFisso);
+        List<PrenotazioneDTO> prenotazioni = prenotazioneFissa.creaPrenotazioniRicorrenti(prenotazioneDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
-//  logica per calcolare le prenotazioni ricorrenti
-    private List<PrenotazioneDTO> creaPrenotazioniRicorrenti(PrenotazioneDTO prenotazioneDTO) {
-        List<PrenotazioneDTO> prenotazioni = new ArrayList<>();
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(prenotazioneDTO.getDataInizio());
-
-        while (cal.getTime().before(prenotazioneDTO.getDataFine())) {
-            if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY) {
-                PrenotazioneDTO nuovaPrenotazione = new PrenotazioneDTO();
-                nuovaPrenotazione.setDataInizio(new Date(cal.getTimeInMillis()));
-                nuovaPrenotazione.setDataFine(prenotazioneDTO.getDataFine());
-                nuovaPrenotazione.setStato(prenotazioneDTO.getStato());
-                nuovaPrenotazione.setPosto(prenotazioneDTO.getPosto());
-                nuovaPrenotazione.setUtente(prenotazioneDTO.getUtente());
-                prenotazioni.add(nuovaPrenotazione);
-            }
-            cal.add(Calendar.DAY_OF_MONTH, 1);
-        }
-        return prenotazioni;
     }
 
     @PostMapping("/moderatore")
