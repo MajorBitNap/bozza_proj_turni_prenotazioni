@@ -17,7 +17,7 @@ import java.util.Calendar;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/prenotazioni")
+@RequestMapping(" ")
 public class PrenotazioneController {
 
     private final GestionePrenotazione gestionePrenotazione;
