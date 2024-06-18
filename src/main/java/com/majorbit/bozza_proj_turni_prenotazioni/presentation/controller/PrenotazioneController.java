@@ -74,5 +74,16 @@ public class PrenotazioneController {
         PrenotazioneDTO newPrenotazione = prenotazioneFissa.prenotazioneFissa(prenotazioneDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+    @PostMapping
+    public ResponseEntity<PrenotazioneDTO> modCreaPrenotazione(@RequestBody PrenotazioneDTO prenotazione) {
+        PrenotazioneDTO newPrenotazione = modCreaPrenotazione.createPrenotazione(prenotazione);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<PrenotazioneDTO> approvaPrenotazione(@PathVariable Long id, @RequestBody PrenotazioneDTO prenotazione) {
+        PrenotazioneDTO updatedPrenotazione = approvaPrenotazione.approvaPrenotazione(id);
+        return ResponseEntity.ok(updatedPrenotazione);
+    }
+
 }
 
