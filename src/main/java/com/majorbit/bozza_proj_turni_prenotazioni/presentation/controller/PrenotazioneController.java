@@ -70,19 +70,25 @@ public class PrenotazioneController {
     }
 
     @PostMapping("/prenotazione_fissa")
-    public ResponseEntity<Void> prenotazioneFissa(@RequestBody PrenotazioneDTO prenotazioneDTO) {
-        PrenotazioneDTO newPrenotazione = prenotazioneFissa.prenotazioneFissa(prenotazioneDTO);
+    public ResponseEntity<Void> prenotaGiornoFisso(@RequestBody PrenotazioneDTO prenotazioneDTO) {
+        PrenotazioneDTO newPrenotazione = prenotazioneFissa.prenotaGiornoFisso(prenotazioneDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-    @PostMapping
-    public ResponseEntity<PrenotazioneDTO> modCreaPrenotazione(@RequestBody PrenotazioneDTO prenotazione) {
-        PrenotazioneDTO newPrenotazione = modCreaPrenotazione.createPrenotazione(prenotazione);
+    @PostMapping("/moderatore")
+    public ResponseEntity<PrenotazioneDTO> modCreaPrenotazione(@RequestBody PrenotazioneDTO prenotazioneDTO) {
+        PrenotazioneDTO newPrenotazione = modCreaPrenotazione.createPrenotazione(prenotazioneDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-    @PutMapping("/{id}")
+    @PutMapping("/approvazione/{id}")
     public ResponseEntity<PrenotazioneDTO> approvaPrenotazione(@PathVariable Long id, @RequestBody PrenotazioneDTO prenotazione) {
         PrenotazioneDTO approvedPrenotazione = approvaPrenotazione.approvaPrenotazione(id);
         return ResponseEntity.ok(approvedPrenotazione);
+    }
+
+    @PostMapping("/prenotazione_singolo_giorno")
+    public ResponseEntity<PrenotazioneDTO> prenotaPerSingoloGiorno(@RequestBody PrenotazioneDTO prenotazioneDTO) {
+        PrenotazioneDTO newPrenotazione = prenotazioneSingoloGiorno.prenotaPerSingoloGiorno(prenotazioneDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 }

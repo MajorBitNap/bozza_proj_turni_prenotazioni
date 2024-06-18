@@ -10,8 +10,6 @@ import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.Prenotazione
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
-
 @Service
 public class IPrenotazioneFissa implements PrenotazioneFissa {
 
@@ -24,7 +22,7 @@ public class IPrenotazioneFissa implements PrenotazioneFissa {
     public PostoMapper postoMapper;
 
     @Autowired
-    public  IPrenotazioneFissa(
+    public IPrenotazioneFissa(
             PrenotazioneRepository prenotazioneRepository,
             PrenotazioneMapper prenotazioneMapper,
             UtenteMapper utenteMapper,
@@ -38,7 +36,7 @@ public class IPrenotazioneFissa implements PrenotazioneFissa {
 
 
     @Override
-    public PrenotazioneDTO prenotazioneFissa(PrenotazioneDTO prenotazioneDTO) {
+    public PrenotazioneDTO prenotaGiornoFisso(PrenotazioneDTO prenotazioneDTO) {
         Prenotazione prenotazione = new Prenotazione();
         prenotazione.setDataFine(prenotazioneDTO.getDataFine());
         prenotazione.setStato("INSERITA");
