@@ -8,6 +8,6 @@ import java.sql.Date;
 
 public interface PrenotazioneFissa {
 
-    public PrenotazioneDTO prenotazioneFissa(Date dataInizio, UtenteDTO utenteDTO, PostoDTO postoDTO);
+    public PrenotazioneDTO prenotazioneFissa(PrenotazioneDTO prenotazioneDTO);
 
 }
