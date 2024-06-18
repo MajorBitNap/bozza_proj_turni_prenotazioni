@@ -89,7 +89,7 @@ public class PrenotazioneController {
         PrenotazioneDTO approvedPrenotazione = approvaPrenotazione.approvaPrenotazione(id);
         return ResponseEntity.ok(approvedPrenotazione);
     }
-
+//  logica per effettuare una prenotazione singola per un giorno specifico
     @PostMapping("/prenotazione_singolo_giorno")
     public ResponseEntity<PrenotazioneDTO> prenotaPerSingoloGiorno(@RequestBody PrenotazioneDTO prenotazioneDTO) {
         PrenotazioneDTO newPrenotazione = prenotazioneSingoloGiorno.prenotaPerSingoloGiorno(prenotazioneDTO);
