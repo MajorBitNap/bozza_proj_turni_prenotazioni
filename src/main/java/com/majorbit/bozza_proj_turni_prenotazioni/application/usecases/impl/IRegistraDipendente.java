@@ -12,7 +12,7 @@ public class IRegistraDipendente implements RegistraDipendente {
     @Autowired
     private GestioneUtente gestioneUtente;
 
-//  logica per registrare un utente con ruolo DIPENDENTE
+//  [per l'amministratore] logica per registrare un utente con ruolo DIPENDENTE
     @Override
     public void registraDipendente(UtenteDTO utenteDTO) {
 
