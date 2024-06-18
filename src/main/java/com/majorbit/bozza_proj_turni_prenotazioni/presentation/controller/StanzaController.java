@@ -1,7 +1,7 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.StanzaDTO;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.spec.GestioneStanza;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.service.GestioneStanza;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
