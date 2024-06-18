@@ -11,6 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 @RestController
@@ -68,12 +71,34 @@ public class PrenotazioneController {
         gestionePrenotazione.deletePrenotazione(id);
         return ResponseEntity.noContent().build();
     }
-
+//  prenotazione fissa ciclica per il giorno della settimana corrispondente a quella della prenotazione
     @PostMapping("/prenotazione_fissa")
     public ResponseEntity<Void> prenotaGiornoFisso(@RequestBody PrenotazioneDTO prenotazioneDTO) {
-        PrenotazioneDTO newPrenotazione = prenotazioneFissa.prenotaGiornoFisso(prenotazioneDTO);
+        List<PrenotazioneDTO> prenotazioni = creaPrenotazioniRicorrenti(prenotazioneDTO);
+        prenotazioni.forEach(prenotazioneFissa::prenotaGiornoFisso);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+//  logica per calcolare le prenotazioni ricorrenti
+    private List<PrenotazioneDTO> creaPrenotazioniRicorrenti(PrenotazioneDTO prenotazioneDTO) {
+        List<PrenotazioneDTO> prenotazioni = new ArrayList<>();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(prenotazioneDTO.getDataInizio());
+
+        while (cal.getTime().before(prenotazioneDTO.getDataFine())) {
+            if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY) {
+                PrenotazioneDTO nuovaPrenotazione = new PrenotazioneDTO();
+                nuovaPrenotazione.setDataInizio(new Date(cal.getTimeInMillis()));
+                nuovaPrenotazione.setDataFine(prenotazioneDTO.getDataFine());
+                nuovaPrenotazione.setStato(prenotazioneDTO.getStato());
+                nuovaPrenotazione.setPosto(prenotazioneDTO.getPosto());
+                nuovaPrenotazione.setUtente(prenotazioneDTO.getUtente());
+                prenotazioni.add(nuovaPrenotazione);
+            }
+            cal.add(Calendar.DAY_OF_MONTH, 1);
+        }
+        return prenotazioni;
+    }
+
     @PostMapping("/moderatore")
     public ResponseEntity<PrenotazioneDTO> modCreaPrenotazione(@RequestBody PrenotazioneDTO prenotazioneDTO) {
         PrenotazioneDTO newPrenotazione = modCreaPrenotazione.createPrenotazione(prenotazioneDTO);
