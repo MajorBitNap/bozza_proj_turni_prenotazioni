@@ -5,7 +5,9 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.Prenotazion
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Prenotazione;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PrenotazioneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class IModCreaPrenotazione {
 
     @Autowired
