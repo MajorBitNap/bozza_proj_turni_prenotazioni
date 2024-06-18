@@ -42,7 +42,6 @@ public class GestionePiano {
 
     public PianoDTO updatePiano(Long id, PianoDTO pianoDTO) {
         Piano piano = pianoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Piano not found"));
-        piano.setId(pianoDTO.getId());
         piano.setNome(pianoDTO.getNome());
         piano.setNumero(pianoDTO.getNumero());
         piano.setSede(sedeRepository.findSedeById(pianoDTO.getSede().getId()));

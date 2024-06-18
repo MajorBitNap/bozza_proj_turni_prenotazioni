@@ -38,7 +38,6 @@ public class GestioneStanza {
 
     public StanzaDTO updateStanza(Long id, StanzaDTO stanzaDTO) {
         Stanza stanza = stanzaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Stanza not found"));
-        stanza.setId(stanzaDTO.getId());
         stanza.setNome(stanzaDTO.getNome());
         stanza.setCapienza(stanzaDTO.getCapienza());
         stanza.setPiano(stanzaDTO.getPiano());

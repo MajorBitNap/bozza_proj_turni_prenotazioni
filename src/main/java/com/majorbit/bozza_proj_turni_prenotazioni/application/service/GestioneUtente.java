@@ -38,7 +38,6 @@ public class GestioneUtente {
 
     public UtenteDTO updateUtente(Long id, UtenteDTO utenteDTO) {
         Utente utente = utenteRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Utente not found"));
-        utente.setId(utenteDTO.getId());
         utente.setNome(utenteDTO.getNome());
         utente.setCognome(utenteDTO.getCognome());
         utente.setEmail(utenteDTO.getEmail());

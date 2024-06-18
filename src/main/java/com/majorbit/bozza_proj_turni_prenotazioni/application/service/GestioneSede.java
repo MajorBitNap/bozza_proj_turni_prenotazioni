@@ -38,7 +38,6 @@ public class GestioneSede {
 
     public SedeDTO updateSede(Long id, SedeDTO sedeDTO) {
         Sede sede = sedeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Sede not found"));
-        sede.setId(sedeDTO.getId());
         sede.setNome(sedeDTO.getNome());
         sede.setIndirizzo(sedeDTO.getIndirizzo());
         Sede updatedSede = sedeRepository.save(sede);
