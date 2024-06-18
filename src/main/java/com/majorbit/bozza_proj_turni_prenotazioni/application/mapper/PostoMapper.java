@@ -9,7 +9,6 @@ public class PostoMapper {
 
     public static PostoDTO toDTO(Posto posto) {
         return new PostoDTO(
-            posto.getId(),
             posto.getNome(),
             posto.isDisponibile(),
             posto.getStanza()
@@ -18,7 +17,6 @@ public class PostoMapper {
 
     public static Posto toEntity(PostoDTO postoDTO) {
         Posto posto = new Posto();
-        posto.setId(postoDTO.getId());
         posto.setDisponibile(postoDTO.isDisponibile());
         posto.setNome(postoDTO.getNome());
         posto.setStanza(postoDTO.getStanza());

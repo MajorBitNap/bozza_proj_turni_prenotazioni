@@ -9,7 +9,6 @@ public class LoginMapper {
 
     public static LoginDTO toDTO(Login login) {
         return new LoginDTO(
-                login.getId(),
                 login.getUtente(),
                 login.getPasswordUtente()
         );
@@ -17,7 +16,6 @@ public class LoginMapper {
 
     public static Login toEntity(LoginDTO loginDTO) {
         Login login = new Login();
-        login.setId(loginDTO.getId());
         login.setUtente(loginDTO.getUtente());
         login.setPasswordUtente(loginDTO.getUtentePassword());
         return login;

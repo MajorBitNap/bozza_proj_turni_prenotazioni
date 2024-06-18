@@ -14,7 +14,6 @@ public class PianoDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
     private String nome;
     private int numero;
     private Sede sede;

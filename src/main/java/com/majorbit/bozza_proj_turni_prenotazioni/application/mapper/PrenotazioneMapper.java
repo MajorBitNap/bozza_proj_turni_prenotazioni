@@ -9,7 +9,6 @@ public class PrenotazioneMapper {
 
     public static PrenotazioneDTO toDTO(Prenotazione prenotazione) {
         return new PrenotazioneDTO(
-                prenotazione.getId(),
                 prenotazione.getDataInizio(),
                 prenotazione.getDataFine(),
                 prenotazione.getStato(),
@@ -20,7 +19,6 @@ public class PrenotazioneMapper {
 
     public static Prenotazione toEntity(PrenotazioneDTO prenotazioneDTO) {
         Prenotazione prenotazione = new Prenotazione();
-        prenotazione.setId(prenotazioneDTO.getId());
         prenotazione.setDataInizio(prenotazioneDTO.getDataInizio());
         prenotazione.setDataFine(prenotazioneDTO.getDataFine());
         prenotazione.setStato(prenotazioneDTO.getStato());

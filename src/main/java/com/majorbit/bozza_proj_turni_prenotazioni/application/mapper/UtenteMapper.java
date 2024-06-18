@@ -9,7 +9,6 @@ public class UtenteMapper {
 
     public static UtenteDTO toDTO(Utente utente) {
         return new UtenteDTO(
-                utente.getId(),
                 utente.getNome(),
                 utente.getCognome(),
                 utente.getEmail(),
@@ -19,7 +18,6 @@ public class UtenteMapper {
 
     public static Utente toEntity(UtenteDTO utenteDTO) {
         Utente utente = new Utente();
-        utente.setId(utenteDTO.getId());
         utente.setNome(utenteDTO.getNome());
         utente.setCognome(utenteDTO.getCognome());
         utente.setEmail(utenteDTO.getEmail());

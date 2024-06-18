@@ -14,7 +14,6 @@ import java.sql.Date;
 public class PrenotazioneDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Long id;
     private Date dataInizio;
     private Date dataFine;
     private String stato;
