@@ -17,9 +17,9 @@ public class LoginMapper {
 
     public static Login toEntity(LoginDTO loginDTO) {
         Login login = new Login();
-        login.setId(loginDTO.id());
-        login.setUtente(loginDTO.utente());
-        login.setPasswordUtente(loginDTO.utentePassword());
+        login.setId(loginDTO.getId());
+        login.setUtente(loginDTO.getUtente());
+        login.setPasswordUtente(loginDTO.getUtentePassword());
         return login;
     }
 }

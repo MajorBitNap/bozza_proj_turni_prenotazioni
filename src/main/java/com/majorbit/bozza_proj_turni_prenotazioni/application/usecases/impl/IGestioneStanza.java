@@ -43,10 +43,10 @@ public class IGestioneStanza implements GestioneStanza {
     @Override
     public StanzaDTO updateStanza(Long id, StanzaDTO stanzaDTO) {
         Stanza stanza = stanzaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Stanza not found"));
-        stanza.setId(stanzaDTO.id());
-        stanza.setNome(stanzaDTO.nome());
-        stanza.setCapienza(stanzaDTO.capienza());
-        stanza.setPiano(stanzaDTO.piano());
+        stanza.setId(stanzaDTO.getId());
+        stanza.setNome(stanzaDTO.getNome());
+        stanza.setCapienza(stanzaDTO.getCapienza());
+        stanza.setPiano(stanzaDTO.getPiano());
         Stanza updatedStanza = stanzaRepository.save(stanza);
         return StanzaMapper.toDTO(updatedStanza);
     }

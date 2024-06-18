@@ -43,9 +43,9 @@ public class IGestioneSede implements GestioneSede {
     @Override
     public SedeDTO updateSede(Long id, SedeDTO sedeDTO) {
         Sede sede = sedeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Sede not found"));
-        sede.setId(sedeDTO.id());
-        sede.setNome(sedeDTO.nome());
-        sede.setIndirizzo(sedeDTO.indirizzo());
+        sede.setId(sedeDTO.getId());
+        sede.setNome(sedeDTO.getNome());
+        sede.setIndirizzo(sedeDTO.getIndirizzo());
         Sede updatedSede = sedeRepository.save(sede);
         return SedeMapper.toDTO(updatedSede);
     }

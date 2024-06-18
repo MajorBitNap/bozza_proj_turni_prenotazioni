@@ -18,10 +18,10 @@ public class PianoMapper {
 
     public static Piano toEntity(PianoDTO pianoDTO) {
         Piano piano = new Piano();
-        piano.setId(pianoDTO.id());
-        piano.setNome(pianoDTO.nome());
-        piano.setNumero(pianoDTO.numero());
-        piano.setSede(pianoDTO.sede());
+        piano.setId(pianoDTO.getId());
+        piano.setNome(pianoDTO.getNome());
+        piano.setNumero(pianoDTO.getNumero());
+        piano.setSede(pianoDTO.getSede());
         return piano;
     }
 }

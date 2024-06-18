@@ -48,10 +48,10 @@ public class IGestionePiano implements GestionePiano {
     @Override
     public PianoDTO updatePiano(Long id, PianoDTO pianoDTO) {
         Piano piano = pianoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Piano not found"));
-        piano.setId(pianoDTO.id());
-        piano.setNome(pianoDTO.nome());
-        piano.setNumero(pianoDTO.numero());
-        piano.setSede(sedeRepository.findSedeById(pianoDTO.sede().getId()));
+        piano.setId(pianoDTO.getId());
+        piano.setNome(pianoDTO.getNome());
+        piano.setNumero(pianoDTO.getNumero());
+        piano.setSede(sedeRepository.findSedeById(pianoDTO.getSede().getId()));
         Piano updatedPiano = pianoRepository.save(piano);
         return PianoMapper.toDTO(updatedPiano);
     }

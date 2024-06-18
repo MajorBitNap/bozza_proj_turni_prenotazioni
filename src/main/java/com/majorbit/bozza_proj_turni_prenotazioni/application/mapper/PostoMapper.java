@@ -18,10 +18,10 @@ public class PostoMapper {
 
     public static Posto toEntity(PostoDTO postoDTO) {
         Posto posto = new Posto();
-        posto.setId(postoDTO.id());
-        posto.setDisponibile(postoDTO.disponibile());
-        posto.setNome(postoDTO.nome());
-        posto.setStanza(postoDTO.stanza());
+        posto.setId(postoDTO.getId());
+        posto.setDisponibile(postoDTO.isDisponibile());
+        posto.setNome(postoDTO.getNome());
+        posto.setStanza(postoDTO.getStanza());
         return posto;
     }
 }

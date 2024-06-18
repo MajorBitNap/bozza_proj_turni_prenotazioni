@@ -19,11 +19,11 @@ public class UtenteMapper {
 
     public static Utente toEntity(UtenteDTO utenteDTO) {
         Utente utente = new Utente();
-        utente.setId(utenteDTO.id());
-        utente.setNome(utenteDTO.nome());
-        utente.setCognome(utenteDTO.cognome());
-        utente.setEmail(utenteDTO.email());
-        utente.setRuolo(utenteDTO.ruolo());
+        utente.setId(utenteDTO.getId());
+        utente.setNome(utenteDTO.getNome());
+        utente.setCognome(utenteDTO.getCognome());
+        utente.setEmail(utenteDTO.getEmail());
+        utente.setRuolo(utenteDTO.getRuolo());
         return utente;
     }
 }

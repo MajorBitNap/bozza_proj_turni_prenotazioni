@@ -18,10 +18,10 @@ public class StanzaMapper {
 
     public static Stanza toEntity(StanzaDTO stanzaDTO) {
         Stanza stanza = new Stanza();
-        stanza.setId(stanzaDTO.id());
-        stanza.setNome(stanzaDTO.nome());
-        stanza.setCapienza(stanzaDTO.capienza());
-        stanza.setPiano(stanzaDTO.piano());
+        stanza.setId(stanzaDTO.getId());
+        stanza.setNome(stanzaDTO.getNome());
+        stanza.setCapienza(stanzaDTO.getCapienza());
+        stanza.setPiano(stanzaDTO.getPiano());
         return stanza;
     }
 
