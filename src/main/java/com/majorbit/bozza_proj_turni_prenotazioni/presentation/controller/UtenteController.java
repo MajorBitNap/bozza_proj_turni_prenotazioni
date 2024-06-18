@@ -1,6 +1,8 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.UtenteDTO;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.IRegistraDipendente;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.IRegistraModeratore;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.spec.GestioneUtente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,10 +16,15 @@ import java.util.List;
 public class UtenteController {
 
     private final GestioneUtente gestioneUtente;
+    private final IRegistraDipendente registraDipendente;
+    private final IRegistraModeratore registraModeratore;
+
 
     @Autowired
-    public UtenteController(GestioneUtente gestioneUtente) {
+    public UtenteController(GestioneUtente gestioneUtente, IRegistraDipendente registraDipendente, IRegistraModeratore registraModeratore) {
         this.gestioneUtente = gestioneUtente;
+        this.registraDipendente = registraDipendente;
+        this.registraModeratore = registraModeratore;
     }
 
     @GetMapping("/{id}")
@@ -48,5 +55,16 @@ public class UtenteController {
     public ResponseEntity<Void> deleteUtente(@PathVariable Long id) {
         gestioneUtente.deleteUtente(id);
         return ResponseEntity.noContent().build();
+    }
+    @PostMapping("/registraDipendente")
+    public ResponseEntity<Void> registraDipendente(@RequestBody UtenteDTO utenteDTO) {
+        registraDipendente.registraDipendente(utenteDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PostMapping("/registraModeratore")
+    public ResponseEntity<Void> registraModeratore(@RequestBody UtenteDTO utenteDTO) {
+        registraModeratore.registraModeratore(utenteDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
