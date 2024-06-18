@@ -81,8 +81,8 @@ public class PrenotazioneController {
     }
     @PutMapping("/{id}")
     public ResponseEntity<PrenotazioneDTO> approvaPrenotazione(@PathVariable Long id, @RequestBody PrenotazioneDTO prenotazione) {
-        PrenotazioneDTO updatedPrenotazione = approvaPrenotazione.approvaPrenotazione(id);
-        return ResponseEntity.ok(updatedPrenotazione);
+        PrenotazioneDTO approvedPrenotazione = approvaPrenotazione.approvaPrenotazione(id);
+        return ResponseEntity.ok(approvedPrenotazione);
     }
 
 }
