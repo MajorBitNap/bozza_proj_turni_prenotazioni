@@ -56,13 +56,16 @@ public class UtenteController {
         gestioneUtente.deleteUtente(id);
         return ResponseEntity.noContent().build();
     }
-    @PostMapping("/registraDipendente")
+
+    // registrazione da parte dell'amministratore di un utente con ruolo DIPENDENTE
+    @PostMapping("/amministratore/registraDipendente")
     public ResponseEntity<Void> registraDipendente(@RequestBody UtenteDTO utenteDTO) {
         registraDipendente.registraDipendente(utenteDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PostMapping("/registraModeratore")
+    // registrazione da parte dell'amministratore di un utente con ruolo MODERATORE
+    @PostMapping("/amministratore/registraModeratore")
     public ResponseEntity<Void> registraModeratore(@RequestBody UtenteDTO utenteDTO) {
         registraModeratore.registraModeratore(utenteDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
