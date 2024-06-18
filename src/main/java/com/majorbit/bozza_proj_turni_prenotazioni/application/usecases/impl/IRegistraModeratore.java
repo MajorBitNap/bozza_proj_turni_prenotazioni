@@ -12,7 +12,7 @@ public class IRegistraModeratore implements RegistraModeratore {
     @Autowired
     private GestioneUtente gestioneUtente;
 
-//  logica per registrare un utente con ruolo MODERATORE
+//  [per l'amministratore] logica per registrare un utente con ruolo MODERATORE
     @Override
     public void registraModeratore(UtenteDTO utenteDTO) {
 
