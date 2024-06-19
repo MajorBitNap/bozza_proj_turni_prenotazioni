@@ -6,6 +6,7 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.Prenotazion
 import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.UtenteMapper;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.spec.PrenotazioneFissa;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Prenotazione;
+import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Utente;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PrenotazioneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,8 +56,8 @@ public class IPrenotazioneFissa implements PrenotazioneFissa {
                 prenotazione.setDataInizio(new Date(cal.getTimeInMillis()));
                 prenotazione.setDataFine(prenotazioneDTO.getDataFine());
                 prenotazione.setStato("INSERITA");
-                prenotazione.setUtente(prenotazioneDTO.getUtente());
-                prenotazione.setPosto(prenotazioneDTO.getPosto());
+                prenotazione.setUtente(UtenteMapper.toEntity(prenotazioneDTO.getUtente()));
+                prenotazione.setPosto(PostoMapper.toEntity(prenotazioneDTO.getPosto()));
                 prenotazioneRepository.save(prenotazione);
                 PrenotazioneDTO savedPrenotazioneDTO = PrenotazioneMapper.toDTO(prenotazione);
                 prenotazioni.add(savedPrenotazioneDTO);

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class PostoMapper {
 
     public static PostoDTO toDTO(Posto posto) {
-        return new com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PostoDTO(
+        return new PostoDTO(
             posto.getNome(),
             posto.isDisponibile(),
             posto.getStanza()

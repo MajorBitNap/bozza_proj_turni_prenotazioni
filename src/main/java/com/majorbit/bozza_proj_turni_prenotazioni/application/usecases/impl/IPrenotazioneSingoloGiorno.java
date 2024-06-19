@@ -35,8 +35,8 @@ public class IPrenotazioneSingoloGiorno implements PrenotazioneSingoloGiorno {
         Prenotazione prenotazione = new Prenotazione();
         prenotazione.setDataInizio(prenotazioneDTO.getDataInizio());
         prenotazione.setStato("INSERITA");
-        prenotazione.setUtente(prenotazioneDTO.getUtente());
-        prenotazione.setPosto(prenotazioneDTO.getPosto());
+        prenotazione.setUtente(UtenteMapper.toEntity(prenotazioneDTO.getUtente()));
+        prenotazione.setPosto(PostoMapper.toEntity(prenotazioneDTO.getPosto()));
         prenotazioneRepository.save(prenotazione);
         return PrenotazioneMapper.toDTO(prenotazione);
     }

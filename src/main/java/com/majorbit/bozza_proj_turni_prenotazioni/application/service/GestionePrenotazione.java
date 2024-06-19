@@ -1,7 +1,9 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.application.service;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PrenotazioneDTO;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.PostoMapper;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.PrenotazioneMapper;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.UtenteMapper;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Prenotazione;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PrenotazioneRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
@@ -41,8 +43,8 @@ public class GestionePrenotazione {
         prenotazione.setDataInizio(prenotazioneDTO.getDataInizio());
         prenotazione.setDataFine(prenotazioneDTO.getDataFine());
         prenotazione.setStato(prenotazioneDTO.getStato());
-        prenotazione.setPosto(prenotazioneDTO.getPosto());
-        prenotazione.setUtente(prenotazioneDTO.getUtente());;
+        prenotazione.setPosto(PostoMapper.toEntity(prenotazioneDTO.getPosto()));
+        prenotazione.setUtente(UtenteMapper.toEntity(prenotazioneDTO.getUtente()));;
         Prenotazione updatedPrenotazione = prenotazioneRepository.save(prenotazione);
         return PrenotazioneMapper.toDTO(updatedPrenotazione);
     }

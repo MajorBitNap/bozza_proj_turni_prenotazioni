@@ -25,14 +25,11 @@ public class PrenotazioneMapper {
 
     public static Prenotazione toEntity(PrenotazioneDTO prenotazioneDTO) {
         Prenotazione prenotazione = new Prenotazione();
-        UtenteDTO utenteDTO = prenotazioneDTO.getUtente();
-        PostoDTO postoDTO = prenotazioneDTO.getPosto();
         prenotazione.setDataInizio(prenotazioneDTO.getDataInizio());
         prenotazione.setDataFine(prenotazioneDTO.getDataFine());
         prenotazione.setStato(prenotazioneDTO.getStato());
-        UtenteMapper.toEntity(utenteDTO);
-        PostoMapper.toEntity(postoDTO);
+        prenotazione.setUtente(UtenteMapper.toEntity(prenotazioneDTO.getUtente()));
+        prenotazione.setPosto(PostoMapper.toEntity(prenotazioneDTO.getPosto()));
         return prenotazione;
     }
-
 }
