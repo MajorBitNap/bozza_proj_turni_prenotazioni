@@ -16,6 +16,6 @@ public class PianoDTO implements Serializable {
 
     private String nome;
     private int numero;
-    private Sede sede;
+    private Long sede;
 
 }

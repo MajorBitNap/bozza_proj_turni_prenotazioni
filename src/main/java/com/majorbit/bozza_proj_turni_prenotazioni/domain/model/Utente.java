@@ -14,7 +14,7 @@ import java.util.List;
 public class Utente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
@@ -31,9 +31,5 @@ public class Utente {
 
     @Column
     private Ruolo ruolo;
-
-    @OneToMany(mappedBy = "utente", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
-    private List<Prenotazione> prenotazioni;
 
 }

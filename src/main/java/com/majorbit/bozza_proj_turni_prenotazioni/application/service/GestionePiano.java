@@ -44,7 +44,7 @@ public class GestionePiano {
         Piano piano = pianoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Piano not found"));
         piano.setNome(pianoDTO.getNome());
         piano.setNumero(pianoDTO.getNumero());
-        piano.setSede(sedeRepository.findSedeById(pianoDTO.getSede().getId()));
+        piano.setSede(pianoDTO.getSede());
         Piano updatedPiano = pianoRepository.save(piano);
         return PianoMapper.toDTO(updatedPiano);
     }

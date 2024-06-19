@@ -14,11 +14,10 @@ public class Login {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_utente", nullable = false)
-    private Utente utente;
+    @Column(name = "email", nullable = false)
+    private String utente;
 
-    @Column(name = "password_utente", nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
 }

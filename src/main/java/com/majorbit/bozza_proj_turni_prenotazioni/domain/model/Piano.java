@@ -22,12 +22,7 @@ public class Piano {
     @Column
     private int numero;
 
-    @ManyToOne
-    @JoinColumn(name = "sede_id")
-    private Sede sede;
-
-    //forse da introdure JSON Ignore
-    @OneToMany(mappedBy = "piano", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Stanza> stanze;
+    @Column(name = "sede_id")
+    private Long sede;
 
 }

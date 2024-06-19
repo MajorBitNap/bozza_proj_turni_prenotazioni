@@ -23,11 +23,7 @@ public class Posto {
     @Column
     private boolean disponibile;
 
-    @ManyToOne
-    @JoinColumn(name = "stanza_id")
-    private Stanza stanza;
-
-    @OneToMany(mappedBy = "posto", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Prenotazione> prenotazioni;
+    @Column(name = "stanza_id")
+    private Long stanza;
 
 }
