@@ -5,6 +5,7 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.PostoMapper
 import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.StanzaMapper;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Posto;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PostoRepository;
+import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.StanzaRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +16,15 @@ import java.util.stream.Collectors;
 @Service
 public class GestionePosto {
 
-    @Autowired
-    private PostoRepository postoRepository;
+    private final PostoRepository postoRepository;
+
+    private final StanzaRepository stanzaRepository;
 
     @Autowired
-    private PostoMapper postoMapper;
+    public GestionePosto(PostoRepository postoRepository, StanzaRepository stanzaRepository) {
+        this.postoRepository = postoRepository;
+        this.stanzaRepository = stanzaRepository;
+    }
 
     public PostoDTO createPosto(PostoDTO PostoDTO) {
         Posto posto = PostoMapper.toEntity(PostoDTO);
@@ -28,7 +33,7 @@ public class GestionePosto {
     }
 
     public PostoDTO getPostoById(Long id) {
-        Posto posto = postoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Posto not found"));
+        Posto posto = postoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("resources not found"));
         return PostoMapper.toDTO(posto);
     }
 
@@ -37,16 +42,16 @@ public class GestionePosto {
         return posti.stream().map(PostoMapper::toDTO).collect(Collectors.toList());
     }
 
-    public PostoDTO updatePosto(Long id, PostoDTO PostoDTO) {
-        Posto posto = postoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Posto not found"));
-        posto.setNome(PostoDTO.getNome());
-        posto.setStanza(StanzaMapper.toEntity(PostoDTO.getStanza()));
+    public PostoDTO updatePosto(Long id, PostoDTO postoDTO) {
+        Posto posto = postoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("resources not found"));
+        posto.setNome(postoDTO.getNome());
+        posto.setStanza(stanzaRepository.findById(postoDTO.getStanza()).orElseThrow(() -> new ResourceNotFoundException("resources not found")));
         Posto updatedPosto = postoRepository.save(posto);
         return PostoMapper.toDTO(updatedPosto);
     }
 
     public void deletePosto(Long id) {
-        Posto posto = postoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Posto not found"));
+        Posto posto = postoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("resources not found"));
         postoRepository.delete(posto);
     }
 }

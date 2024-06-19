@@ -3,7 +3,9 @@ package com.majorbit.bozza_proj_turni_prenotazioni.application.service;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.StanzaDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.PianoMapper;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.StanzaMapper;
+import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Piano;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Stanza;
+import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PianoRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.StanzaRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +17,15 @@ import java.util.stream.Collectors;
 @Service
 public class GestioneStanza {
 
-    @Autowired
-    private StanzaRepository stanzaRepository;
+    private final StanzaRepository stanzaRepository;
 
-    @Autowired
-    private StanzaMapper stanzaMapper;
+    private final PianoRepository pianoRepository;
+
+    public GestioneStanza(StanzaRepository stanzaRepository, PianoRepository pianoRepository) {
+        this.stanzaRepository = stanzaRepository;
+        this.pianoRepository = pianoRepository;
+    }
+
 
     public StanzaDTO createStanza(StanzaDTO StanzaDTO) {
         Stanza stanza = StanzaMapper.toEntity(StanzaDTO);
@@ -37,11 +43,12 @@ public class GestioneStanza {
         return stanze.stream().map(StanzaMapper::toDTO).collect(Collectors.toList());
     }
 
-    public StanzaDTO updateStanza(Long id, StanzaDTO StanzaDTO) {
+    public StanzaDTO updateStanza(Long id, StanzaDTO stanzaDTO) {
         Stanza stanza = stanzaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Stanza not found"));
-        stanza.setNome(StanzaDTO.getNome());
-        stanza.setCapienza(StanzaDTO.getCapienza());
-        stanza.setPiano(PianoMapper.toEntity(StanzaDTO.getPiano()));
+        stanza.setNome(stanzaDTO.getNome());
+        stanza.setCapienza(stanzaDTO.getCapienza());
+        Piano piano = pianoRepository.findById(stanzaDTO.getPiano()).orElseThrow(() -> new ResourceNotFoundException("Stanza not found"));
+        stanza.setPiano(piano);
         Stanza updatedStanza = stanzaRepository.save(stanza);
         return StanzaMapper.toDTO(updatedStanza);
     }

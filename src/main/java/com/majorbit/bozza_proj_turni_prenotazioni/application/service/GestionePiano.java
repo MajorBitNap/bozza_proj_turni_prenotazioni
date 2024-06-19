@@ -16,14 +16,15 @@ import java.util.stream.Collectors;
 @Service
 public class GestionePiano {
 
-    @Autowired
-    private PianoRepository pianoRepository;
+    private final PianoRepository pianoRepository;
+
+    private final SedeRepository sedeRepository;
 
     @Autowired
-    private SedeRepository sedeRepository;
-
-    @Autowired
-    private PianoMapper pianoMapper;
+    public GestionePiano(PianoRepository pianoRepository, SedeRepository sedeRepository, PianoMapper pianoMapper) {
+        this.pianoRepository = pianoRepository;
+        this.sedeRepository = sedeRepository;
+    }
 
     public PianoDTO createPiano(PianoDTO PianoDTO) {
         Piano piano = PianoMapper.toEntity(PianoDTO);
@@ -32,7 +33,7 @@ public class GestionePiano {
     }
 
     public PianoDTO getPianoById(Long id) {
-        Piano piano = pianoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Piano not found"));
+        Piano piano = pianoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("resources not found"));
         return PianoMapper.toDTO(piano);
     }
 
@@ -41,11 +42,11 @@ public class GestionePiano {
         return piani.stream().map(PianoMapper::toDTO).collect(Collectors.toList());
     }
 
-    public PianoDTO updatePiano(Long id, PianoDTO PianoDTO) {
-        Piano piano = pianoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Piano not found"));
-        piano.setNome(PianoDTO.getNome());
-        piano.setNumero(PianoDTO.getNumero());
-        piano.setSede(SedeMapper.toEntity(PianoDTO.getSede()));
+    public PianoDTO updatePiano(Long id, PianoDTO pianoDTO) {
+        Piano piano = pianoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("resources not found"));
+        piano.setNome(pianoDTO.getNome());
+        piano.setNumero(pianoDTO.getNumero());
+        piano.setSede(sedeRepository.findById(pianoDTO.getSede()).orElseThrow(() -> new ResourceNotFoundException("resources not found")));
         Piano updatedPiano = pianoRepository.save(piano);
         return PianoMapper.toDTO(updatedPiano);
     }

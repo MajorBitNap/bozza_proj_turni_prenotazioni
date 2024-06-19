@@ -2,16 +2,25 @@ package com.majorbit.bozza_proj_turni_prenotazioni.application.mapper;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.StanzaDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Stanza;
+import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PianoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class StanzaMapper {
 
+    private static PianoRepository pianoRepository;
+
+    @Autowired
+    public StanzaMapper(PianoRepository pianoRepository) {
+        this.pianoRepository = pianoRepository;
+    }
+
     public static StanzaDTO toDTO(Stanza stanza) {
         return new StanzaDTO(
                 stanza.getNome(),
                 stanza.getCapienza(),
-                PianoMapper.toDTO(stanza.getPiano())
+                stanza.getPiano().getId()
         );
     }
 
@@ -19,7 +28,7 @@ public class StanzaMapper {
         Stanza stanza = new Stanza();
         stanza.setNome(stanzaDTO.getNome());
         stanza.setCapienza(stanzaDTO.getCapienza());
-        stanza.setPiano(PianoMapper.toEntity(stanzaDTO.getPiano()));
+        stanza.setPiano(pianoRepository.findById(stanzaDTO.getPiano()).orElseThrow());
         return stanza;
     }
 

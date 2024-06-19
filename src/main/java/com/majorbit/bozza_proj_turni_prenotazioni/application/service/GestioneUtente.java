@@ -14,13 +14,14 @@ import java.util.stream.Collectors;
 @Service
 public class GestioneUtente {
 
-    @Autowired
-    private UtenteRepository utenteRepository;
+    private final UtenteRepository utenteRepository;
 
     @Autowired
-    private UtenteMapper utenteMapper;
+    public GestioneUtente(UtenteRepository utenteRepository) {
+        this.utenteRepository = utenteRepository;
+    }
 
-        public UtenteDTO createUtente(UtenteDTO UtenteDTO) {
+    public UtenteDTO createUtente(UtenteDTO UtenteDTO) {
         Utente utente = UtenteMapper.toEntity(UtenteDTO);
         Utente savedUtente = utenteRepository.save(utente);
         return UtenteMapper.toDTO(savedUtente);

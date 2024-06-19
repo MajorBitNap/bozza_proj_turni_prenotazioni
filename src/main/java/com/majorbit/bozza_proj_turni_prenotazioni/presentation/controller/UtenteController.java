@@ -16,9 +16,10 @@ import java.util.List;
 public class UtenteController {
 
     private final GestioneUtente gestioneUtente;
-    private final IRegistraDipendente registraDipendente;
-    private final IRegistraModeratore registraModeratore;
 
+    private final IRegistraDipendente registraDipendente;
+
+    private final IRegistraModeratore registraModeratore;
 
     @Autowired
     public UtenteController(GestioneUtente gestioneUtente, IRegistraDipendente registraDipendente, IRegistraModeratore registraModeratore) {

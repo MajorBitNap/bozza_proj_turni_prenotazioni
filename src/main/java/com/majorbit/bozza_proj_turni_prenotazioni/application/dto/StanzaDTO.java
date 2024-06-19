@@ -15,6 +15,6 @@ public class StanzaDTO implements Serializable {
 
     private String nome;
     private int capienza;
-    private PianoDTO piano;
+    private Long piano;
 
 }

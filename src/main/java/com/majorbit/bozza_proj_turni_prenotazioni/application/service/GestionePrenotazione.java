@@ -5,7 +5,9 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.PostoMapper
 import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.PrenotazioneMapper;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.UtenteMapper;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Prenotazione;
+import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PostoRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PrenotazioneRepository;
+import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.UtenteRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,11 +18,20 @@ import java.util.stream.Collectors;
 @Service
 public class GestionePrenotazione {
 
-    @Autowired
-    private PrenotazioneRepository prenotazioneRepository;
+    private final PrenotazioneRepository prenotazioneRepository;
+
+    private final PostoRepository postoRepository;
+
+    private final UtenteRepository utenteRepository;
 
     @Autowired
-    private PrenotazioneMapper prenotazioneMapper;
+    public GestionePrenotazione(PrenotazioneRepository prenotazioneRepository,
+                                PostoRepository postoRepository,
+                                UtenteRepository utenteRepository) {
+        this.prenotazioneRepository = prenotazioneRepository;
+        this.postoRepository = postoRepository;
+        this.utenteRepository = utenteRepository;
+    }
 
     public PrenotazioneDTO createPrenotazione(PrenotazioneDTO PrenotazioneDTO) {
         Prenotazione prenotazione = PrenotazioneMapper.toEntity(PrenotazioneDTO);
@@ -29,7 +40,7 @@ public class GestionePrenotazione {
     }
 
     public PrenotazioneDTO getPrenotazioneById(Long id) {
-        Prenotazione prenotazione = prenotazioneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Prenotazione not found"));
+        Prenotazione prenotazione = prenotazioneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("resource not found"));
         return PrenotazioneMapper.toDTO(prenotazione);
     }
 
@@ -38,19 +49,19 @@ public class GestionePrenotazione {
         return prenotazioni.stream().map(PrenotazioneMapper::toDTO).collect(Collectors.toList());
     }
 
-    public PrenotazioneDTO updatePrenotazione(Long id, PrenotazioneDTO PrenotazioneDTO) {
-        Prenotazione prenotazione = prenotazioneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Prenotazione not found"));
-        prenotazione.setDataInizio(PrenotazioneDTO.getDataInizio());
-        prenotazione.setDataFine(PrenotazioneDTO.getDataFine());
-        prenotazione.setStato(PrenotazioneDTO.getStato());
-        prenotazione.setPosto(PostoMapper.toEntity(PrenotazioneDTO.getPosto()));
-        prenotazione.setUtente(UtenteMapper.toEntity(PrenotazioneDTO.getUtente()));;
+    public PrenotazioneDTO updatePrenotazione(Long id, PrenotazioneDTO prenotazioneDTO) {
+        Prenotazione prenotazione = prenotazioneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("resource not found"));
+        prenotazione.setDataInizio(prenotazioneDTO.getDataInizio());
+        prenotazione.setDataFine(prenotazioneDTO.getDataFine());
+        prenotazione.setStato(prenotazioneDTO.getStato());
+        prenotazione.setPosto(postoRepository.findById(prenotazioneDTO.getPosto()).orElseThrow(() -> new ResourceNotFoundException("resource not found")));
+        prenotazione.setUtente(utenteRepository.findById(prenotazioneDTO.getUtente()).orElseThrow(() -> new ResourceNotFoundException("resource not found")));;
         Prenotazione updatedPrenotazione = prenotazioneRepository.save(prenotazione);
         return PrenotazioneMapper.toDTO(updatedPrenotazione);
     }
 
     public void deletePrenotazione(Long id) {
-        Prenotazione prenotazione = prenotazioneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Prenotazione not found"));
+        Prenotazione prenotazione = prenotazioneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("resource not found"));
         prenotazioneRepository.delete(prenotazione);
     }
 }

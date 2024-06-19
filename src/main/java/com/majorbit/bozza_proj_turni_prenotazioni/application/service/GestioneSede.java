@@ -14,11 +14,12 @@ import java.util.stream.Collectors;
 @Service
 public class GestioneSede {
 
-    @Autowired
-    private SedeRepository sedeRepository;
+    private final SedeRepository sedeRepository;
 
     @Autowired
-    private SedeMapper sedeMapper;
+    public GestioneSede(SedeRepository sedeRepository) {
+        this.sedeRepository = sedeRepository;
+    }
 
     public SedeDTO createSede(SedeDTO SedeDTO) {
         Sede sede = SedeMapper.toEntity(SedeDTO);

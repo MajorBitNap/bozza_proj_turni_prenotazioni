@@ -14,11 +14,12 @@ import java.util.stream.Collectors;
 @Service
 public class GestioneLogin {
 
-    @Autowired
-    private LoginRepository loginRepository;
+    private final LoginRepository loginRepository;
 
     @Autowired
-    private LoginMapper loginMapper;
+    public GestioneLogin(LoginRepository loginRepository) {
+        this.loginRepository = loginRepository;
+    }
 
     public LoginDTO createLogin(LoginDTO ILoginDTO) {
         Login login = LoginMapper.toEntity(ILoginDTO);
