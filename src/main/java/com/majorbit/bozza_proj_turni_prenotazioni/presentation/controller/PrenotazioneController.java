@@ -17,7 +17,7 @@ import java.util.Calendar;
 import java.util.List;
 
 @RestController
-@RequestMapping(" ")
+@RequestMapping("/api/v1/prenotazioni")
 public class PrenotazioneController {
 
     private final GestionePrenotazione gestionePrenotazione;
@@ -53,12 +53,6 @@ public class PrenotazioneController {
     public ResponseEntity<List<PrenotazioneDTO>> getAllPrenotazioni() {
         List<PrenotazioneDTO> prenotazioni = gestionePrenotazione.getAllPrenotazioni();
         return ResponseEntity.ok(prenotazioni);
-    }
-
-    @PostMapping
-    public ResponseEntity<PrenotazioneDTO> createPrenotazione(@RequestBody PrenotazioneDTO prenotazione) {
-        PrenotazioneDTO newPrenotazione = gestionePrenotazione.createPrenotazione(prenotazione);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping("/{id}")
