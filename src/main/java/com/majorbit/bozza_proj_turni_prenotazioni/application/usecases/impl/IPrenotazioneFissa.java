@@ -40,30 +40,29 @@ public class IPrenotazioneFissa implements PrenotazioneFissa {
     }
 
 //  logica per prenotare un posto per una Data
-@Override
-public List<PrenotazioneDTO> creaPrenotazioniRicorrenti(PrenotazioneDTO prenotazioneDTO) {
-    List<PrenotazioneDTO> prenotazioni = new ArrayList<>();
-    Calendar cal = Calendar.getInstance();
-    cal.setTime(prenotazioneDTO.getDataInizio());
+    @Override
+    public List<PrenotazioneDTO> creaPrenotazioniRicorrenti(PrenotazioneDTO prenotazioneDTO) {
 
-    int giornoDellaSettimanaDesiderato = cal.get(Calendar.DAY_OF_WEEK);
+        List<PrenotazioneDTO> prenotazioni = new ArrayList<>();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(prenotazioneDTO.getDataInizio());
 
-    while (cal.getTime().before(prenotazioneDTO.getDataFine()) || cal.get(Calendar.DAY_OF_WEEK) == giornoDellaSettimanaDesiderato) {
-        if (cal.get(Calendar.DAY_OF_WEEK) == giornoDellaSettimanaDesiderato) {
-            Prenotazione prenotazione = new Prenotazione();
-            prenotazione.setDataInizio(new Date(cal.getTimeInMillis()));
-            prenotazione.setDataFine(prenotazioneDTO.getDataFine());
-            prenotazione.setStato("INSERITA");
-            prenotazione.setUtente(prenotazioneDTO.getUtente());
-            prenotazione.setPosto(prenotazioneDTO.getPosto());
-            prenotazioneRepository.save(prenotazione);
-            PrenotazioneDTO savedPrenotazioneDTO = PrenotazioneMapper.toDTO(prenotazione);
-            prenotazioni.add(savedPrenotazioneDTO);
+        int giornoDellaSettimanaDesiderato = cal.get(Calendar.DAY_OF_WEEK);
+
+        while (cal.getTime().before(prenotazioneDTO.getDataFine()) || cal.get(Calendar.DAY_OF_WEEK) == giornoDellaSettimanaDesiderato) {
+            if (cal.get(Calendar.DAY_OF_WEEK) == giornoDellaSettimanaDesiderato) {
+                Prenotazione prenotazione = new Prenotazione();
+                prenotazione.setDataInizio(new Date(cal.getTimeInMillis()));
+                prenotazione.setDataFine(prenotazioneDTO.getDataFine());
+                prenotazione.setStato("INSERITA");
+                prenotazione.setUtente(prenotazioneDTO.getUtente());
+                prenotazione.setPosto(prenotazioneDTO.getPosto());
+                prenotazioneRepository.save(prenotazione);
+                PrenotazioneDTO savedPrenotazioneDTO = PrenotazioneMapper.toDTO(prenotazione);
+                prenotazioni.add(savedPrenotazioneDTO);
+            }
+            cal.add(Calendar.DAY_OF_MONTH, 1);
         }
-        cal.add(Calendar.DAY_OF_MONTH, 1);
+        return prenotazioni;
     }
-    return prenotazioni;
-}
-
-
 }
