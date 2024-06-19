@@ -1,6 +1,5 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.application.service;
 
-import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PostoDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.PostoMapper;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Posto;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PostoRepository;
@@ -20,23 +19,23 @@ public class GestionePosto {
     @Autowired
     private PostoMapper postoMapper;
 
-    public PostoDTO createPosto(PostoDTO postoDTO) {
+    public com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PostoDTO createPosto(com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PostoDTO postoDTO) {
         Posto posto = PostoMapper.toEntity(postoDTO);
         Posto savedPosto = postoRepository.save(posto);
         return PostoMapper.toDTO(savedPosto);
     }
 
-    public PostoDTO getPostoById(Long id) {
+    public com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PostoDTO getPostoById(Long id) {
         Posto posto = postoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Posto not found"));
         return PostoMapper.toDTO(posto);
     }
 
-    public List<PostoDTO> getAllPosti() {
+    public List<com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PostoDTO> getAllPosti() {
         List<Posto> posti = postoRepository.findAll();
         return posti.stream().map(PostoMapper::toDTO).collect(Collectors.toList());
     }
 
-    public PostoDTO updatePosto(Long id, PostoDTO postoDTO) {
+    public com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PostoDTO updatePosto(Long id, com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PostoDTO postoDTO) {
         Posto posto = postoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Posto not found"));
         posto.setNome(postoDTO.getNome());
         posto.setStanza(postoDTO.getStanza());
