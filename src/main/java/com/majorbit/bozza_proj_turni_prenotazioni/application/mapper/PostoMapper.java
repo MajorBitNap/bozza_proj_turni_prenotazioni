@@ -11,7 +11,7 @@ public class PostoMapper {
         return new PostoDTO(
             posto.getNome(),
             posto.isDisponibile(),
-            posto.getStanza()
+            StanzaMapper.toDTO(posto.getStanza())
         );
     }
 
@@ -19,7 +19,7 @@ public class PostoMapper {
         Posto posto = new Posto();
         posto.setDisponibile(postoDTO.isDisponibile());
         posto.setNome(postoDTO.getNome());
-        posto.setStanza(postoDTO.getStanza());
+        posto.setStanza(StanzaMapper.toEntity(postoDTO.getStanza()));
         return posto;
     }
 }

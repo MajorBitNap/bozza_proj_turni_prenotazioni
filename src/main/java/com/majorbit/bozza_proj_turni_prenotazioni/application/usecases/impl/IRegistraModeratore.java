@@ -14,8 +14,8 @@ public class IRegistraModeratore implements RegistraModeratore {
 
 //  [per l'amministratore] logica per registrare un utente con ruolo MODERATORE
     @Override
-    public void registraModeratore(UtenteDTO utenteDTO) {
+    public void registraModeratore(UtenteDTO UtenteDTO) {
 
-        gestioneUtente.createUtente(utenteDTO);
+        gestioneUtente.createUtente(UtenteDTO);
     }
 }

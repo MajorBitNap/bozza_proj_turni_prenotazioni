@@ -14,8 +14,8 @@ public class IRegistraDipendente implements RegistraDipendente {
 
 //  [per l'amministratore] logica per registrare un utente con ruolo DIPENDENTE
     @Override
-    public void registraDipendente(UtenteDTO utenteDTO) {
+    public void registraDipendente(UtenteDTO UtenteDTO) {
 
-        gestioneUtente.createUtente(utenteDTO);
+        gestioneUtente.createUtente(UtenteDTO);
     }
 }

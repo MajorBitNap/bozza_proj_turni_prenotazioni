@@ -5,16 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.sql.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PrenotazioneDTO implements Serializable {
+public class StanzaID implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
-    private Date dataInizio;
-    private Date dataFine;
-    private String stato;
-    private PostoDTO posto;
-    private UtenteDTO utente;
+    private Long id;
+
 }

@@ -15,7 +15,7 @@ public class Login {
     private Long id;
 
     @Column(name = "email", nullable = false)
-    private String utente;
+    private String email;
 
     @Column(name = "password", nullable = false)
     private String password;

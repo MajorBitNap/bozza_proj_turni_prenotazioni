@@ -11,7 +11,7 @@ public class StanzaMapper {
         return new StanzaDTO(
                 stanza.getNome(),
                 stanza.getCapienza(),
-                stanza.getPiano()
+                PianoMapper.toDTO(stanza.getPiano())
         );
     }
 
@@ -19,7 +19,7 @@ public class StanzaMapper {
         Stanza stanza = new Stanza();
         stanza.setNome(stanzaDTO.getNome());
         stanza.setCapienza(stanzaDTO.getCapienza());
-        stanza.setPiano(stanzaDTO.getPiano());
+        stanza.setPiano(PianoMapper.toEntity(stanzaDTO.getPiano()));
         return stanza;
     }
 

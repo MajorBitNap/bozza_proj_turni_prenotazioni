@@ -23,7 +23,8 @@ Stanza {
     @Column
     private int capienza;
 
-    @Column(name = "piano_id")
-    private Long piano;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "piano_id")
+    private Piano piano;
 
 }

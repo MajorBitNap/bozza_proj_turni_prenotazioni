@@ -11,9 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 @RestController
@@ -68,14 +65,14 @@ public class PrenotazioneController {
     }
 //  prenotazione fissa ciclica per il giorno della settimana corrispondente a quella della prenotazione
     @PostMapping("/prenotazione_fissa")
-    public ResponseEntity<Void> prenotaGiornoFisso(@RequestBody PrenotazioneDTO prenotazioneDTO) {
-        List<PrenotazioneDTO> prenotazioni = prenotazioneFissa.creaPrenotazioniRicorrenti(prenotazioneDTO);
+    public ResponseEntity<Void> prenotaGiornoFisso(@RequestBody PrenotazioneDTO PrenotazioneDTO) {
+        List<PrenotazioneDTO> prenotazioni = prenotazioneFissa.creaPrenotazioniRicorrenti(PrenotazioneDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PostMapping("/moderatore")
-    public ResponseEntity<PrenotazioneDTO> modCreaPrenotazione(@RequestBody PrenotazioneDTO prenotazioneDTO) {
-        PrenotazioneDTO newPrenotazione = modCreaPrenotazione.createPrenotazione(prenotazioneDTO);
+    public ResponseEntity<PrenotazioneDTO> modCreaPrenotazione(@RequestBody PrenotazioneDTO PrenotazioneDTO) {
+        PrenotazioneDTO newPrenotazione = modCreaPrenotazione.createPrenotazione(PrenotazioneDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
     @PutMapping("/approvazione/{id}")
@@ -85,8 +82,8 @@ public class PrenotazioneController {
     }
 //  logica per effettuare una prenotazione singola per un giorno specifico
     @PostMapping("/prenotazione_singolo_giorno")
-    public ResponseEntity<PrenotazioneDTO> prenotaPerSingoloGiorno(@RequestBody PrenotazioneDTO prenotazioneDTO) {
-        PrenotazioneDTO newPrenotazione = prenotazioneSingoloGiorno.prenotaPerSingoloGiorno(prenotazioneDTO);
+    public ResponseEntity<PrenotazioneDTO> prenotaPerSingoloGiorno(@RequestBody PrenotazioneDTO PrenotazioneDTO) {
+        PrenotazioneDTO newPrenotazione = prenotazioneSingoloGiorno.prenotaPerSingoloGiorno(PrenotazioneDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

@@ -22,8 +22,8 @@ public class GestionePrenotazione {
     @Autowired
     private PrenotazioneMapper prenotazioneMapper;
 
-    public PrenotazioneDTO createPrenotazione(PrenotazioneDTO prenotazioneDTO) {
-        Prenotazione prenotazione = PrenotazioneMapper.toEntity(prenotazioneDTO);
+    public PrenotazioneDTO createPrenotazione(PrenotazioneDTO PrenotazioneDTO) {
+        Prenotazione prenotazione = PrenotazioneMapper.toEntity(PrenotazioneDTO);
         Prenotazione savedPrenotazione = prenotazioneRepository.save(prenotazione);
         return PrenotazioneMapper.toDTO(savedPrenotazione);
     }
@@ -38,13 +38,13 @@ public class GestionePrenotazione {
         return prenotazioni.stream().map(PrenotazioneMapper::toDTO).collect(Collectors.toList());
     }
 
-    public PrenotazioneDTO updatePrenotazione(Long id, PrenotazioneDTO prenotazioneDTO) {
+    public PrenotazioneDTO updatePrenotazione(Long id, PrenotazioneDTO PrenotazioneDTO) {
         Prenotazione prenotazione = prenotazioneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Prenotazione not found"));
-        prenotazione.setDataInizio(prenotazioneDTO.getDataInizio());
-        prenotazione.setDataFine(prenotazioneDTO.getDataFine());
-        prenotazione.setStato(prenotazioneDTO.getStato());
-        prenotazione.setPosto(prenotazioneDTO.getPosto());
-        prenotazione.setUtente(prenotazioneDTO.getUtente());;
+        prenotazione.setDataInizio(PrenotazioneDTO.getDataInizio());
+        prenotazione.setDataFine(PrenotazioneDTO.getDataFine());
+        prenotazione.setStato(PrenotazioneDTO.getStato());
+        prenotazione.setPosto(PostoMapper.toEntity(PrenotazioneDTO.getPosto()));
+        prenotazione.setUtente(UtenteMapper.toEntity(PrenotazioneDTO.getUtente()));;
         Prenotazione updatedPrenotazione = prenotazioneRepository.save(prenotazione);
         return PrenotazioneMapper.toDTO(updatedPrenotazione);
     }

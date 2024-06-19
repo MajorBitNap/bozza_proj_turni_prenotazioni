@@ -9,14 +9,14 @@ public class LoginMapper {
 
     public static LoginDTO toDTO(Login login) {
         return new LoginDTO(
-                login.getUtente(),
+                login.getEmail(),
                 login.getPassword()
         );
     }
 
     public static Login toEntity(LoginDTO loginDTO) {
         Login login = new Login();
-        login.setUtente(loginDTO.getUtente());
+        login.setEmail(loginDTO.getEmail());
         login.setPassword(loginDTO.getPassword());
         return login;
     }

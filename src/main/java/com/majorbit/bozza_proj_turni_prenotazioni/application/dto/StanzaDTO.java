@@ -1,6 +1,5 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.application.dto;
 
-import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Piano;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +15,6 @@ public class StanzaDTO implements Serializable {
 
     private String nome;
     private int capienza;
-    private Long piano;
+    private PianoDTO piano;
 
 }

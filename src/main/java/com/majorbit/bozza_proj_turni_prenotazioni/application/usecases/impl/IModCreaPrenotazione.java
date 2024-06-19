@@ -16,8 +16,8 @@ public class IModCreaPrenotazione {
     @Autowired
     private PrenotazioneMapper prenotazioneMapper;
 
-    public PrenotazioneDTO createPrenotazione(PrenotazioneDTO prenotazioneDTO) {
-        Prenotazione prenotazione = PrenotazioneMapper.toEntity(prenotazioneDTO);
+    public PrenotazioneDTO createPrenotazione(PrenotazioneDTO PrenotazioneDTO) {
+        Prenotazione prenotazione = PrenotazioneMapper.toEntity(PrenotazioneDTO);
         prenotazione.setStato("Approvata");
         Prenotazione savedPrenotazione = prenotazioneRepository.save(prenotazione);
         return PrenotazioneMapper.toDTO(savedPrenotazione);

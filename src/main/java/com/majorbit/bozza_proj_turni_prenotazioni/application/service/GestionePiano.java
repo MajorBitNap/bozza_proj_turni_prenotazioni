@@ -2,6 +2,7 @@ package com.majorbit.bozza_proj_turni_prenotazioni.application.service;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PianoDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.PianoMapper;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.SedeMapper;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Piano;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PianoRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.SedeRepository;
@@ -24,8 +25,8 @@ public class GestionePiano {
     @Autowired
     private PianoMapper pianoMapper;
 
-    public PianoDTO createPiano(PianoDTO pianoDTO) {
-        Piano piano = PianoMapper.toEntity(pianoDTO);
+    public PianoDTO createPiano(PianoDTO PianoDTO) {
+        Piano piano = PianoMapper.toEntity(PianoDTO);
         Piano savedPiano = pianoRepository.save(piano);
         return PianoMapper.toDTO(savedPiano);
     }
@@ -40,11 +41,11 @@ public class GestionePiano {
         return piani.stream().map(PianoMapper::toDTO).collect(Collectors.toList());
     }
 
-    public PianoDTO updatePiano(Long id, PianoDTO pianoDTO) {
+    public PianoDTO updatePiano(Long id, PianoDTO PianoDTO) {
         Piano piano = pianoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Piano not found"));
-        piano.setNome(pianoDTO.getNome());
-        piano.setNumero(pianoDTO.getNumero());
-        piano.setSede(pianoDTO.getSede());
+        piano.setNome(PianoDTO.getNome());
+        piano.setNumero(PianoDTO.getNumero());
+        piano.setSede(SedeMapper.toEntity(PianoDTO.getSede()));
         Piano updatedPiano = pianoRepository.save(piano);
         return PianoMapper.toDTO(updatedPiano);
     }

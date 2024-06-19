@@ -20,8 +20,8 @@ public class GestioneUtente {
     @Autowired
     private UtenteMapper utenteMapper;
 
-        public UtenteDTO createUtente(UtenteDTO utenteDTO) {
-        Utente utente = UtenteMapper.toEntity(utenteDTO);
+        public UtenteDTO createUtente(UtenteDTO UtenteDTO) {
+        Utente utente = UtenteMapper.toEntity(UtenteDTO);
         Utente savedUtente = utenteRepository.save(utente);
         return UtenteMapper.toDTO(savedUtente);
     }
@@ -36,12 +36,12 @@ public class GestioneUtente {
         return utenti.stream().map(UtenteMapper::toDTO).collect(Collectors.toList());
     }
 
-    public UtenteDTO updateUtente(Long id, UtenteDTO utenteDTO) {
+    public UtenteDTO updateUtente(Long id, UtenteDTO UtenteDTO) {
         Utente utente = utenteRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Utente not found"));
-        utente.setNome(utenteDTO.getNome());
-        utente.setCognome(utenteDTO.getCognome());
-        utente.setEmail(utenteDTO.getEmail());
-        utente.setRuolo(utenteDTO.getRuolo());
+        utente.setNome(UtenteDTO.getNome());
+        utente.setCognome(UtenteDTO.getCognome());
+        utente.setEmail(UtenteDTO.getEmail());
+        utente.setRuolo(UtenteDTO.getRuolo());
         Utente updatedUtente = utenteRepository.save(utente);
         return UtenteMapper.toDTO(updatedUtente);
     }

@@ -59,15 +59,15 @@ public class UtenteController {
 
     // registrazione da parte dell'amministratore di un utente con ruolo DIPENDENTE
     @PostMapping("/amministratore/registraDipendente")
-    public ResponseEntity<Void> registraDipendente(@RequestBody UtenteDTO utenteDTO) {
-        registraDipendente.registraDipendente(utenteDTO);
+    public ResponseEntity<Void> registraDipendente(@RequestBody UtenteDTO UtenteDTO) {
+        registraDipendente.registraDipendente(UtenteDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     // registrazione da parte dell'amministratore di un utente con ruolo MODERATORE
     @PostMapping("/amministratore/registraModeratore")
-    public ResponseEntity<Void> registraModeratore(@RequestBody UtenteDTO utenteDTO) {
-        registraModeratore.registraModeratore(utenteDTO);
+    public ResponseEntity<Void> registraModeratore(@RequestBody UtenteDTO UtenteDTO) {
+        registraModeratore.registraModeratore(UtenteDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

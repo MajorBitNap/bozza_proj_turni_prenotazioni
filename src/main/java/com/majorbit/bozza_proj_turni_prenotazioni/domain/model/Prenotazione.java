@@ -26,11 +26,12 @@ public class Prenotazione {
     private String stato;
 
 
-    @Column(name = "posto_id")
-    private Long posto;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "posto_id")
+    private Posto posto;
 
-    @Column(name = "utente_id")
-    private Long utente;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "utente_id")
+    private Utente utente;
 
 }

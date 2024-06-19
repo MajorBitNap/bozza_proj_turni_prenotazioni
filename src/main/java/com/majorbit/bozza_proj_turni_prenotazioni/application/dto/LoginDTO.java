@@ -1,6 +1,5 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.application.dto;
 
-import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Utente;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +13,7 @@ public class LoginDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String utente;
+    private String email;
     private String password;
 
 }

@@ -1,6 +1,7 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.application.service;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.StanzaDTO;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.PianoMapper;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.StanzaMapper;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Stanza;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.StanzaRepository;
@@ -20,8 +21,8 @@ public class GestioneStanza {
     @Autowired
     private StanzaMapper stanzaMapper;
 
-    public StanzaDTO createStanza(StanzaDTO stanzaDTO) {
-        Stanza stanza = StanzaMapper.toEntity(stanzaDTO);
+    public StanzaDTO createStanza(StanzaDTO StanzaDTO) {
+        Stanza stanza = StanzaMapper.toEntity(StanzaDTO);
         Stanza savedStanza = stanzaRepository.save(stanza);
         return StanzaMapper.toDTO(savedStanza);
     }
@@ -36,11 +37,11 @@ public class GestioneStanza {
         return stanze.stream().map(StanzaMapper::toDTO).collect(Collectors.toList());
     }
 
-    public StanzaDTO updateStanza(Long id, StanzaDTO stanzaDTO) {
+    public StanzaDTO updateStanza(Long id, StanzaDTO StanzaDTO) {
         Stanza stanza = stanzaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Stanza not found"));
-        stanza.setNome(stanzaDTO.getNome());
-        stanza.setCapienza(stanzaDTO.getCapienza());
-        stanza.setPiano(stanzaDTO.getPiano());
+        stanza.setNome(StanzaDTO.getNome());
+        stanza.setCapienza(StanzaDTO.getCapienza());
+        stanza.setPiano(PianoMapper.toEntity(StanzaDTO.getPiano()));
         Stanza updatedStanza = stanzaRepository.save(stanza);
         return StanzaMapper.toDTO(updatedStanza);
     }

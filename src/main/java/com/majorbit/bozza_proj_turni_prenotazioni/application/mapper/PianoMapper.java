@@ -11,7 +11,7 @@ public class PianoMapper {
         return new PianoDTO(
                 piano.getNome(),
                 piano.getNumero(),
-                piano.getSede()
+                SedeMapper.toDTO(piano.getSede())
         );
     }
 
@@ -19,7 +19,7 @@ public class PianoMapper {
         Piano piano = new Piano();
         piano.setNome(pianoDTO.getNome());
         piano.setNumero(pianoDTO.getNumero());
-        piano.setSede(pianoDTO.getSede());
+        piano.setSede(SedeMapper.toEntity(pianoDTO.getSede()));
         return piano;
     }
 }

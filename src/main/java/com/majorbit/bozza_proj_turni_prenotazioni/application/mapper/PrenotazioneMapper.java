@@ -1,11 +1,7 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.application.mapper;
 
-import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PostoDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PrenotazioneDTO;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.UtenteDTO;
-import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Posto;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Prenotazione;
-import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Utente;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,18 +12,18 @@ public class PrenotazioneMapper {
                 prenotazione.getDataInizio(),
                 prenotazione.getDataFine(),
                 prenotazione.getStato(),
-                prenotazione.getPosto(),
-                prenotazione.getUtente()
+                PostoMapper.toDTO(prenotazione.getPosto()),
+                UtenteMapper.toDTO(prenotazione.getUtente())
         );
     }
 
-    public static Prenotazione toEntity(PrenotazioneDTO prenotazioneDTO) {
+    public static Prenotazione toEntity(PrenotazioneDTO PrenotazioneDTO) {
         Prenotazione prenotazione = new Prenotazione();
-        prenotazione.setDataInizio(prenotazioneDTO.getDataInizio());
-        prenotazione.setDataFine(prenotazioneDTO.getDataFine());
-        prenotazione.setStato(prenotazioneDTO.getStato());
-        prenotazione.setUtente(prenotazioneDTO.getUtente());
-        prenotazione.setPosto(prenotazioneDTO.getPosto());
+        prenotazione.setDataInizio(PrenotazioneDTO.getDataInizio());
+        prenotazione.setDataFine(PrenotazioneDTO.getDataFine());
+        prenotazione.setStato(PrenotazioneDTO.getStato());
+        prenotazione.setUtente(UtenteMapper.toEntity(PrenotazioneDTO.getUtente()));
+        prenotazione.setPosto(PostoMapper.toEntity(PrenotazioneDTO.getPosto()));
         return prenotazione;
     }
 }

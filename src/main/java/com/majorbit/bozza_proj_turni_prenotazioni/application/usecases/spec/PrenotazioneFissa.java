@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface PrenotazioneFissa {
 
-    public List<PrenotazioneDTO> creaPrenotazioniRicorrenti(PrenotazioneDTO prenotazioneDTO);
+    public List<PrenotazioneDTO> creaPrenotazioniRicorrenti(PrenotazioneDTO PrenotazioneDTO);
 
 }

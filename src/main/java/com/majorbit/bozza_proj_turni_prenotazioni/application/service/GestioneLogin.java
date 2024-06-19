@@ -20,8 +20,8 @@ public class GestioneLogin {
     @Autowired
     private LoginMapper loginMapper;
 
-    public LoginDTO createLogin(LoginDTO loginDTO) {
-        Login login = LoginMapper.toEntity(loginDTO);
+    public LoginDTO createLogin(LoginDTO ILoginDTO) {
+        Login login = LoginMapper.toEntity(ILoginDTO);
         Login savedLogin = loginRepository.save(login);
         return LoginMapper.toDTO(savedLogin);
     }
@@ -36,10 +36,10 @@ public class GestioneLogin {
         return logins.stream().map(LoginMapper::toDTO).collect(Collectors.toList());
     }
 
-    public LoginDTO updateLogin(Long id, LoginDTO loginDTO) {
+    public LoginDTO updateLogin(Long id, LoginDTO ILoginDTO) {
         Login login = loginRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Login not found"));
-        login.setPassword(loginDTO.getPassword());
-        login.setUtente(loginDTO.getUtente());
+        login.setPassword(ILoginDTO.getPassword());
+        login.setEmail(     ILoginDTO.getEmail());
         Login updatedLogin = loginRepository.save(login);
         return LoginMapper.toDTO(updatedLogin);
     }

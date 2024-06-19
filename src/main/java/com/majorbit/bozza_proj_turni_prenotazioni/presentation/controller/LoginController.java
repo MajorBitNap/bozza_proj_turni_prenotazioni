@@ -23,26 +23,26 @@ public class LoginController {
 
     @GetMapping("/{id}")
     public ResponseEntity<LoginDTO> getLoginById(@PathVariable Long id) {
-        LoginDTO loginDTO = loginService.getLoginById(id);
-        return ResponseEntity.ok(loginDTO);
+        LoginDTO ILoginDTO = loginService.getLoginById(id);
+        return ResponseEntity.ok(ILoginDTO);
     }
 
     @GetMapping
     public ResponseEntity<List<LoginDTO>> getAllLogins() {
-        List<LoginDTO> loginDTOs = loginService.getAllLogins();
-        return ResponseEntity.ok(loginDTOs);
+        List<LoginDTO> ILoginDTOS = loginService.getAllLogins();
+        return ResponseEntity.ok(ILoginDTOS);
     }
 
     @PostMapping
-    public ResponseEntity<LoginDTO> createLogin(@RequestBody LoginDTO loginDTO) {
-        LoginDTO createdLoginDTO = loginService.createLogin(loginDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdLoginDTO);
+    public ResponseEntity<LoginDTO> createLogin(@RequestBody LoginDTO ILoginDTO) {
+        LoginDTO createdILoginDTO = loginService.createLogin(ILoginDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdILoginDTO);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<LoginDTO> updateLogin(@PathVariable Long id, @RequestBody LoginDTO loginDTO) {
-        LoginDTO updatedLoginDTO = loginService.updateLogin(id, loginDTO);
-        return ResponseEntity.ok(updatedLoginDTO);
+    public ResponseEntity<LoginDTO> updateLogin(@PathVariable Long id, @RequestBody LoginDTO ILoginDTO) {
+        LoginDTO updatedILoginDTO = loginService.updateLogin(id, ILoginDTO);
+        return ResponseEntity.ok(updatedILoginDTO);
     }
 
     @DeleteMapping("/{id}")

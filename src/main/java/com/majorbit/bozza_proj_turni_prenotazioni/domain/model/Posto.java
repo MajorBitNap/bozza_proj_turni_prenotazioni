@@ -23,7 +23,8 @@ public class Posto {
     @Column
     private boolean disponibile;
 
-    @Column(name = "stanza_id")
-    private Long stanza;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "stanza_id")
+    private Stanza stanza;
 
 }

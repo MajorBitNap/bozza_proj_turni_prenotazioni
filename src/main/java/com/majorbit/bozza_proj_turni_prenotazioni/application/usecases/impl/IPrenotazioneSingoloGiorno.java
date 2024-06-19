@@ -31,12 +31,12 @@ public class IPrenotazioneSingoloGiorno implements PrenotazioneSingoloGiorno {
         this.postoMapper = postoMapper;
     }
     @Override
-    public PrenotazioneDTO prenotaPerSingoloGiorno (PrenotazioneDTO prenotazioneDTO){
+    public PrenotazioneDTO prenotaPerSingoloGiorno (PrenotazioneDTO PrenotazioneDTO){
         Prenotazione prenotazione = new Prenotazione();
-        prenotazione.setDataInizio(prenotazioneDTO.getDataInizio());
+        prenotazione.setDataInizio(PrenotazioneDTO.getDataInizio());
         prenotazione.setStato("INSERITA");
-        prenotazione.setUtente(prenotazioneDTO.getUtente());
-        prenotazione.setPosto(prenotazioneDTO.getPosto());
+        prenotazione.setUtente(UtenteMapper.toEntity(PrenotazioneDTO.getUtente()));
+        prenotazione.setPosto(PostoMapper.toEntity(PrenotazioneDTO.getPosto()));
         prenotazioneRepository.save(prenotazione);
         return PrenotazioneMapper.toDTO(prenotazione);
     }
