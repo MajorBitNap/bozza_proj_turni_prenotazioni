@@ -56,8 +56,8 @@ public class IPrenotazioneFissa implements PrenotazioneFissa {
                 prenotazione.setDataInizio(new Date(cal.getTimeInMillis()));
                 prenotazione.setDataFine(prenotazioneDTO.getDataFine());
                 prenotazione.setStato("INSERITA");
-                prenotazione.setUtente(UtenteMapper.toEntity(prenotazioneDTO.getUtente()));
-                prenotazione.setPosto(PostoMapper.toEntity(prenotazioneDTO.getPosto()));
+                prenotazione.setUtente(prenotazioneDTO.getUtente());
+                prenotazione.setPosto(prenotazioneDTO.getPosto());
                 prenotazioneRepository.save(prenotazione);
                 PrenotazioneDTO savedPrenotazioneDTO = PrenotazioneMapper.toDTO(prenotazione);
                 prenotazioni.add(savedPrenotazioneDTO);

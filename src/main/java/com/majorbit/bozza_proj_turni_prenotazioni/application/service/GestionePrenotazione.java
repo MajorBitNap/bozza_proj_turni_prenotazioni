@@ -43,8 +43,8 @@ public class GestionePrenotazione {
         prenotazione.setDataInizio(prenotazioneDTO.getDataInizio());
         prenotazione.setDataFine(prenotazioneDTO.getDataFine());
         prenotazione.setStato(prenotazioneDTO.getStato());
-        prenotazione.setPosto(PostoMapper.toEntity(prenotazioneDTO.getPosto()));
-        prenotazione.setUtente(UtenteMapper.toEntity(prenotazioneDTO.getUtente()));;
+        prenotazione.setPosto(prenotazioneDTO.getPosto());
+        prenotazione.setUtente(prenotazioneDTO.getUtente());;
         Prenotazione updatedPrenotazione = prenotazioneRepository.save(prenotazione);
         return PrenotazioneMapper.toDTO(updatedPrenotazione);
     }

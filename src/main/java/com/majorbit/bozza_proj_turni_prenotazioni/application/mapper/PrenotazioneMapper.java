@@ -12,14 +12,12 @@ import org.springframework.stereotype.Component;
 public class PrenotazioneMapper {
 
     public static PrenotazioneDTO toDTO(Prenotazione prenotazione) {
-        Posto posto = prenotazione.getPosto();
-        Utente utente = prenotazione.getUtente();
         return new PrenotazioneDTO(
                 prenotazione.getDataInizio(),
                 prenotazione.getDataFine(),
                 prenotazione.getStato(),
-                PostoMapper.toDTO(posto),
-                UtenteMapper.toDTO(utente)
+                prenotazione.getPosto(),
+                prenotazione.getUtente()
         );
     }
 
@@ -28,8 +26,8 @@ public class PrenotazioneMapper {
         prenotazione.setDataInizio(prenotazioneDTO.getDataInizio());
         prenotazione.setDataFine(prenotazioneDTO.getDataFine());
         prenotazione.setStato(prenotazioneDTO.getStato());
-        prenotazione.setUtente(UtenteMapper.toEntity(prenotazioneDTO.getUtente()));
-        prenotazione.setPosto(PostoMapper.toEntity(prenotazioneDTO.getPosto()));
+        prenotazione.setUtente(prenotazioneDTO.getUtente());
+        prenotazione.setPosto(prenotazioneDTO.getPosto());
         return prenotazione;
     }
 }

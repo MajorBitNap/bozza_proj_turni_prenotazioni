@@ -12,27 +12,25 @@ import java.sql.Date;
 @Entity
 public class Prenotazione {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(name = "data_inizio")
     private Date dataInizio;
 
-    @Column
+    @Column(name = "data_fine")
     private Date dataFine;
 
     @Column
     private String stato;
 
 
-    @ManyToOne
-    @JoinColumn(name = "posto_id")
-    private Posto posto;
+    @Column(name = "posto_id")
+    private Long posto;
 
-    @ManyToOne
-    @JoinColumn(name = "utente_id")
-    private Utente utente;
+    @Column(name = "utente_id")
+    private Long utente;
 
 
 }
