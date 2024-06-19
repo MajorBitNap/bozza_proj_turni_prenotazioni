@@ -33,7 +33,7 @@ public class IPrenotazioneSingoloGiorno implements PrenotazioneSingoloGiorno {
     @Override
     public PrenotazioneDTO prenotaPerSingoloGiorno (PrenotazioneDTO prenotazioneDTO){
         Prenotazione prenotazione = new Prenotazione();
-        prenotazione.setDataFine(prenotazioneDTO.getDataFine());
+        prenotazione.setDataInizio(prenotazioneDTO.getDataInizio());
         prenotazione.setStato("INSERITA");
         prenotazione.setUtente(prenotazioneDTO.getUtente());
         prenotazione.setPosto(prenotazioneDTO.getPosto());
