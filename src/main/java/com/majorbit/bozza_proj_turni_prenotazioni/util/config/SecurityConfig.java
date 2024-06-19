@@ -1,4 +1,4 @@
-package com.majorbit.bozza_proj_turni_prenotazioni.util.exception.config;
+package com.majorbit.bozza_proj_turni_prenotazioni.util.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
