@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class PianoMapper {
 
-    private static SedeRepository sedeRepository;
+    private final SedeRepository sedeRepository;
 
     @Autowired
     public PianoMapper(SedeRepository sedeRepository) {
         this.sedeRepository = sedeRepository;
     }
 
-    public static PianoDTO toDTO(Piano piano) {
+    public PianoDTO toDTO(Piano piano) {
         return new PianoDTO(
                 piano.getNome(),
                 piano.getNumero(),
@@ -24,7 +24,7 @@ public class PianoMapper {
         );
     }
 
-    public static Piano toEntity(PianoDTO pianoDTO) {
+    public Piano toEntity(PianoDTO pianoDTO) {
         Piano piano = new Piano();
         piano.setNome(pianoDTO.getNome());
         piano.setNumero(pianoDTO.getNumero());

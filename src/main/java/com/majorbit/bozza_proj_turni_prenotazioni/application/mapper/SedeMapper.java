@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class SedeMapper {
 
-    public static SedeDTO toDTO(Sede sede) {
+    public SedeDTO toDTO(Sede sede) {
         return new SedeDTO(sede.getNome(), sede.getIndirizzo());
     }
 
-    public static Sede toEntity(SedeDTO sedeDTO) {
+    public Sede toEntity(SedeDTO sedeDTO) {
         Sede sede = new Sede();
         sede.setNome(sedeDTO.getNome());
         sede.setIndirizzo(sedeDTO.getIndirizzo());

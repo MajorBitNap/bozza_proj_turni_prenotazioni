@@ -16,25 +16,29 @@ public class GestioneUtente {
 
     private final UtenteRepository utenteRepository;
 
+    private final UtenteMapper utenteMapper;
+
     @Autowired
-    public GestioneUtente(UtenteRepository utenteRepository) {
+    public GestioneUtente(UtenteRepository utenteRepository,
+                          UtenteMapper utenteMapper) {
         this.utenteRepository = utenteRepository;
+        this.utenteMapper = utenteMapper;
     }
 
     public UtenteDTO createUtente(UtenteDTO UtenteDTO) {
-        Utente utente = UtenteMapper.toEntity(UtenteDTO);
+        Utente utente = utenteMapper.toEntity(UtenteDTO);
         Utente savedUtente = utenteRepository.save(utente);
-        return UtenteMapper.toDTO(savedUtente);
+        return utenteMapper.toDTO(savedUtente);
     }
 
     public UtenteDTO getUtenteById(Long id) {
         Utente utente = utenteRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Utente not found"));
-        return UtenteMapper.toDTO(utente);
+        return utenteMapper.toDTO(utente);
     }
 
     public List<UtenteDTO> getAllUtenti() {
         List<Utente> utenti = utenteRepository.findAll();
-        return utenti.stream().map(UtenteMapper::toDTO).collect(Collectors.toList());
+        return utenti.stream().map(utenteMapper::toDTO).collect(Collectors.toList());
     }
 
     public UtenteDTO updateUtente(Long id, UtenteDTO UtenteDTO) {
@@ -44,7 +48,7 @@ public class GestioneUtente {
         utente.setEmail(UtenteDTO.getEmail());
         utente.setRuolo(UtenteDTO.getRuolo());
         Utente updatedUtente = utenteRepository.save(utente);
-        return UtenteMapper.toDTO(updatedUtente);
+        return utenteMapper.toDTO(updatedUtente);
     }
 
     public void deleteUtente(Long id) {

@@ -9,13 +9,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class IRegistraModeratore implements RegistraModeratore {
 
-    @Autowired
-    private GestioneUtente gestioneUtente;
+    private final GestioneUtente gestioneUtente;
 
-//  [per l'amministratore] logica per registrare un utente con ruolo MODERATORE
+    @Autowired
+    public IRegistraModeratore(GestioneUtente gestioneUtente) {
+        this.gestioneUtente = gestioneUtente;
+    }
+
+    //  [per l'amministratore] logica per registrare un utente con ruolo MODERATORE
     @Override
     public void registraModeratore(UtenteDTO UtenteDTO) {
-
         gestioneUtente.createUtente(UtenteDTO);
     }
 }

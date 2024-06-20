@@ -18,29 +18,32 @@ import java.util.stream.Collectors;
 public class GestioneStanza {
 
     private final StanzaRepository stanzaRepository;
-
     private final PianoRepository pianoRepository;
+    private final StanzaMapper stanzaMapper;
 
-    public GestioneStanza(StanzaRepository stanzaRepository, PianoRepository pianoRepository) {
+    public GestioneStanza(StanzaRepository stanzaRepository,
+                          PianoRepository pianoRepository,
+                          StanzaMapper stanzaMapper) {
         this.stanzaRepository = stanzaRepository;
         this.pianoRepository = pianoRepository;
+        this.stanzaMapper = stanzaMapper;
     }
 
 
     public StanzaDTO createStanza(StanzaDTO StanzaDTO) {
-        Stanza stanza = StanzaMapper.toEntity(StanzaDTO);
+        Stanza stanza = stanzaMapper.toEntity(StanzaDTO);
         Stanza savedStanza = stanzaRepository.save(stanza);
-        return StanzaMapper.toDTO(savedStanza);
+        return stanzaMapper.toDTO(savedStanza);
     }
 
     public StanzaDTO getStanzaById(Long id) {
         Stanza stanza = stanzaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Stanza not found"));
-        return StanzaMapper.toDTO(stanza);
+        return stanzaMapper.toDTO(stanza);
     }
 
     public List<StanzaDTO> getAllStanze() {
         List<Stanza> stanze = stanzaRepository.findAll();
-        return stanze.stream().map(StanzaMapper::toDTO).collect(Collectors.toList());
+        return stanze.stream().map(stanzaMapper::toDTO).collect(Collectors.toList());
     }
 
     public StanzaDTO updateStanza(Long id, StanzaDTO stanzaDTO) {
@@ -50,7 +53,7 @@ public class GestioneStanza {
         Piano piano = pianoRepository.findById(stanzaDTO.getPiano()).orElseThrow(() -> new ResourceNotFoundException("Stanza not found"));
         stanza.setPiano(piano);
         Stanza updatedStanza = stanzaRepository.save(stanza);
-        return StanzaMapper.toDTO(updatedStanza);
+        return stanzaMapper.toDTO(updatedStanza);
     }
 
     public void deleteStanza(Long id) {

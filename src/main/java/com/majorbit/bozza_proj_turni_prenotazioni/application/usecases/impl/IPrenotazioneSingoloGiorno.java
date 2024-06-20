@@ -18,20 +18,20 @@ import org.springframework.stereotype.Service;
 public class IPrenotazioneSingoloGiorno implements PrenotazioneSingoloGiorno {
 
     private final PrenotazioneRepository prenotazioneRepository;
-
     private final UtenteRepository utenteRepository;
-
     private final PostoRepository postoRepository;
+    private final PrenotazioneMapper prenotazioneMapper;
 
     @Autowired
     public IPrenotazioneSingoloGiorno(
             PrenotazioneRepository prenotazioneRepository,
             UtenteRepository utenteRepository,
-            PostoRepository postoRepository
-            ){
+            PostoRepository postoRepository, PrenotazioneMapper prenotazioneMapper
+    ){
         this.prenotazioneRepository=prenotazioneRepository;
         this.utenteRepository = utenteRepository;
         this.postoRepository = postoRepository;
+        this.prenotazioneMapper = prenotazioneMapper;
     }
     @Override
     public PrenotazioneDTO prenotaPerSingoloGiorno (PrenotazioneDTO prenotazioneDTO){
@@ -43,6 +43,6 @@ public class IPrenotazioneSingoloGiorno implements PrenotazioneSingoloGiorno {
         prenotazione.setUtente(utente);
         prenotazione.setPosto(posto);
         prenotazioneRepository.save(prenotazione);
-        return PrenotazioneMapper.toDTO(prenotazione);
+        return prenotazioneMapper.toDTO(prenotazione);
     }
 }

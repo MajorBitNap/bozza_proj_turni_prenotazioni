@@ -23,20 +23,21 @@ import java.util.List;
 public class IPrenotazioneFissa implements PrenotazioneFissa {
 
     private final PrenotazioneRepository prenotazioneRepository;
-
     private final UtenteRepository utenteRepository;
-
     private final PostoRepository postoRepository;
+    private final PrenotazioneMapper prenotazioneMapper;
 
     @Autowired
     public IPrenotazioneFissa(
             PrenotazioneRepository prenotazioneRepository,
             UtenteRepository utenteRepository,
-            PostoRepository postoRepository
-            ) {
+            PostoRepository postoRepository,
+            PrenotazioneMapper prenotazioneMapper
+    ) {
         this.prenotazioneRepository=prenotazioneRepository;
         this.utenteRepository = utenteRepository;
         this.postoRepository = postoRepository;
+        this.prenotazioneMapper = prenotazioneMapper;
     }
 
 //  logica per prenotare un posto per una Data
@@ -60,7 +61,7 @@ public class IPrenotazioneFissa implements PrenotazioneFissa {
                 prenotazione.setUtente(utente);
                 prenotazione.setPosto(posto);
                 prenotazioneRepository.save(prenotazione);
-                PrenotazioneDTO savedPrenotazioneDTO = PrenotazioneMapper.toDTO(prenotazione);
+                PrenotazioneDTO savedPrenotazioneDTO = prenotazioneMapper.toDTO(prenotazione);
                 prenotazioni.add(savedPrenotazioneDTO);
             }
             cal.add(Calendar.DAY_OF_MONTH, 1);

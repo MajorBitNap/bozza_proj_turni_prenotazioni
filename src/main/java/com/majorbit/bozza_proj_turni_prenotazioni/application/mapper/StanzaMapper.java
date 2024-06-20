@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class StanzaMapper {
 
-    private static PianoRepository pianoRepository;
+    private final PianoRepository pianoRepository;
 
     @Autowired
     public StanzaMapper(PianoRepository pianoRepository) {
         this.pianoRepository = pianoRepository;
     }
 
-    public static StanzaDTO toDTO(Stanza stanza) {
+    public StanzaDTO toDTO(Stanza stanza) {
         return new StanzaDTO(
                 stanza.getNome(),
                 stanza.getCapienza(),
@@ -24,7 +24,7 @@ public class StanzaMapper {
         );
     }
 
-    public static Stanza toEntity(StanzaDTO stanzaDTO) {
+    public Stanza toEntity(StanzaDTO stanzaDTO) {
         Stanza stanza = new Stanza();
         stanza.setNome(stanzaDTO.getNome());
         stanza.setCapienza(stanzaDTO.getCapienza());

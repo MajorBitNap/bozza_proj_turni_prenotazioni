@@ -17,29 +17,32 @@ import java.util.stream.Collectors;
 public class GestionePiano {
 
     private final PianoRepository pianoRepository;
-
     private final SedeRepository sedeRepository;
+    private final PianoMapper pianoMapper;
 
     @Autowired
-    public GestionePiano(PianoRepository pianoRepository, SedeRepository sedeRepository, PianoMapper pianoMapper) {
+    public GestionePiano(PianoRepository pianoRepository,
+                         SedeRepository sedeRepository,
+                         PianoMapper pianoMapper) {
         this.pianoRepository = pianoRepository;
         this.sedeRepository = sedeRepository;
+        this.pianoMapper = pianoMapper;
     }
 
     public PianoDTO createPiano(PianoDTO PianoDTO) {
-        Piano piano = PianoMapper.toEntity(PianoDTO);
+        Piano piano = pianoMapper.toEntity(PianoDTO);
         Piano savedPiano = pianoRepository.save(piano);
-        return PianoMapper.toDTO(savedPiano);
+        return pianoMapper.toDTO(savedPiano);
     }
 
     public PianoDTO getPianoById(Long id) {
         Piano piano = pianoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("resources not found"));
-        return PianoMapper.toDTO(piano);
+        return pianoMapper.toDTO(piano);
     }
 
     public List<PianoDTO> getAllPiani() {
         List<Piano> piani = pianoRepository.findAll();
-        return piani.stream().map(PianoMapper::toDTO).collect(Collectors.toList());
+        return piani.stream().map(pianoMapper::toDTO).collect(Collectors.toList());
     }
 
     public PianoDTO updatePiano(Long id, PianoDTO pianoDTO) {
@@ -48,7 +51,7 @@ public class GestionePiano {
         piano.setNumero(pianoDTO.getNumero());
         piano.setSede(sedeRepository.findById(pianoDTO.getSede()).orElseThrow(() -> new ResourceNotFoundException("resources not found")));
         Piano updatedPiano = pianoRepository.save(piano);
-        return PianoMapper.toDTO(updatedPiano);
+        return pianoMapper.toDTO(updatedPiano);
     }
 
     public void deletePiano(Long id) {

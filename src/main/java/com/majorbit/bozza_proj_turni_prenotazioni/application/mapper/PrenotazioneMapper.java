@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class PrenotazioneMapper {
 
-    private static UtenteRepository utenteRepository;
+    private final UtenteRepository utenteRepository;
 
-    private static PostoRepository postoRepository;
+    private final PostoRepository postoRepository;
 
     @Autowired
     public PrenotazioneMapper(UtenteRepository utenteRepository, PostoRepository postoRepository) {
@@ -20,7 +20,7 @@ public class PrenotazioneMapper {
         this.postoRepository = postoRepository;
     }
 
-    public static PrenotazioneDTO toDTO(Prenotazione prenotazione) {
+    public PrenotazioneDTO toDTO(Prenotazione prenotazione) {
         return new PrenotazioneDTO(
                 prenotazione.getDataInizio(),
                 prenotazione.getDataFine(),
@@ -30,7 +30,7 @@ public class PrenotazioneMapper {
         );
     }
 
-    public static Prenotazione toEntity(PrenotazioneDTO prenotazioneDTO) {
+    public Prenotazione toEntity(PrenotazioneDTO prenotazioneDTO) {
         Prenotazione prenotazione = new Prenotazione();
         prenotazione.setDataInizio(prenotazioneDTO.getDataInizio());
         prenotazione.setDataFine(prenotazioneDTO.getDataFine());

@@ -9,13 +9,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class IRegistraDipendente implements RegistraDipendente {
 
-    @Autowired
-    private GestioneUtente gestioneUtente;
+    private final GestioneUtente gestioneUtente;
 
-//  [per l'amministratore] logica per registrare un utente con ruolo DIPENDENTE
+    @Autowired
+    public IRegistraDipendente(GestioneUtente gestioneUtente) {
+        this.gestioneUtente = gestioneUtente;
+    }
+
+    //  [per l'amministratore] logica per registrare un utente con ruolo DIPENDENTE
     @Override
     public void registraDipendente(UtenteDTO UtenteDTO) {
-
         gestioneUtente.createUtente(UtenteDTO);
     }
 }

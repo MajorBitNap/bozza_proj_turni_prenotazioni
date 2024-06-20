@@ -10,16 +10,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class IModCreaPrenotazione {
 
-    @Autowired
-    private PrenotazioneRepository prenotazioneRepository;
+    private final PrenotazioneRepository prenotazioneRepository;
+    private final PrenotazioneMapper prenotazioneMapper;
 
     @Autowired
-    private PrenotazioneMapper prenotazioneMapper;
+    public IModCreaPrenotazione(PrenotazioneRepository prenotazioneRepository,
+                                PrenotazioneMapper prenotazioneMapper) {
+        this.prenotazioneRepository = prenotazioneRepository;
+        this.prenotazioneMapper = prenotazioneMapper;
+    }
 
     public PrenotazioneDTO createPrenotazione(PrenotazioneDTO PrenotazioneDTO) {
-        Prenotazione prenotazione = PrenotazioneMapper.toEntity(PrenotazioneDTO);
+        Prenotazione prenotazione = prenotazioneMapper.toEntity(PrenotazioneDTO);
         prenotazione.setStato("Approvata");
         Prenotazione savedPrenotazione = prenotazioneRepository.save(prenotazione);
-        return PrenotazioneMapper.toDTO(savedPrenotazione);
+        return prenotazioneMapper.toDTO(savedPrenotazione);
     }
 }

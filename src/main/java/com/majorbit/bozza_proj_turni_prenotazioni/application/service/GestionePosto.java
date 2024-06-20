@@ -17,29 +17,32 @@ import java.util.stream.Collectors;
 public class GestionePosto {
 
     private final PostoRepository postoRepository;
-
     private final StanzaRepository stanzaRepository;
+    private final PostoMapper postoMapper;
 
     @Autowired
-    public GestionePosto(PostoRepository postoRepository, StanzaRepository stanzaRepository) {
+    public GestionePosto(PostoRepository postoRepository,
+                         StanzaRepository stanzaRepository,
+                         PostoMapper postoMapper) {
         this.postoRepository = postoRepository;
         this.stanzaRepository = stanzaRepository;
+        this.postoMapper = postoMapper;
     }
 
     public PostoDTO createPosto(PostoDTO PostoDTO) {
-        Posto posto = PostoMapper.toEntity(PostoDTO);
+        Posto posto = postoMapper.toEntity(PostoDTO);
         Posto savedPosto = postoRepository.save(posto);
-        return PostoMapper.toDTO(savedPosto);
+        return postoMapper.toDTO(savedPosto);
     }
 
     public PostoDTO getPostoById(Long id) {
         Posto posto = postoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("resources not found"));
-        return PostoMapper.toDTO(posto);
+        return postoMapper.toDTO(posto);
     }
 
     public List<PostoDTO> getAllPosti() {
         List<Posto> posti = postoRepository.findAll();
-        return posti.stream().map(PostoMapper::toDTO).collect(Collectors.toList());
+        return posti.stream().map(postoMapper::toDTO).collect(Collectors.toList());
     }
 
     public PostoDTO updatePosto(Long id, PostoDTO postoDTO) {
@@ -47,7 +50,7 @@ public class GestionePosto {
         posto.setNome(postoDTO.getNome());
         posto.setStanza(stanzaRepository.findById(postoDTO.getStanza()).orElseThrow(() -> new ResourceNotFoundException("resources not found")));
         Posto updatedPosto = postoRepository.save(posto);
-        return PostoMapper.toDTO(updatedPosto);
+        return postoMapper.toDTO(updatedPosto);
     }
 
     public void deletePosto(Long id) {

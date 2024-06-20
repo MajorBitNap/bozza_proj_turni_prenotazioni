@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UtenteMapper {
 
-    public static UtenteDTO toDTO(Utente utente) {
+    public UtenteDTO toDTO(Utente utente) {
         return new UtenteDTO(
                 utente.getNome(),
                 utente.getCognome(),
@@ -16,7 +16,7 @@ public class UtenteMapper {
         );
     }
 
-    public static Utente toEntity(UtenteDTO utenteDTO) {
+    public Utente toEntity(UtenteDTO utenteDTO) {
         Utente utente = new Utente();
         utente.setNome(utenteDTO.getNome());
         utente.setCognome(utenteDTO.getCognome());

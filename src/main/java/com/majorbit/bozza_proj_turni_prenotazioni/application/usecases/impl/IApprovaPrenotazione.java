@@ -12,11 +12,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class IApprovaPrenotazione implements ApprovaPrenotazione {
 
-    @Autowired
-    private PrenotazioneRepository prenotazioneRepository;
+    private final PrenotazioneRepository prenotazioneRepository;
 
     @Autowired
-    private PrenotazioneMapper prenotazioneMapper;
+    public IApprovaPrenotazione(PrenotazioneRepository prenotazioneRepository) {
+        this.prenotazioneRepository = prenotazioneRepository;
+    }
 
     @Override
     public PrenotazioneDTO approvaPrenotazione(Long id){

@@ -9,13 +9,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class PostoMapper {
 
-    private static StanzaRepository stanzaRepository;
+    private final StanzaRepository stanzaRepository;
+
     @Autowired
     public PostoMapper(StanzaRepository stanzaRepository) {
         this.stanzaRepository = stanzaRepository;
     }
 
-    public static PostoDTO toDTO(Posto posto) {
+    public PostoDTO toDTO(Posto posto) {
         return new PostoDTO(
             posto.getNome(),
             posto.isDisponibile(),
@@ -23,7 +24,7 @@ public class PostoMapper {
         );
     }
 
-    public static Posto toEntity(PostoDTO postoDTO) {
+    public Posto toEntity(PostoDTO postoDTO) {
         Posto posto = new Posto();
         posto.setDisponibile(postoDTO.isDisponibile());
         posto.setNome(postoDTO.getNome());

@@ -15,26 +15,28 @@ import java.util.stream.Collectors;
 public class GestioneLogin {
 
     private final LoginRepository loginRepository;
+    private final LoginMapper loginMapper;
 
     @Autowired
-    public GestioneLogin(LoginRepository loginRepository) {
+    public GestioneLogin(LoginRepository loginRepository, LoginMapper loginMapper) {
         this.loginRepository = loginRepository;
+        this.loginMapper = loginMapper;
     }
 
     public LoginDTO createLogin(LoginDTO ILoginDTO) {
-        Login login = LoginMapper.toEntity(ILoginDTO);
+        Login login = loginMapper.toEntity(ILoginDTO);
         Login savedLogin = loginRepository.save(login);
-        return LoginMapper.toDTO(savedLogin);
+        return loginMapper.toDTO(savedLogin);
     }
 
     public LoginDTO getLoginById(Long id) {
         Login login = loginRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Login not found"));
-        return LoginMapper.toDTO(login);
+        return loginMapper.toDTO(login);
     }
 
     public List<LoginDTO> getAllLogins() {
         List<Login> logins = loginRepository.findAll();
-        return logins.stream().map(LoginMapper::toDTO).collect(Collectors.toList());
+        return logins.stream().map(loginMapper::toDTO).collect(Collectors.toList());
     }
 
     public LoginDTO updateLogin(Long id, LoginDTO ILoginDTO) {
@@ -42,7 +44,7 @@ public class GestioneLogin {
         login.setPassword(ILoginDTO.getPassword());
         login.setEmail(     ILoginDTO.getEmail());
         Login updatedLogin = loginRepository.save(login);
-        return LoginMapper.toDTO(updatedLogin);
+        return loginMapper.toDTO(updatedLogin);
     }
 
     public void deleteLogin(Long id) {

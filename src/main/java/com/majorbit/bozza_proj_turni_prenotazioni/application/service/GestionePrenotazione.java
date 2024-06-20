@@ -19,34 +19,35 @@ import java.util.stream.Collectors;
 public class GestionePrenotazione {
 
     private final PrenotazioneRepository prenotazioneRepository;
-
     private final PostoRepository postoRepository;
-
     private final UtenteRepository utenteRepository;
+    private final PrenotazioneMapper prenotazioneMapper;
 
     @Autowired
     public GestionePrenotazione(PrenotazioneRepository prenotazioneRepository,
                                 PostoRepository postoRepository,
-                                UtenteRepository utenteRepository) {
+                                UtenteRepository utenteRepository,
+                                PrenotazioneMapper prenotazioneMapper) {
         this.prenotazioneRepository = prenotazioneRepository;
         this.postoRepository = postoRepository;
         this.utenteRepository = utenteRepository;
+        this.prenotazioneMapper = prenotazioneMapper;
     }
 
     public PrenotazioneDTO createPrenotazione(PrenotazioneDTO PrenotazioneDTO) {
-        Prenotazione prenotazione = PrenotazioneMapper.toEntity(PrenotazioneDTO);
+        Prenotazione prenotazione = prenotazioneMapper.toEntity(PrenotazioneDTO);
         Prenotazione savedPrenotazione = prenotazioneRepository.save(prenotazione);
-        return PrenotazioneMapper.toDTO(savedPrenotazione);
+        return prenotazioneMapper.toDTO(savedPrenotazione);
     }
 
     public PrenotazioneDTO getPrenotazioneById(Long id) {
         Prenotazione prenotazione = prenotazioneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("resource not found"));
-        return PrenotazioneMapper.toDTO(prenotazione);
+        return prenotazioneMapper.toDTO(prenotazione);
     }
 
     public List<PrenotazioneDTO> getAllPrenotazioni() {
         List<Prenotazione> prenotazioni = prenotazioneRepository.findAll();
-        return prenotazioni.stream().map(PrenotazioneMapper::toDTO).collect(Collectors.toList());
+        return prenotazioni.stream().map(prenotazioneMapper::toDTO).collect(Collectors.toList());
     }
 
     public PrenotazioneDTO updatePrenotazione(Long id, PrenotazioneDTO prenotazioneDTO) {
@@ -57,7 +58,7 @@ public class GestionePrenotazione {
         prenotazione.setPosto(postoRepository.findById(prenotazioneDTO.getPosto()).orElseThrow(() -> new ResourceNotFoundException("resource not found")));
         prenotazione.setUtente(utenteRepository.findById(prenotazioneDTO.getUtente()).orElseThrow(() -> new ResourceNotFoundException("resource not found")));;
         Prenotazione updatedPrenotazione = prenotazioneRepository.save(prenotazione);
-        return PrenotazioneMapper.toDTO(updatedPrenotazione);
+        return prenotazioneMapper.toDTO(updatedPrenotazione);
     }
 
     public void deletePrenotazione(Long id) {
