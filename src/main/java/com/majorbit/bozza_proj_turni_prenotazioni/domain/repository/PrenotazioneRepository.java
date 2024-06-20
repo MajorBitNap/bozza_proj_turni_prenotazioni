@@ -7,5 +7,5 @@ import java.sql.Date;
 import java.util.List;
 
 public interface PrenotazioneRepository extends JpaRepository<Prenotazione, Long> {
-    List<Prenotazione> findByStanzaIdAndData(Long stanzaId, Date data);
+    List<Prenotazione> findByStanzaAndData(Long stanzaId, Date data);
 }

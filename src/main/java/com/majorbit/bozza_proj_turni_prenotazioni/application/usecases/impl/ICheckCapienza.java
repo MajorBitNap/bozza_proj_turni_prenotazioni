@@ -28,7 +28,7 @@ public class ICheckCapienza implements CheckCapienza {
 
     public boolean isOver(StanzaDTO stanzaDTO, Date data) {
         Stanza stanza = stanzaMapper.toEntity(stanzaDTO);
-        List<Prenotazione> prenotazioni = prenotazioneRepository.findByStanzaIdAndData(stanza.getId(), data);
+        List<Prenotazione> prenotazioni = prenotazioneRepository.findByStanzaAndData(stanza.getId(), data);
         if (prenotazioni.size() < (stanza.getCapienza() * 0.8)) {
             return false;
         }
