@@ -36,7 +36,9 @@ public class IApprovaPrenotazione implements ApprovaPrenotazione {
         emailService.sendEmail(
                 prenotazione.getUtente().getEmail(),
                 "PRENOTAZIONE APPROVATA",
-                "Gentile " + prenotazione.getUtente().getNome() + " " + prenotazione.getUtente().getCognome() + ", la sua prenotazione per il giorno " + prenotazione.getDataInizio() + " è stata accettata dal moderatore. \nBuon lavoro!"
+                "Gentile " + prenotazione.getUtente().getNome() + " "
+                        + prenotazione.getUtente().getCognome() + ", la sua prenotazione per il giorno "
+                        + prenotazione.getDataInizio() + " è stata accettata dal moderatore. \nBuon lavoro!"
         );
         return null;
     }
