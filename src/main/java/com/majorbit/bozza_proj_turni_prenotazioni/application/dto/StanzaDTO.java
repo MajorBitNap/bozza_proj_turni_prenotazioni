@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -18,5 +19,6 @@ public class StanzaDTO implements Serializable {
     private String nome;
     private int capienza;
     private Long piano;
+    private List<Long> posti;
 
 }

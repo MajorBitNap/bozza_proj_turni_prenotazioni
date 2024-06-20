@@ -86,8 +86,8 @@ public class PrenotazioneController {
     }
 
     @GetMapping("/capienza/{id}")
-    public ResponseEntity<Boolean> checkCapienza(@RequestBody StanzaDTO stanzaDTO, Date data) {
-        return ResponseEntity.ok(checkCapienza.isOver(stanzaDTO, data));
+    public ResponseEntity<Boolean> checkCapienza(@RequestBody StanzaDTO stanzaDTO, Date dataInizio, Date dataFine) {
+        return ResponseEntity.ok(checkCapienza.isOver(stanzaDTO, dataInizio, dataFine));
     }
 }
 

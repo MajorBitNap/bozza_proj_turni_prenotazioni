@@ -26,4 +26,7 @@ public class Stanza {
     @JoinColumn(name = "piano_id")
     private Piano piano;
 
+    @OneToMany(mappedBy = "stanza", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Posto> posti;
+
 }
