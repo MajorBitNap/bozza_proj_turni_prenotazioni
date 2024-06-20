@@ -4,6 +4,7 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.StanzaDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Posto;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Stanza;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PianoRepository;
+import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PostoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,10 +15,13 @@ import java.util.List;
 public class StanzaMapper {
 
     private final PianoRepository pianoRepository;
+    private final PostoRepository postoRepository;
 
     @Autowired
-    public StanzaMapper(PianoRepository pianoRepository) {
+    public StanzaMapper(PianoRepository pianoRepository,
+                        PostoRepository postoRepository) {
         this.pianoRepository = pianoRepository;
+        this.postoRepository = postoRepository;
     }
 
     public StanzaDTO toDTO(Stanza stanza) {
@@ -33,10 +37,14 @@ public class StanzaMapper {
     }
 
     public Stanza toEntity(StanzaDTO stanzaDTO) {
+        List<Long> postiId = stanzaDTO.getPosti();
+        List<Posto> posti = new ArrayList<>();
+        postiId.forEach((id) -> posti.add(postoRepository.findById(id).orElseThrow()));
         Stanza stanza = new Stanza();
         stanza.setNome(stanzaDTO.getNome());
         stanza.setCapienza(stanzaDTO.getCapienza());
         stanza.setPiano(pianoRepository.findById(stanzaDTO.getPiano()).orElseThrow());
+        stanza.setPosti(posti);
         return stanza;
     }
 

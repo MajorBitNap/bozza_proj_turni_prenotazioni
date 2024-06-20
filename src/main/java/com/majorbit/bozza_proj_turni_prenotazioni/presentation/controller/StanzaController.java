@@ -1,22 +1,28 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller;
 
+import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.DateRequestDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.StanzaDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.service.GestioneStanza;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.ICheckCapienza;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 @RestController
 @RequestMapping("/api/v1/stanze")
 public class StanzaController {
 
     private final GestioneStanza gestioneStanza;
+    private final ICheckCapienza checkCapienza;
 
     @Autowired
-    public StanzaController(GestioneStanza gestioneStanza) {
+    public StanzaController(GestioneStanza gestioneStanza,
+                            ICheckCapienza checkCapienza) {
         this.gestioneStanza = gestioneStanza;
+        this.checkCapienza = checkCapienza;
     }
 
     @GetMapping("/{id}")
@@ -49,6 +55,10 @@ public class StanzaController {
         return ResponseEntity.noContent().build();
     }
 
+    @PostMapping("/capienza/{id}")
+    public ResponseEntity<Boolean> checkCapienza(@PathVariable Long id, @RequestBody DateRequestDTO dateRequestDTO) {
+        return ResponseEntity.ok(checkCapienza.isOver(gestioneStanza.getStanzaById(id), dateRequestDTO.getDataInizio(), dateRequestDTO.getDataFine()));
+    }
 
 }
 

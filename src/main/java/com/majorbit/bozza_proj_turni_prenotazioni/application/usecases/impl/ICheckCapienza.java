@@ -33,7 +33,7 @@ public class ICheckCapienza implements CheckCapienza {
         List<Prenotazione> prenotazioni = new ArrayList<>();
         for (int i = 0; i < posti.size(); i++) {
             prenotazioni = prenotazioneRepository
-                    .findByPostoAndDataInizioAndDataFine(posti.get(i), dataInizio, datafine);
+                    .findPrenotazioniInDateRange(posti.get(i), dataInizio, datafine);
         }
         if (prenotazioni.size() < (stanza.getCapienza() * 0.8)) {
             return false;

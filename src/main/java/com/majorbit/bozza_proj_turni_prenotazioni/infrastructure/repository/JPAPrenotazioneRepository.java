@@ -11,5 +11,5 @@ import java.util.List;
 
 @Repository
 public interface JPAPrenotazioneRepository extends JpaRepository<Prenotazione, Long>, PrenotazioneRepository {
-    List<Prenotazione> findByPostoAndDataInizioAndDataFine(Posto posto, Date dataInizio, Date dataFine);
+    List<Prenotazione> findPrenotazioniInDateRange(Posto posto, Date dataInizio, Date dataFine);
 }
