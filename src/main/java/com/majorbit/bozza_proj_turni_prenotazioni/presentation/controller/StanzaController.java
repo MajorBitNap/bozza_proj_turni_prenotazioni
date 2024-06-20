@@ -48,6 +48,8 @@ public class StanzaController {
         gestioneStanza.deleteStanza(id);
         return ResponseEntity.noContent().build();
     }
+
+
 }
 
 

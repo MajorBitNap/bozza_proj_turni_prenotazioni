@@ -1,16 +1,15 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PrenotazioneDTO;
 
+import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.StanzaDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.service.GestionePrenotazione;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.IApprovaPrenotazione;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.IModCreaPrenotazione;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.IPrenotazioneFissa;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.IPrenotazioneSingoloGiorno;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 
 @RestController
@@ -18,26 +17,25 @@ import java.util.List;
 public class PrenotazioneController {
 
     private final GestionePrenotazione gestionePrenotazione;
-
     private final IPrenotazioneFissa prenotazioneFissa;
-
     private final IPrenotazioneSingoloGiorno prenotazioneSingoloGiorno;
-
     private final IModCreaPrenotazione modCreaPrenotazione;
-
     private final IApprovaPrenotazione approvaPrenotazione;
+    private final ICheckCapienza checkCapienza;
 
     @Autowired
     public PrenotazioneController(GestionePrenotazione gestionePrenotazione,
                                   IPrenotazioneSingoloGiorno prenotazioneSingoloGiorno ,
                                   IPrenotazioneFissa prenotazioneFissa,
                                   IModCreaPrenotazione modCreaPrenotazione,
-                                  IApprovaPrenotazione approvaPrenotazione) {
+                                  IApprovaPrenotazione approvaPrenotazione,
+                                  ICheckCapienza checkCapienza) {
         this.gestionePrenotazione = gestionePrenotazione;
         this.prenotazioneFissa = prenotazioneFissa;
         this.modCreaPrenotazione = modCreaPrenotazione;
         this.approvaPrenotazione = approvaPrenotazione;
         this.prenotazioneSingoloGiorno = prenotazioneSingoloGiorno;
+        this.checkCapienza = checkCapienza;
     }
 
     @GetMapping("/{id}")
@@ -87,5 +85,9 @@ public class PrenotazioneController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @GetMapping("/capienza/{id}")
+    public ResponseEntity<Boolean> checkCapienza(@RequestBody StanzaDTO stanzaDTO, Date data) {
+        return ResponseEntity.ok(checkCapienza.isOver(stanzaDTO, data));
+    }
 }
 
