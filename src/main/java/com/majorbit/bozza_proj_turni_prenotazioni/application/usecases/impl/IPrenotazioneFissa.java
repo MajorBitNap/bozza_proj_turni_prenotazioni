@@ -4,6 +4,7 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PrenotazioneDT
 import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.PostoMapper;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.PrenotazioneMapper;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.UtenteMapper;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.service.EmailService;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.spec.PrenotazioneFissa;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Posto;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Prenotazione;
@@ -18,6 +19,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class IPrenotazioneFissa implements PrenotazioneFissa {
@@ -26,18 +28,21 @@ public class IPrenotazioneFissa implements PrenotazioneFissa {
     private final UtenteRepository utenteRepository;
     private final PostoRepository postoRepository;
     private final PrenotazioneMapper prenotazioneMapper;
+    private final EmailService emailService;
 
     @Autowired
     public IPrenotazioneFissa(
             PrenotazioneRepository prenotazioneRepository,
             UtenteRepository utenteRepository,
             PostoRepository postoRepository,
-            PrenotazioneMapper prenotazioneMapper
+            PrenotazioneMapper prenotazioneMapper,
+            EmailService emailService
     ) {
         this.prenotazioneRepository=prenotazioneRepository;
         this.utenteRepository = utenteRepository;
         this.postoRepository = postoRepository;
         this.prenotazioneMapper = prenotazioneMapper;
+        this.emailService = emailService;
     }
 
 //  logica per prenotare un posto per una Data
@@ -49,8 +54,9 @@ public class IPrenotazioneFissa implements PrenotazioneFissa {
         cal.setTime(prenotazioneDTO.getDataInizio());
         Utente utente = utenteRepository.findById(prenotazioneDTO.getUtente()).orElseThrow();
         Posto posto = postoRepository.findById(prenotazioneDTO.getPosto()).orElseThrow();
-
+        int c = 1;
         int giornoDellaSettimanaDesiderato = cal.get(Calendar.DAY_OF_WEEK);
+        String nomeGiornoDellaSettimanaDesiderato = cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
 
         while (cal.getTime().before(prenotazioneDTO.getDataFine()) || cal.get(Calendar.DAY_OF_WEEK) == giornoDellaSettimanaDesiderato) {
             if (cal.get(Calendar.DAY_OF_WEEK) == giornoDellaSettimanaDesiderato) {
@@ -61,11 +67,16 @@ public class IPrenotazioneFissa implements PrenotazioneFissa {
                 prenotazione.setUtente(utente);
                 prenotazione.setPosto(posto);
                 prenotazioneRepository.save(prenotazione);
+                c++;
                 PrenotazioneDTO savedPrenotazioneDTO = prenotazioneMapper.toDTO(prenotazione);
                 prenotazioni.add(savedPrenotazioneDTO);
             }
             cal.add(Calendar.DAY_OF_MONTH, 1);
         }
+        emailService.sendEmail(
+                utente.getEmail(),
+                "Prenotazione Ripetuta Effettuata",
+                "Sono appena state inserite " + c + " prenotazioni per il " + utente.getRuolo().toString().toLowerCase() + " " + utente.getNome() + " " + utente.getCognome() + " per ogni " + nomeGiornoDellaSettimanaDesiderato + " dal giorno "+ prenotazioneDTO.getDataInizio() + " al giorno " + prenotazioneDTO.getDataFine());
         return prenotazioni;
     }
 }

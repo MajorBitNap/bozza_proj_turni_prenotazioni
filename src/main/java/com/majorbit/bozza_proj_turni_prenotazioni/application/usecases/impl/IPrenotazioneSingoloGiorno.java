@@ -49,9 +49,9 @@ public class IPrenotazioneSingoloGiorno implements PrenotazioneSingoloGiorno {
         prenotazione.setPosto(posto);
         prenotazioneRepository.save(prenotazione);
         emailService.sendEmail(
-                "e.antola@majorbit.com",
+                utente.getEmail(),
                 "Prenotazione Singola Effettuata",
-                "Egregio signor " + utente.getNome() + " " + utente.getNome() + " è appena stata eseguita una prenotazione per il giorno " + prenotazioneDTO.getDataInizio());
+                "E' stata inserita una prenotazione per il " + utente.getRuolo().toString().toLowerCase() + " " + utente.getNome() + " " + utente.getCognome() + " nel giorno " + prenotazioneDTO.getDataInizio());
         return prenotazioneMapper.toDTO(prenotazione);
     }
 }
