@@ -1,8 +1,7 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.EmailDTO;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.LoginDTO;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.service.JavaSmtpGmailSenderService;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.service.EmailService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,15 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/email")
 public class MailController {
 
-    private final JavaSmtpGmailSenderService javaSmtpGmailSenderService;
+    private final EmailService emailService;
 
-    public MailController(JavaSmtpGmailSenderService javaSmtpGmailSenderService) {
-        this.javaSmtpGmailSenderService = javaSmtpGmailSenderService;
+    public MailController(EmailService emailService) {
+        this.emailService = emailService;
     }
 
     @PostMapping("/send")
     public ResponseEntity<Void> sendEmail(@RequestBody EmailDTO emailDTO) {
-            javaSmtpGmailSenderService.sendEmail(emailDTO.getToEmail(), emailDTO.getSubject(), emailDTO.getBody());
+            emailService.sendEmail(emailDTO.getToEmail(), emailDTO.getSubject(), emailDTO.getBody());
         return ResponseEntity.noContent().build();
     }
 

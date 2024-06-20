@@ -4,6 +4,7 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PrenotazioneDT
 import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.PostoMapper;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.PrenotazioneMapper;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.UtenteMapper;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.service.EmailService;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.spec.PrenotazioneSingoloGiorno;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Posto;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Prenotazione;
@@ -21,17 +22,21 @@ public class IPrenotazioneSingoloGiorno implements PrenotazioneSingoloGiorno {
     private final UtenteRepository utenteRepository;
     private final PostoRepository postoRepository;
     private final PrenotazioneMapper prenotazioneMapper;
+    private final EmailService emailService;
 
     @Autowired
     public IPrenotazioneSingoloGiorno(
             PrenotazioneRepository prenotazioneRepository,
             UtenteRepository utenteRepository,
-            PostoRepository postoRepository, PrenotazioneMapper prenotazioneMapper
+            PostoRepository postoRepository,
+            PrenotazioneMapper prenotazioneMapper,
+            EmailService emailService
     ){
         this.prenotazioneRepository=prenotazioneRepository;
         this.utenteRepository = utenteRepository;
         this.postoRepository = postoRepository;
         this.prenotazioneMapper = prenotazioneMapper;
+        this.emailService = emailService;
     }
     @Override
     public PrenotazioneDTO prenotaPerSingoloGiorno (PrenotazioneDTO prenotazioneDTO){
@@ -43,6 +48,10 @@ public class IPrenotazioneSingoloGiorno implements PrenotazioneSingoloGiorno {
         prenotazione.setUtente(utente);
         prenotazione.setPosto(posto);
         prenotazioneRepository.save(prenotazione);
+        emailService.sendEmail(
+                "e.antola@majorbit.com",
+                "Prenotazione Singola Effettuata",
+                "Egregio signor " + utente.getNome() + " " + utente.getNome() + " è appena stata eseguita una prenotazione per il giorno " + prenotazioneDTO.getDataInizio());
         return prenotazioneMapper.toDTO(prenotazione);
     }
 }
