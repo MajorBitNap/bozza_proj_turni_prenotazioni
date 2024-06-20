@@ -51,7 +51,9 @@ public class IPrenotazioneSingoloGiorno implements PrenotazioneSingoloGiorno {
         emailService.sendEmail(
                 utente.getEmail(),
                 "Prenotazione Singola Effettuata",
-                "E' stata inserita una prenotazione per il " + utente.getRuolo().toString().toLowerCase() + " " + utente.getNome() + " " + utente.getCognome() + " nel giorno " + prenotazioneDTO.getDataInizio());
+                "E' stata inserita una prenotazione per il " + utente.getRuolo().toString().toLowerCase()
+                        + " " + utente.getNome() + " " + utente.getCognome() + " nel giorno "
+                        + prenotazioneDTO.getDataInizio());
         return prenotazioneMapper.toDTO(prenotazione);
     }
 }

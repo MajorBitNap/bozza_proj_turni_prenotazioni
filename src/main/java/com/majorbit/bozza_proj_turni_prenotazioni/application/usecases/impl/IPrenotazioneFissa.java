@@ -76,7 +76,10 @@ public class IPrenotazioneFissa implements PrenotazioneFissa {
         emailService.sendEmail(
                 utente.getEmail(),
                 "Prenotazione Ripetuta Effettuata",
-                "Sono appena state inserite " + c + " prenotazioni per il " + utente.getRuolo().toString().toLowerCase() + " " + utente.getNome() + " " + utente.getCognome() + " per ogni " + nomeGiornoDellaSettimanaDesiderato + " dal giorno "+ prenotazioneDTO.getDataInizio() + " al giorno " + prenotazioneDTO.getDataFine());
+                "Sono appena state inserite " + c + " prenotazioni per il " + utente.getRuolo().toString().toLowerCase()
+                        + " " + utente.getNome() + " " + utente.getCognome() + " per ogni "
+                        + nomeGiornoDellaSettimanaDesiderato + " dal giorno "+ prenotazioneDTO.getDataInizio() + " al giorno "
+                        + prenotazioneDTO.getDataFine());
         return prenotazioni;
     }
 }
