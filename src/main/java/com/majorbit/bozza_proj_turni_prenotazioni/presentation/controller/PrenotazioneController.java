@@ -71,7 +71,7 @@ public class PrenotazioneController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
     @PutMapping("/approvazione/{id}")
-    public ResponseEntity<PrenotazioneDTO> approvaPrenotazione(@PathVariable Long id, @RequestBody PrenotazioneDTO prenotazione) {
+    public ResponseEntity<PrenotazioneDTO> approvaPrenotazione(@PathVariable Long id) {
         PrenotazioneDTO approvedPrenotazione = approvaPrenotazione.approvaPrenotazione(id);
         return ResponseEntity.ok(approvedPrenotazione);
     }
