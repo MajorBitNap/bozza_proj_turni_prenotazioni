@@ -7,6 +7,8 @@ import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.UtenteReposi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
+
 @Component
 public class PrenotazioneMapper {
 
@@ -33,7 +35,9 @@ public class PrenotazioneMapper {
     public Prenotazione toEntity(PrenotazioneDTO prenotazioneDTO) {
         Prenotazione prenotazione = new Prenotazione();
         prenotazione.setDataInizio(prenotazioneDTO.getDataInizio());
-        prenotazione.setDataFine(prenotazioneDTO.getDataFine());
+        if (!Objects.equals(prenotazioneDTO.getDataFine(), null)) {
+            prenotazione.setDataFine(prenotazioneDTO.getDataFine());
+        }
         prenotazione.setStato(prenotazioneDTO.getStato());
         prenotazione.setUtente(utenteRepository.findById(prenotazioneDTO.getUtente()).orElseThrow());
         prenotazione.setPosto(postoRepository.findById(prenotazioneDTO.getPosto()).orElseThrow());

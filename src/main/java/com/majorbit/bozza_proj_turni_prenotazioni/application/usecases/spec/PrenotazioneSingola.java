@@ -3,6 +3,6 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PrenotazioneDT
 import org.springframework.stereotype.Component;
 
 @Component
-public interface PrenotazioneSingoloGiorno {
-    PrenotazioneDTO prenotaPerSingoloGiorno(PrenotazioneDTO PrenotazioneDTO);
+public interface PrenotazioneSingola {
+    PrenotazioneDTO creaPrenotazione(PrenotazioneDTO PrenotazioneDTO);
 }
