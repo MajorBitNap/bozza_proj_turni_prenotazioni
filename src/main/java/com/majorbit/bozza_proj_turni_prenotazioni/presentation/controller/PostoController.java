@@ -2,6 +2,7 @@ package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PostoDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.service.GestionePosto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,15 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/v1/posti")
 public class PostoController {
 
     private final GestionePosto gestionePosto;
-
-    @Autowired
-    public PostoController(GestionePosto gestionePosto) {
-        this.gestionePosto = gestionePosto;
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<PostoDTO> getPostoById(@PathVariable Integer id) {

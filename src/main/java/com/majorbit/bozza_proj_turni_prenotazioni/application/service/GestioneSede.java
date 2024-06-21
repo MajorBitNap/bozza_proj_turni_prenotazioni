@@ -5,6 +5,7 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.SedeMapper;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Sede;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.SedeRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,16 +13,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class GestioneSede {
 
     private final SedeRepository sedeRepository;
     private final SedeMapper sedeMapper;
-
-    @Autowired
-    public GestioneSede(SedeRepository sedeRepository, SedeMapper sedeMapper) {
-        this.sedeRepository = sedeRepository;
-        this.sedeMapper = sedeMapper;
-    }
 
     public SedeDTO createSede(SedeDTO SedeDTO) {
         Sede sede = sedeMapper.toEntity(SedeDTO);

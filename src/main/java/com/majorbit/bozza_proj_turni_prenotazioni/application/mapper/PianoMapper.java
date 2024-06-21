@@ -3,18 +3,15 @@ package com.majorbit.bozza_proj_turni_prenotazioni.application.mapper;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PianoDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Piano;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.SedeRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class PianoMapper {
 
     private final SedeRepository sedeRepository;
-
-    @Autowired
-    public PianoMapper(SedeRepository sedeRepository) {
-        this.sedeRepository = sedeRepository;
-    }
 
     public PianoDTO toDTO(Piano piano) {
         return new PianoDTO(

@@ -7,6 +7,7 @@ import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Piano;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PianoRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.SedeRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,20 +15,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class GestionePiano {
 
     private final PianoRepository pianoRepository;
     private final SedeRepository sedeRepository;
     private final PianoMapper pianoMapper;
-
-    @Autowired
-    public GestionePiano(PianoRepository pianoRepository,
-                         SedeRepository sedeRepository,
-                         PianoMapper pianoMapper) {
-        this.pianoRepository = pianoRepository;
-        this.sedeRepository = sedeRepository;
-        this.pianoMapper = pianoMapper;
-    }
 
     public PianoDTO createPiano(PianoDTO PianoDTO) {
         Piano piano = pianoMapper.toEntity(PianoDTO);

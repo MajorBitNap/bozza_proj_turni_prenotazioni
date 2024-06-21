@@ -4,6 +4,7 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.UtenteDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.service.GestioneUtente;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.IRegistraDipendente;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.IRegistraModeratore;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,21 +13,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/v1/utenti")
 public class UtenteController {
 
     private final GestioneUtente gestioneUtente;
     private final IRegistraDipendente registraDipendente;
     private final IRegistraModeratore registraModeratore;
-
-    @Autowired
-    public UtenteController(GestioneUtente gestioneUtente,
-                            IRegistraDipendente registraDipendente,
-                            IRegistraModeratore registraModeratore) {
-        this.gestioneUtente = gestioneUtente;
-        this.registraDipendente = registraDipendente;
-        this.registraModeratore = registraModeratore;
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<UtenteDTO> getUtenteById(@PathVariable Integer id) {

@@ -5,6 +5,7 @@ import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Posto;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Stanza;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PianoRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PostoRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,17 +14,11 @@ import java.util.List;
 import java.util.Objects;
 
 @Component
+@RequiredArgsConstructor
 public class StanzaMapper {
 
     private final PianoRepository pianoRepository;
     private final PostoRepository postoRepository;
-
-    @Autowired
-    public StanzaMapper(PianoRepository pianoRepository,
-                        PostoRepository postoRepository) {
-        this.pianoRepository = pianoRepository;
-        this.postoRepository = postoRepository;
-    }
 
     public StanzaDTO toDTO(Stanza stanza) {
         List<Posto> posti = stanza.getPosti();

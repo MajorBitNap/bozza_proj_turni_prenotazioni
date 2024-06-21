@@ -12,6 +12,7 @@ import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Utente;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PostoRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PrenotazioneRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.UtenteRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ import java.util.List;
 import java.util.Locale;
 
 @Service
+@RequiredArgsConstructor
 public class IPrenotazioneFissa implements PrenotazioneFissa {
 
     private final PrenotazioneRepository prenotazioneRepository;
@@ -29,21 +31,6 @@ public class IPrenotazioneFissa implements PrenotazioneFissa {
     private final PostoRepository postoRepository;
     private final PrenotazioneMapper prenotazioneMapper;
     private final EmailService emailService;
-
-    @Autowired
-    public IPrenotazioneFissa(
-            PrenotazioneRepository prenotazioneRepository,
-            UtenteRepository utenteRepository,
-            PostoRepository postoRepository,
-            PrenotazioneMapper prenotazioneMapper,
-            EmailService emailService
-    ) {
-        this.prenotazioneRepository=prenotazioneRepository;
-        this.utenteRepository = utenteRepository;
-        this.postoRepository = postoRepository;
-        this.prenotazioneMapper = prenotazioneMapper;
-        this.emailService = emailService;
-    }
 
 //  logica per prenotare un posto per una Data
     @Override

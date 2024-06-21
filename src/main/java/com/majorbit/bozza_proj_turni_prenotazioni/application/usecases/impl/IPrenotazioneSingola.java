@@ -10,10 +10,12 @@ import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Utente;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PostoRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PrenotazioneRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.UtenteRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class IPrenotazioneSingola implements PrenotazioneSingola {
 
     private final PrenotazioneRepository prenotazioneRepository;
@@ -22,20 +24,6 @@ public class IPrenotazioneSingola implements PrenotazioneSingola {
     private final PrenotazioneMapper prenotazioneMapper;
     private final EmailService emailService;
 
-    @Autowired
-    public IPrenotazioneSingola(
-            PrenotazioneRepository prenotazioneRepository,
-            UtenteRepository utenteRepository,
-            PostoRepository postoRepository,
-            PrenotazioneMapper prenotazioneMapper,
-            EmailService emailService
-    ){
-        this.prenotazioneRepository=prenotazioneRepository;
-        this.utenteRepository = utenteRepository;
-        this.postoRepository = postoRepository;
-        this.prenotazioneMapper = prenotazioneMapper;
-        this.emailService = emailService;
-    }
     @Override
     public PrenotazioneDTO creaPrenotazione(PrenotazioneDTO prenotazioneDTO){
         Prenotazione prenotazione = new Prenotazione();
