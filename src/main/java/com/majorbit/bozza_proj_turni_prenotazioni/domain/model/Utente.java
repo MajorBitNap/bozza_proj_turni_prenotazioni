@@ -17,19 +17,18 @@ public class Utente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String nome;
 
-    @Column
+    @Column(nullable = false)
     private String cognome;
 
-    @Column
+//  la password viene recuprerata tramite email dalla tabella login
+    @Column(nullable = false)
     private String email;
 
-    @Column
-    private String password;
-
-    @Column
+//  nella richiesta assicurarsi che il ruolo sia in formato TUTTO MAIUSCOLO
+    @Column(nullable = false)
     private Ruolo ruolo;
 
 }

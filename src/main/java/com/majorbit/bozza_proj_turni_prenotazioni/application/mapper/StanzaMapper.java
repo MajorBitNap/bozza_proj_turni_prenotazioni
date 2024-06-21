@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Component
 public class StanzaMapper {
@@ -39,7 +40,9 @@ public class StanzaMapper {
     public Stanza toEntity(StanzaDTO stanzaDTO) {
         List<Long> postiId = stanzaDTO.getPosti();
         List<Posto> posti = new ArrayList<>();
-        postiId.forEach((id) -> posti.add(postoRepository.findById(id).orElseThrow()));
+        if (!Objects.equals(null, postiId)) {
+            postiId.forEach((id) -> posti.add(postoRepository.findById(id).orElseThrow()));
+        }
         Stanza stanza = new Stanza();
         stanza.setNome(stanzaDTO.getNome());
         stanza.setCapienza(stanzaDTO.getCapienza());

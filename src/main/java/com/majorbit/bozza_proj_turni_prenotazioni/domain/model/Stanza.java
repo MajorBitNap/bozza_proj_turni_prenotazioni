@@ -16,10 +16,10 @@ public class Stanza {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String nome;
 
-    @Column
+    @Column(nullable = false)
     private int capienza;
 
     @ManyToOne(fetch = FetchType.LAZY)
