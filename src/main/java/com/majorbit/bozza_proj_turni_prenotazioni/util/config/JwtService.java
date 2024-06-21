@@ -70,7 +70,7 @@ public class JwtService {
     }
 
     public boolean isExpired(String token) {
-        return extractExpiration(token).before(new Date()); //setta come controllo la data attuale 
+        return extractExpiration(token).before(new Date(System.currentTimeMillis())); //setta come controllo la data attuale
     }
 
     private Date extractExpiration(String token) {
