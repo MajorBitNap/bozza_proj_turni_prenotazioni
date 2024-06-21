@@ -14,7 +14,7 @@ public class Prenotazione {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(name = "data_inizio", nullable = false)
     private Date dataInizio;

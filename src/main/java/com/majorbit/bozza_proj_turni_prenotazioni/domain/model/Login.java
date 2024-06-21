@@ -12,10 +12,10 @@ public class Login {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(nullable = false)
-    private String email;
+    private String username;
 
     @Column(nullable = false)
     private String password;

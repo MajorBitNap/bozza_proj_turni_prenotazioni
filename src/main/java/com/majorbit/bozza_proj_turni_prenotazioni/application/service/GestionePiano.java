@@ -35,7 +35,7 @@ public class GestionePiano {
         return pianoMapper.toDTO(savedPiano);
     }
 
-    public PianoDTO getPianoById(Long id) {
+    public PianoDTO getPianoById(Integer id) {
         Piano piano = pianoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("resources not found"));
         return pianoMapper.toDTO(piano);
     }
@@ -45,7 +45,7 @@ public class GestionePiano {
         return piani.stream().map(pianoMapper::toDTO).collect(Collectors.toList());
     }
 
-    public PianoDTO updatePiano(Long id, PianoDTO pianoDTO) {
+    public PianoDTO updatePiano(Integer id, PianoDTO pianoDTO) {
         Piano piano = pianoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("resources not found"));
         piano.setNome(pianoDTO.getNome());
         piano.setNumero(pianoDTO.getNumero());
@@ -54,7 +54,7 @@ public class GestionePiano {
         return pianoMapper.toDTO(updatedPiano);
     }
 
-    public void deletePiano(Long id) {
+    public void deletePiano(Integer id) {
         Piano piano = pianoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Piano not found"));
         pianoRepository.delete(piano);
     }

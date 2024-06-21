@@ -29,7 +29,7 @@ public class GestioneSede {
         return sedeMapper.toDTO(savedSede);
     }
 
-    public SedeDTO getSedeById(Long id) {
+    public SedeDTO getSedeById(Integer id) {
         Sede sede = sedeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Sede not found"));
         return sedeMapper.toDTO(sede);
     }
@@ -39,7 +39,7 @@ public class GestioneSede {
         return sedi.stream().map(sedeMapper::toDTO).collect(Collectors.toList());
     }
 
-    public SedeDTO updateSede(Long id, SedeDTO SedeDTO) {
+    public SedeDTO updateSede(Integer id, SedeDTO SedeDTO) {
         Sede sede = sedeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Sede not found"));
         sede.setNome(SedeDTO.getNome());
         sede.setIndirizzo(SedeDTO.getIndirizzo());
@@ -47,7 +47,7 @@ public class GestioneSede {
         return sedeMapper.toDTO(updatedSede);
     }
 
-    public void deleteSede(Long id) {
+    public void deleteSede(Integer id) {
         Sede sede = sedeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Sede not found"));
         sedeRepository.delete(sede);
     }

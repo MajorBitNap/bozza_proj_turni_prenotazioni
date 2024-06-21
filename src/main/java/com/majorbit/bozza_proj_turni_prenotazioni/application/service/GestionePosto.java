@@ -35,7 +35,7 @@ public class GestionePosto {
         return postoMapper.toDTO(savedPosto);
     }
 
-    public PostoDTO getPostoById(Long id) {
+    public PostoDTO getPostoById(Integer id) {
         Posto posto = postoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("resources not found"));
         return postoMapper.toDTO(posto);
     }
@@ -45,7 +45,7 @@ public class GestionePosto {
         return posti.stream().map(postoMapper::toDTO).collect(Collectors.toList());
     }
 
-    public PostoDTO updatePosto(Long id, PostoDTO postoDTO) {
+    public PostoDTO updatePosto(Integer id, PostoDTO postoDTO) {
         Posto posto = postoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("resources not found"));
         posto.setNome(postoDTO.getNome());
         posto.setStanza(stanzaRepository.findById(postoDTO.getStanza()).orElseThrow(() -> new ResourceNotFoundException("resources not found")));
@@ -53,7 +53,7 @@ public class GestionePosto {
         return postoMapper.toDTO(updatedPosto);
     }
 
-    public void deletePosto(Long id) {
+    public void deletePosto(Integer id) {
         Posto posto = postoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("resources not found"));
         postoRepository.delete(posto);
     }

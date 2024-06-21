@@ -29,7 +29,7 @@ public class GestioneLogin {
         return loginMapper.toDTO(savedLogin);
     }
 
-    public LoginDTO getLoginById(Long id) {
+    public LoginDTO getLoginById(Integer id) {
         Login login = loginRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Login not found"));
         return loginMapper.toDTO(login);
     }
@@ -39,15 +39,15 @@ public class GestioneLogin {
         return logins.stream().map(loginMapper::toDTO).collect(Collectors.toList());
     }
 
-    public LoginDTO updateLogin(Long id, LoginDTO ILoginDTO) {
+    public LoginDTO updateLogin(Integer id, LoginDTO ILoginDTO) {
         Login login = loginRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Login not found"));
         login.setPassword(ILoginDTO.getPassword());
-        login.setEmail(     ILoginDTO.getEmail());
+        login.setUsername(     ILoginDTO.getUsername());
         Login updatedLogin = loginRepository.save(login);
         return loginMapper.toDTO(updatedLogin);
     }
 
-    public void deleteLogin(Long id) {
+    public void deleteLogin(Integer id) {
         Login login = loginRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Login not found"));
         loginRepository.delete(login);
     }

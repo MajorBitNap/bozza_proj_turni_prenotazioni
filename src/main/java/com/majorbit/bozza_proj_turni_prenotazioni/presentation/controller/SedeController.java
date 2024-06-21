@@ -26,7 +26,7 @@ public class SedeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SedeDTO> getSedeById(@PathVariable Long id) {
+    public ResponseEntity<SedeDTO> getSedeById(@PathVariable Integer id) {
         SedeDTO sede = gestioneSede.getSedeById(id);
         return ResponseEntity.ok(sede);
     }
@@ -39,13 +39,13 @@ public class SedeController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<SedeDTO> updateSede(@PathVariable Long id, @RequestBody SedeDTO sede) {
+    public ResponseEntity<SedeDTO> updateSede(@PathVariable Integer id, @RequestBody SedeDTO sede) {
         SedeDTO updatedSede = gestioneSede.updateSede(id, sede);
         return ResponseEntity.ok(updatedSede);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteSede(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteSede(@PathVariable Integer id) {
         gestioneSede.deleteSede(id);
         return ResponseEntity.noContent().build();
     }

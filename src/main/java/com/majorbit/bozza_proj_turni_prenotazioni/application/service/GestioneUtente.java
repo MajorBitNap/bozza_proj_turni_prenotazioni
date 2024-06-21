@@ -31,7 +31,7 @@ public class GestioneUtente {
         return utenteMapper.toDTO(savedUtente);
     }
 
-    public UtenteDTO getUtenteById(Long id) {
+    public UtenteDTO getUtenteById(Integer id) {
         Utente utente = utenteRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Utente not found"));
         return utenteMapper.toDTO(utente);
     }
@@ -41,7 +41,7 @@ public class GestioneUtente {
         return utenti.stream().map(utenteMapper::toDTO).collect(Collectors.toList());
     }
 
-    public UtenteDTO updateUtente(Long id, UtenteDTO UtenteDTO) {
+    public UtenteDTO updateUtente(Integer id, UtenteDTO UtenteDTO) {
         Utente utente = utenteRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Utente not found"));
         utente.setNome(UtenteDTO.getNome());
         utente.setCognome(UtenteDTO.getCognome());
@@ -51,7 +51,7 @@ public class GestioneUtente {
         return utenteMapper.toDTO(updatedUtente);
     }
 
-    public void deleteUtente(Long id) {
+    public void deleteUtente(Integer id) {
         Utente utente = utenteRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Utente not found"));
         utenteRepository.delete(utente);
     }

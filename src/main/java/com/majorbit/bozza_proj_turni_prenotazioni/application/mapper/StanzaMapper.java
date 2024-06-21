@@ -27,7 +27,7 @@ public class StanzaMapper {
 
     public StanzaDTO toDTO(Stanza stanza) {
         List<Posto> posti = stanza.getPosti();
-        List<Long> postiId = new ArrayList<>();
+        List<Integer> postiId = new ArrayList<>();
         posti.forEach((posto) -> postiId.add(posto.getId()));
         return new StanzaDTO(
                 stanza.getNome(),
@@ -38,7 +38,7 @@ public class StanzaMapper {
     }
 
     public Stanza toEntity(StanzaDTO stanzaDTO) {
-        List<Long> postiId = stanzaDTO.getPosti();
+        List<Integer> postiId = stanzaDTO.getPosti();
         List<Posto> posti = new ArrayList<>();
         if (!Objects.equals(null, postiId)) {
             postiId.forEach((id) -> posti.add(postoRepository.findById(id).orElseThrow()));

@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface JPAUtenteRepository extends JpaRepository<Utente, Long>, UtenteRepository {
+public interface JPAUtenteRepository extends JpaRepository<Utente, Integer>, UtenteRepository {
 
 
 }

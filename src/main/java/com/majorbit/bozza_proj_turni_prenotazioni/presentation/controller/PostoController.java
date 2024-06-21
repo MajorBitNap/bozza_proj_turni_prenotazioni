@@ -20,7 +20,7 @@ public class PostoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PostoDTO> getPostoById(@PathVariable Long id) {
+    public ResponseEntity<PostoDTO> getPostoById(@PathVariable Integer id) {
         PostoDTO posto = gestionePosto.getPostoById(id);
         return ResponseEntity.ok(posto);
     }
@@ -38,13 +38,13 @@ public class PostoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PostoDTO> updatePosto(@PathVariable Long id, @RequestBody PostoDTO posto) {
+    public ResponseEntity<PostoDTO> updatePosto(@PathVariable Integer id, @RequestBody PostoDTO posto) {
         PostoDTO updatedPosto = gestionePosto.updatePosto(id, posto);
         return ResponseEntity.ok(updatedPosto);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePosto(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePosto(@PathVariable Integer id) {
         gestionePosto.deletePosto(id);
         return ResponseEntity.noContent().build();
     }

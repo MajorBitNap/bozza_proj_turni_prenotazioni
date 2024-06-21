@@ -25,7 +25,7 @@ public class StanzaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StanzaDTO> getStanzaById(@PathVariable Long id) {
+    public ResponseEntity<StanzaDTO> getStanzaById(@PathVariable Integer id) {
         StanzaDTO stanza = gestioneStanza.getStanzaById(id);
         return ResponseEntity.ok(stanza);
     }
@@ -43,19 +43,19 @@ public class StanzaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<StanzaDTO> updateStanza(@PathVariable Long id, @RequestBody StanzaDTO stanza) {
+    public ResponseEntity<StanzaDTO> updateStanza(@PathVariable Integer id, @RequestBody StanzaDTO stanza) {
         StanzaDTO updatedStanza = gestioneStanza.updateStanza(id, stanza);
         return ResponseEntity.ok(updatedStanza);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteStanza(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteStanza(@PathVariable Integer id) {
         gestioneStanza.deleteStanza(id);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/capienza/{id}")
-    public ResponseEntity<Boolean> checkCapienza(@PathVariable Long id, @RequestBody DateRequestDTO dateRequestDTO) {
+    public ResponseEntity<Boolean> checkCapienza(@PathVariable Integer id, @RequestBody DateRequestDTO dateRequestDTO) {
         return ResponseEntity.ok(checkCapienza.isOver(gestioneStanza.getStanzaById(id), dateRequestDTO.getDataInizio(), dateRequestDTO.getDataFine()));
     }
 

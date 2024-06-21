@@ -35,9 +35,7 @@ public class PrenotazioneMapper {
     public Prenotazione toEntity(PrenotazioneDTO prenotazioneDTO) {
         Prenotazione prenotazione = new Prenotazione();
         prenotazione.setDataInizio(prenotazioneDTO.getDataInizio());
-        if (!Objects.equals(prenotazioneDTO.getDataFine(), null)) {
-            prenotazione.setDataFine(prenotazioneDTO.getDataFine());
-        }
+        prenotazione.setDataFine(prenotazioneDTO.getDataFine());
         prenotazione.setStato(prenotazioneDTO.getStato());
         prenotazione.setUtente(utenteRepository.findById(prenotazioneDTO.getUtente()).orElseThrow());
         prenotazione.setPosto(postoRepository.findById(prenotazioneDTO.getPosto()).orElseThrow());

@@ -22,7 +22,7 @@ public class LoginController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<LoginDTO> getLoginById(@PathVariable Long id) {
+    public ResponseEntity<LoginDTO> getLoginById(@PathVariable Integer id) {
         LoginDTO ILoginDTO = loginService.getLoginById(id);
         return ResponseEntity.ok(ILoginDTO);
     }
@@ -40,13 +40,13 @@ public class LoginController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<LoginDTO> updateLogin(@PathVariable Long id, @RequestBody LoginDTO ILoginDTO) {
+    public ResponseEntity<LoginDTO> updateLogin(@PathVariable Integer id, @RequestBody LoginDTO ILoginDTO) {
         LoginDTO updatedILoginDTO = loginService.updateLogin(id, ILoginDTO);
         return ResponseEntity.ok(updatedILoginDTO);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteLogin(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteLogin(@PathVariable Integer id) {
         loginService.deleteLogin(id);
         return ResponseEntity.noContent().build();
     }

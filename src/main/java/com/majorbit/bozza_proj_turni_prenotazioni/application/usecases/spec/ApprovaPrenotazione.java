@@ -5,5 +5,5 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface ApprovaPrenotazione {
-    public PrenotazioneDTO approvaPrenotazione(Long id);
+    public PrenotazioneDTO approvaPrenotazione(Integer id);
 }

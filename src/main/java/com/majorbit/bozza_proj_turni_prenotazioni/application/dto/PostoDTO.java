@@ -17,6 +17,6 @@ public class PostoDTO implements Serializable {
 
     private String nome;
     private boolean disponibile;
-    private Long stanza;
+    private Integer stanza;
 
 }

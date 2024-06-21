@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface JPALoginRepository extends JpaRepository<Login, Long>, LoginRepository {
+public interface JPALoginRepository extends JpaRepository<Login, Integer>, LoginRepository {
 
 }

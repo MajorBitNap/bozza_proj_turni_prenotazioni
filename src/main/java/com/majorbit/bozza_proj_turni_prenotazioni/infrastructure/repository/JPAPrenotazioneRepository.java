@@ -10,6 +10,6 @@ import java.sql.Date;
 import java.util.List;
 
 @Repository
-public interface JPAPrenotazioneRepository extends JpaRepository<Prenotazione, Long>, PrenotazioneRepository {
+public interface JPAPrenotazioneRepository extends JpaRepository<Prenotazione, Integer>, PrenotazioneRepository {
     List<Prenotazione> findPrenotazioniInDateRange(Posto posto, Date dataInizio, Date dataFine);
 }

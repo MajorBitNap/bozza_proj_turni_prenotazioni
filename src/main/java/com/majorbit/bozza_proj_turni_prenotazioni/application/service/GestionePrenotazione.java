@@ -40,7 +40,7 @@ public class GestionePrenotazione {
         return prenotazioneMapper.toDTO(savedPrenotazione);
     }
 
-    public PrenotazioneDTO getPrenotazioneById(Long id) {
+    public PrenotazioneDTO getPrenotazioneById(Integer id) {
         Prenotazione prenotazione = prenotazioneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("resource not found"));
         return prenotazioneMapper.toDTO(prenotazione);
     }
@@ -50,7 +50,7 @@ public class GestionePrenotazione {
         return prenotazioni.stream().map(prenotazioneMapper::toDTO).collect(Collectors.toList());
     }
 
-    public PrenotazioneDTO updatePrenotazione(Long id, PrenotazioneDTO prenotazioneDTO) {
+    public PrenotazioneDTO updatePrenotazione(Integer id, PrenotazioneDTO prenotazioneDTO) {
         Prenotazione prenotazione = prenotazioneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("resource not found"));
         prenotazione.setDataInizio(prenotazioneDTO.getDataInizio());
         prenotazione.setDataFine(prenotazioneDTO.getDataFine());
@@ -61,7 +61,7 @@ public class GestionePrenotazione {
         return prenotazioneMapper.toDTO(updatedPrenotazione);
     }
 
-    public void deletePrenotazione(Long id) {
+    public void deletePrenotazione(Integer id) {
         Prenotazione prenotazione = prenotazioneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("resource not found"));
         prenotazioneRepository.delete(prenotazione);
     }

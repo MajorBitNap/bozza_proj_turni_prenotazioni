@@ -16,20 +16,20 @@ import java.util.List;
 public class UtenteController {
 
     private final GestioneUtente gestioneUtente;
-
     private final IRegistraDipendente registraDipendente;
-
     private final IRegistraModeratore registraModeratore;
 
     @Autowired
-    public UtenteController(GestioneUtente gestioneUtente, IRegistraDipendente registraDipendente, IRegistraModeratore registraModeratore) {
+    public UtenteController(GestioneUtente gestioneUtente,
+                            IRegistraDipendente registraDipendente,
+                            IRegistraModeratore registraModeratore) {
         this.gestioneUtente = gestioneUtente;
         this.registraDipendente = registraDipendente;
         this.registraModeratore = registraModeratore;
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UtenteDTO> getUtenteById(@PathVariable Long id) {
+    public ResponseEntity<UtenteDTO> getUtenteById(@PathVariable Integer id) {
         UtenteDTO utente = gestioneUtente.getUtenteById(id);
         return ResponseEntity.ok(utente);
     }
@@ -47,13 +47,13 @@ public class UtenteController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UtenteDTO> updateUtente(@PathVariable Long id, @RequestBody UtenteDTO utente) {
+    public ResponseEntity<UtenteDTO> updateUtente(@PathVariable Integer id, @RequestBody UtenteDTO utente) {
         UtenteDTO updatedUtente = gestioneUtente.updateUtente(id, utente);
         return ResponseEntity.ok(updatedUtente);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUtente(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteUtente(@PathVariable Integer id) {
         gestioneUtente.deleteUtente(id);
         return ResponseEntity.noContent().build();
     }

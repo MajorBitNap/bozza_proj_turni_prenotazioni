@@ -22,7 +22,7 @@ public class PianoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PianoDTO> getPianoById(@PathVariable Long id) {
+    public ResponseEntity<PianoDTO> getPianoById(@PathVariable Integer id) {
         PianoDTO piano = gestionePiano.getPianoById(id);
         return ResponseEntity.ok(piano);
     }
@@ -39,13 +39,13 @@ public class PianoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PianoDTO> updatePiano(@PathVariable Long id, @RequestBody PianoDTO piano) {
+    public ResponseEntity<PianoDTO> updatePiano(@PathVariable Integer id, @RequestBody PianoDTO piano) {
         PianoDTO updatedPiano = gestionePiano.updatePiano(id, piano);
         return ResponseEntity.ok(updatedPiano);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePiano(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePiano(@PathVariable Integer id) {
         gestionePiano.deletePiano(id);
         return ResponseEntity.noContent().build();
     }

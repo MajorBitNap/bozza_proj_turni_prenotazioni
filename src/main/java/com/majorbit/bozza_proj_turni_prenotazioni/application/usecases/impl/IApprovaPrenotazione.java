@@ -29,7 +29,7 @@ public class IApprovaPrenotazione implements ApprovaPrenotazione {
     }
 
     @Override
-    public PrenotazioneDTO approvaPrenotazione(Long id){
+    public PrenotazioneDTO approvaPrenotazione(Integer id){
         Prenotazione prenotazione = prenotazioneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Prenotazione not found"));
         prenotazione.setStato("Approvata");
         prenotazioneRepository.save(prenotazione);

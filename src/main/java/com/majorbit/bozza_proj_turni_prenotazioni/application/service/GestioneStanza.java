@@ -34,7 +34,7 @@ public class GestioneStanza {
         return stanzaMapper.toDTO(savedStanza);
     }
 
-    public StanzaDTO getStanzaById(Long id) {
+    public StanzaDTO getStanzaById(Integer id) {
         Stanza stanza = stanzaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Stanza not found"));
         return stanzaMapper.toDTO(stanza);
     }
@@ -44,7 +44,7 @@ public class GestioneStanza {
         return stanze.stream().map(stanzaMapper::toDTO).collect(Collectors.toList());
     }
 
-    public StanzaDTO updateStanza(Long id, StanzaDTO stanzaDTO) {
+    public StanzaDTO updateStanza(Integer id, StanzaDTO stanzaDTO) {
         Stanza stanza = stanzaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Stanza not found"));
         stanza.setNome(stanzaDTO.getNome());
         stanza.setCapienza(stanzaDTO.getCapienza());
@@ -54,7 +54,7 @@ public class GestioneStanza {
         return stanzaMapper.toDTO(updatedStanza);
     }
 
-    public void deleteStanza(Long id) {
+    public void deleteStanza(Integer id) {
         Stanza stanza = stanzaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Stanza not found"));
         stanzaRepository.delete(stanza);
     }

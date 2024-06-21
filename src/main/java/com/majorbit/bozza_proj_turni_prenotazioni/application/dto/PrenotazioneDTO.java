@@ -18,7 +18,7 @@ public class PrenotazioneDTO implements Serializable {
     private Date dataInizio;
     private Date dataFine;
     private String stato;
-    private Long posto;
-    private Long utente;
+    private Integer posto;
+    private Integer utente;
 
 }

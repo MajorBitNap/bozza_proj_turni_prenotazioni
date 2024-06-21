@@ -34,7 +34,7 @@ public class PrenotazioneController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PrenotazioneDTO> getPrenotazioneById(@PathVariable Long id) {
+    public ResponseEntity<PrenotazioneDTO> getPrenotazioneById(@PathVariable Integer id) {
         PrenotazioneDTO prenotazione = gestionePrenotazione.getPrenotazioneById(id);
         return ResponseEntity.ok(prenotazione);
     }
@@ -46,13 +46,13 @@ public class PrenotazioneController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PrenotazioneDTO> updatePrenotazione(@PathVariable Long id, @RequestBody PrenotazioneDTO prenotazione) {
+    public ResponseEntity<PrenotazioneDTO> updatePrenotazione(@PathVariable Integer id, @RequestBody PrenotazioneDTO prenotazione) {
         PrenotazioneDTO updatedPrenotazione = gestionePrenotazione.updatePrenotazione(id, prenotazione);
         return ResponseEntity.ok(updatedPrenotazione);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePrenotazione(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePrenotazione(@PathVariable Integer id) {
         gestionePrenotazione.deletePrenotazione(id);
         return ResponseEntity.noContent().build();
     }
@@ -69,7 +69,7 @@ public class PrenotazioneController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
     @PutMapping("/approvazione/{id}")
-    public ResponseEntity<PrenotazioneDTO> approvaPrenotazione(@PathVariable Long id) {
+    public ResponseEntity<PrenotazioneDTO> approvaPrenotazione(@PathVariable Integer id) {
         PrenotazioneDTO approvedPrenotazione = approvaPrenotazione.approvaPrenotazione(id);
         return ResponseEntity.ok(approvedPrenotazione);
     }
