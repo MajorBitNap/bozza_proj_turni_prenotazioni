@@ -4,23 +4,19 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PrenotazioneDT
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Prenotazione;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PostoRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.UtenteRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
 @Component
+@RequiredArgsConstructor
 public class PrenotazioneMapper {
 
     private final UtenteRepository utenteRepository;
 
     private final PostoRepository postoRepository;
-
-    @Autowired
-    public PrenotazioneMapper(UtenteRepository utenteRepository, PostoRepository postoRepository) {
-        this.utenteRepository = utenteRepository;
-        this.postoRepository = postoRepository;
-    }
 
     public PrenotazioneDTO toDTO(Prenotazione prenotazione) {
         return new PrenotazioneDTO(

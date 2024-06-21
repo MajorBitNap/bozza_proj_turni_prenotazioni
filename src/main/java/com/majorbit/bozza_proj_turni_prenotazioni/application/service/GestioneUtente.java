@@ -5,6 +5,7 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.UtenteMappe
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Utente;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.UtenteRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,18 +13,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class GestioneUtente {
 
     private final UtenteRepository utenteRepository;
 
     private final UtenteMapper utenteMapper;
-
-    @Autowired
-    public GestioneUtente(UtenteRepository utenteRepository,
-                          UtenteMapper utenteMapper) {
-        this.utenteRepository = utenteRepository;
-        this.utenteMapper = utenteMapper;
-    }
 
     public UtenteDTO createUtente(UtenteDTO UtenteDTO) {
         Utente utente = utenteMapper.toEntity(UtenteDTO);

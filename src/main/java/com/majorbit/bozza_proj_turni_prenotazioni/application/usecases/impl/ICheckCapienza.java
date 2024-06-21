@@ -8,6 +8,7 @@ import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Posto;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Prenotazione;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Stanza;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PrenotazioneRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,20 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class ICheckCapienza implements CheckCapienza {
 
     private final PrenotazioneRepository prenotazioneRepository;
     private final StanzaMapper stanzaMapper;
     private final EmailService emailService;
-
-    @Autowired
-    public ICheckCapienza(PrenotazioneRepository prenotazioneRepository,
-                          StanzaMapper stanzaMapper,
-                          EmailService emailService) {
-        this.prenotazioneRepository = prenotazioneRepository;
-        this.stanzaMapper = stanzaMapper;
-        this.emailService = emailService;
-    }
 
     public boolean isOver(StanzaDTO stanzaDTO, Date dataInizio, Date  datafine) {
         Stanza stanza = stanzaMapper.toEntity(stanzaDTO);

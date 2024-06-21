@@ -1,6 +1,7 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.SedeDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.service.GestioneSede;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,15 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/v1/sedi")
 public class SedeController {
 
     private final GestioneSede gestioneSede;
-
-    @Autowired
-    public SedeController(GestioneSede gestioneSede) {
-        this.gestioneSede = gestioneSede;
-    }
 
     @PostMapping
     public ResponseEntity<SedeDTO> createSede(@RequestBody SedeDTO sede) {

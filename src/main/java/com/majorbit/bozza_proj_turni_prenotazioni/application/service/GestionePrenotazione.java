@@ -9,6 +9,7 @@ import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PostoReposit
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PrenotazioneRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.UtenteRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,23 +17,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class GestionePrenotazione {
 
     private final PrenotazioneRepository prenotazioneRepository;
     private final PostoRepository postoRepository;
     private final UtenteRepository utenteRepository;
     private final PrenotazioneMapper prenotazioneMapper;
-
-    @Autowired
-    public GestionePrenotazione(PrenotazioneRepository prenotazioneRepository,
-                                PostoRepository postoRepository,
-                                UtenteRepository utenteRepository,
-                                PrenotazioneMapper prenotazioneMapper) {
-        this.prenotazioneRepository = prenotazioneRepository;
-        this.postoRepository = postoRepository;
-        this.utenteRepository = utenteRepository;
-        this.prenotazioneMapper = prenotazioneMapper;
-    }
 
     public PrenotazioneDTO createPrenotazione(PrenotazioneDTO PrenotazioneDTO) {
         Prenotazione prenotazione = prenotazioneMapper.toEntity(PrenotazioneDTO);

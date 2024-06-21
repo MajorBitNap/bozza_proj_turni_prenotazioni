@@ -7,26 +7,19 @@ import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Stanza;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PianoRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.StanzaRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class GestioneStanza {
 
     private final StanzaRepository stanzaRepository;
     private final PianoRepository pianoRepository;
     private final StanzaMapper stanzaMapper;
-
-    public GestioneStanza(StanzaRepository stanzaRepository,
-                          PianoRepository pianoRepository,
-                          StanzaMapper stanzaMapper) {
-        this.stanzaRepository = stanzaRepository;
-        this.pianoRepository = pianoRepository;
-        this.stanzaMapper = stanzaMapper;
-    }
-
 
     public StanzaDTO createStanza(StanzaDTO StanzaDTO) {
         Stanza stanza = stanzaMapper.toEntity(StanzaDTO);

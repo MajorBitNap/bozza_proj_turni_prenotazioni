@@ -5,6 +5,7 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.LoginMapper
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Login;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.LoginRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,16 +13,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class GestioneLogin {
 
     private final LoginRepository loginRepository;
     private final LoginMapper loginMapper;
-
-    @Autowired
-    public GestioneLogin(LoginRepository loginRepository, LoginMapper loginMapper) {
-        this.loginRepository = loginRepository;
-        this.loginMapper = loginMapper;
-    }
 
     public LoginDTO createLogin(LoginDTO ILoginDTO) {
         Login login = loginMapper.toEntity(ILoginDTO);

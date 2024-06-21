@@ -2,6 +2,7 @@ package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.LoginDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.service.GestioneLogin;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,16 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/v1/login")
 public class LoginController {
 
     private final GestioneLogin loginService;
-
-    @Autowired
-    public LoginController(GestioneLogin loginService) {
-        this.loginService = loginService;
-    }
-
 
     @GetMapping("/{id}")
     public ResponseEntity<LoginDTO> getLoginById(@PathVariable Integer id) {

@@ -3,6 +3,7 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PrenotazioneDT
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.service.GestionePrenotazione;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/v1/prenotazioni")
 public class PrenotazioneController {
 
@@ -19,19 +21,6 @@ public class PrenotazioneController {
     private final IPrenotazioneSingola prenotazioneSingola;
     private final IModCreaPrenotazione modCreaPrenotazione;
     private final IApprovaPrenotazione approvaPrenotazione;
-
-    @Autowired
-    public PrenotazioneController(GestionePrenotazione gestionePrenotazione,
-                                  IPrenotazioneSingola prenotazioneSingola,
-                                  IPrenotazioneFissa prenotazioneFissa,
-                                  IModCreaPrenotazione modCreaPrenotazione,
-                                  IApprovaPrenotazione approvaPrenotazione) {
-        this.gestionePrenotazione = gestionePrenotazione;
-        this.prenotazioneFissa = prenotazioneFissa;
-        this.modCreaPrenotazione = modCreaPrenotazione;
-        this.approvaPrenotazione = approvaPrenotazione;
-        this.prenotazioneSingola = prenotazioneSingola;
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<PrenotazioneDTO> getPrenotazioneById(@PathVariable Integer id) {
