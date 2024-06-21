@@ -2,6 +2,7 @@ package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.TokenDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.LoginDTO;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.UtenteDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<TokenDTO> register(
-            @RequestBody RegisterDTO request
+            @RequestBody UtenteDTO request
     ) {
         return ResponseEntity.ok(authService.register(request));
     }
