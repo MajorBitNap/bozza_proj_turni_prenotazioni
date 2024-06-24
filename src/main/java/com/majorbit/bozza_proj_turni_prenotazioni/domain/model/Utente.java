@@ -31,6 +31,9 @@ public class Utente {
     @Column(nullable = false)
     private String email;
 
+    @Column
+    private String password;
+
 //  nella richiesta assicurarsi che il ruolo sia in formato TUTTO MAIUSCOLO
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
