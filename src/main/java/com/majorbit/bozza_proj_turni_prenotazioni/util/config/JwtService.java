@@ -7,22 +7,22 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.util.Base64;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class JwtService {
 
-    @Value("${jwt.secret-key}")
+    @Value("${jwt.secret.key}")
     private String SECRET_KEY;
     @Value("${jwt.token.validity}")
     private Integer TOKEN_VALIDITY;
@@ -44,19 +44,21 @@ public class JwtService {
                 .getPayload();
     }
     private SecretKey getSignInKey() {
-        byte[] bytes = Base64.getDecoder()
-                .decode(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
-        return new SecretKeySpec(bytes,"HS256");
+        byte[] bytes = Base64.getDecoder().decode(SECRET_KEY);
+        return new SecretKeySpec(bytes, "HmacSHA256");
     }
 //  metodo per generare token con claim extra
     public String generateToken(
             Map<String, Object> extraClaims,
             UserDetails userDetails) {
+        extraClaims.put("roles", userDetails.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList()));
         return Jwts.builder()
                 .setClaims(extraClaims)
                 .subject(userDetails.getUsername())
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + TOKEN_VALIDITY))
+                .issuedAt(new java.util.Date(System.currentTimeMillis()))
+                .expiration(new java.util.Date(System.currentTimeMillis() + TOKEN_VALIDITY))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -71,10 +73,10 @@ public class JwtService {
     }
 
     public boolean isExpired(String token) {
-        return extractExpiration(token).before(new Date(System.currentTimeMillis())); //setta come controllo la data attuale
+        return extractExpiration(token).before(new java.util.Date(System.currentTimeMillis())); //setta come controllo la data attuale
     }
 
-    private Date extractExpiration(String token) {
-        return (Date) extractClaim(token, Claims::getExpiration);
+    private java.util.Date extractExpiration(String token) {
+        return extractClaim(token, Claims::getExpiration);
     }
 }
