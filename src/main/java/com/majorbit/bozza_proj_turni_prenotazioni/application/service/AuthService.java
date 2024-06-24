@@ -49,5 +49,5 @@ public class AuthService {
         var utente = utenteRepository.findByEmail(request.getUsername()).orElseThrow();
         TokenDTO token = new TokenDTO(jwtService.generateToken(utente));
         return token;
-    } //VIDEO A 1:55:50
+    }
 }
