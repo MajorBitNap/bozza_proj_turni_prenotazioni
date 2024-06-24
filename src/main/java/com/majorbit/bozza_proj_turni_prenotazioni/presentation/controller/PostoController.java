@@ -3,7 +3,6 @@ package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PostoDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.service.GestionePosto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +17,7 @@ public class PostoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<PostoDTO> getPostoById(@PathVariable Integer id) {
-        PostoDTO posto = gestionePosto.getPostoById(id);
+        var posto = gestionePosto.getPostoById(id);
         return ResponseEntity.ok(posto);
     }
 
@@ -30,13 +29,13 @@ public class PostoController {
 
     @PostMapping
     public ResponseEntity<PostoDTO> createPosto(@RequestBody PostoDTO posto) {
-        PostoDTO newPosto = gestionePosto.createPosto(posto);
+        var newPosto = gestionePosto.createPosto(posto);
         return ResponseEntity.status(HttpStatus.CREATED).body(newPosto);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<PostoDTO> updatePosto(@PathVariable Integer id, @RequestBody PostoDTO posto) {
-        PostoDTO updatedPosto = gestionePosto.updatePosto(id, posto);
+        var updatedPosto = gestionePosto.updatePosto(id, posto);
         return ResponseEntity.ok(updatedPosto);
     }
 

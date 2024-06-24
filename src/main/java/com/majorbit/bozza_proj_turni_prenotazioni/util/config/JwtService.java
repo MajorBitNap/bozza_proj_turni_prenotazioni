@@ -11,7 +11,6 @@ import org.springframework.security.core.GrantedAuthority;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import java.sql.Date;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +27,7 @@ public class JwtService {
     private Integer TOKEN_VALIDITY;
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllClaims(token);
+        final var claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
 

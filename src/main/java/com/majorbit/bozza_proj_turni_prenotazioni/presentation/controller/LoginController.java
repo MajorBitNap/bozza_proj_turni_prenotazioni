@@ -3,7 +3,6 @@ package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.LoginDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.service.GestioneLogin;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +18,7 @@ public class LoginController {
 
     @GetMapping("/{id}")
     public ResponseEntity<LoginDTO> getLoginById(@PathVariable Integer id) {
-        LoginDTO ILoginDTO = loginService.getLoginById(id);
+        var ILoginDTO = loginService.getLoginById(id);
         return ResponseEntity.ok(ILoginDTO);
     }
 
@@ -31,13 +30,13 @@ public class LoginController {
 
     @PostMapping
     public ResponseEntity<LoginDTO> createLogin(@RequestBody LoginDTO ILoginDTO) {
-        LoginDTO createdILoginDTO = loginService.createLogin(ILoginDTO);
+        var createdILoginDTO = loginService.createLogin(ILoginDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdILoginDTO);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<LoginDTO> updateLogin(@PathVariable Integer id, @RequestBody LoginDTO ILoginDTO) {
-        LoginDTO updatedILoginDTO = loginService.updateLogin(id, ILoginDTO);
+        var updatedILoginDTO = loginService.updateLogin(id, ILoginDTO);
         return ResponseEntity.ok(updatedILoginDTO);
     }
 

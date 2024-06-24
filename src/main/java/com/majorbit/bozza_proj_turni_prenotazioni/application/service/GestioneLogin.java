@@ -6,7 +6,6 @@ import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Login;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.LoginRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,13 +19,13 @@ public class GestioneLogin {
     private final LoginMapper loginMapper;
 
     public LoginDTO createLogin(LoginDTO ILoginDTO) {
-        Login login = loginMapper.toEntity(ILoginDTO);
-        Login savedLogin = loginRepository.save(login);
+        var login = loginMapper.toEntity(ILoginDTO);
+        var savedLogin = loginRepository.save(login);
         return loginMapper.toDTO(savedLogin);
     }
 
     public LoginDTO getLoginById(Integer id) {
-        Login login = loginRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Login not found"));
+        var login = loginRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Login not found"));
         return loginMapper.toDTO(login);
     }
 
@@ -36,15 +35,15 @@ public class GestioneLogin {
     }
 
     public LoginDTO updateLogin(Integer id, LoginDTO ILoginDTO) {
-        Login login = loginRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Login not found"));
+        var login = loginRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Login not found"));
         login.setPassword(ILoginDTO.getPassword());
         login.setUsername(     ILoginDTO.getUsername());
-        Login updatedLogin = loginRepository.save(login);
+        var updatedLogin = loginRepository.save(login);
         return loginMapper.toDTO(updatedLogin);
     }
 
     public void deleteLogin(Integer id) {
-        Login login = loginRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Login not found"));
+        var login = loginRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Login not found"));
         loginRepository.delete(login);
     }
 }

@@ -6,7 +6,6 @@ import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Stanza;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PianoRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PostoRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -38,7 +37,7 @@ public class StanzaMapper {
         if (!Objects.equals(null, postiId)) {
             postiId.forEach((id) -> posti.add(postoRepository.findById(id).orElseThrow()));
         }
-        Stanza stanza = new Stanza();
+        var stanza = new Stanza();
         stanza.setNome(stanzaDTO.getNome());
         stanza.setCapienza(stanzaDTO.getCapienza());
         stanza.setPiano(pianoRepository.findById(stanzaDTO.getPiano()).orElseThrow());

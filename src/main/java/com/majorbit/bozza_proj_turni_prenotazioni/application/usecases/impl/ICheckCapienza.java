@@ -6,10 +6,8 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.service.EmailServi
 import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.spec.CheckCapienza;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Posto;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Prenotazione;
-import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Stanza;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PrenotazioneRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
@@ -25,7 +23,7 @@ public class ICheckCapienza implements CheckCapienza {
     private final EmailService emailService;
 
     public boolean isOver(StanzaDTO stanzaDTO, Date dataInizio, Date  datafine) {
-        Stanza stanza = stanzaMapper.toEntity(stanzaDTO);
+        var stanza = stanzaMapper.toEntity(stanzaDTO);
         List<Posto> posti = stanza.getPosti();
         List<Prenotazione> prenotazioni = new ArrayList<>();
         for (int i = 0; i < posti.size(); i++) {

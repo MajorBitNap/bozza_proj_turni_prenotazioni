@@ -4,7 +4,6 @@ package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PianoDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.service.GestionePiano;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +19,7 @@ public class PianoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<PianoDTO> getPianoById(@PathVariable Integer id) {
-        PianoDTO piano = gestionePiano.getPianoById(id);
+        var piano = gestionePiano.getPianoById(id);
         return ResponseEntity.ok(piano);
     }
     @GetMapping
@@ -31,13 +30,13 @@ public class PianoController {
 
     @PostMapping
     public ResponseEntity<PianoDTO> createPiano(@RequestBody PianoDTO piano) {
-        PianoDTO newPiano = gestionePiano.createPiano(piano);
+        var newPiano = gestionePiano.createPiano(piano);
         return ResponseEntity.status(HttpStatus.CREATED).body(newPiano);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<PianoDTO> updatePiano(@PathVariable Integer id, @RequestBody PianoDTO piano) {
-        PianoDTO updatedPiano = gestionePiano.updatePiano(id, piano);
+        var updatedPiano = gestionePiano.updatePiano(id, piano);
         return ResponseEntity.ok(updatedPiano);
     }
 

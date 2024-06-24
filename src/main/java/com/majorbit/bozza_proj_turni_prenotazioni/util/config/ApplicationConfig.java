@@ -1,7 +1,5 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.util.config;
 
-import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Utente;
-import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.LoginRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.UtenteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -31,8 +29,8 @@ public class ApplicationConfig {
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService()); //dice al provider qual'è il servizio degli utenti
+        var authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService()); //dice al provider qual è il servizio degli utenti
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }

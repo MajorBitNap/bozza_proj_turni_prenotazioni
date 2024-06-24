@@ -5,7 +5,6 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.service.GestioneUt
 import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.IRegistraDipendente;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.IRegistraModeratore;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +22,7 @@ public class UtenteController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UtenteDTO> getUtenteById(@PathVariable Integer id) {
-        UtenteDTO utente = gestioneUtente.getUtenteById(id);
+        var utente = gestioneUtente.getUtenteById(id);
         return ResponseEntity.ok(utente);
     }
 
@@ -35,13 +34,13 @@ public class UtenteController {
 
     @PostMapping
     public ResponseEntity<UtenteDTO> createUtente(@RequestBody UtenteDTO utente) {
-        UtenteDTO newUtente = gestioneUtente.createUtente(utente);
+        var newUtente = gestioneUtente.createUtente(utente);
         return ResponseEntity.status(HttpStatus.CREATED).body(newUtente);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<UtenteDTO> updateUtente(@PathVariable Integer id, @RequestBody UtenteDTO utente) {
-        UtenteDTO updatedUtente = gestioneUtente.updateUtente(id, utente);
+        var updatedUtente = gestioneUtente.updateUtente(id, utente);
         return ResponseEntity.ok(updatedUtente);
     }
 

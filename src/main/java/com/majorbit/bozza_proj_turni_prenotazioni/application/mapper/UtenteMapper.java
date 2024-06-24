@@ -18,7 +18,7 @@ public class UtenteMapper {
     }
 
     public Utente toEntity(UtenteDTO utenteDTO) {
-        Utente utente = new Utente();
+        var utente = new Utente();
         utente.setNome(utenteDTO.getNome());
         utente.setCognome(utenteDTO.getCognome());
         utente.setEmail(utenteDTO.getEmail());

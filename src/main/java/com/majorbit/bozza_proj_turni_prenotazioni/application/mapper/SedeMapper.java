@@ -12,7 +12,7 @@ public class SedeMapper {
     }
 
     public Sede toEntity(SedeDTO sedeDTO) {
-        Sede sede = new Sede();
+        var sede = new Sede();
         sede.setNome(sedeDTO.getNome());
         sede.setIndirizzo(sedeDTO.getIndirizzo());
         return sede;

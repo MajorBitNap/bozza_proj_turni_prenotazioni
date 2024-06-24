@@ -5,7 +5,6 @@ import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Prenotazione;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PostoRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.UtenteRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -29,7 +28,7 @@ public class PrenotazioneMapper {
     }
 
     public Prenotazione toEntity(PrenotazioneDTO prenotazioneDTO) {
-        Prenotazione prenotazione = new Prenotazione();
+        var prenotazione = new Prenotazione();
         prenotazione.setDataInizio(prenotazioneDTO.getDataInizio());
         prenotazione.setDataFine(prenotazioneDTO.getDataFine());
         prenotazione.setStato(prenotazioneDTO.getStato());

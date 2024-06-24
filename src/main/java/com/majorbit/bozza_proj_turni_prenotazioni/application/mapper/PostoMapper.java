@@ -4,7 +4,6 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PostoDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Posto;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.StanzaRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -22,7 +21,7 @@ public class PostoMapper {
     }
 
     public Posto toEntity(PostoDTO postoDTO) {
-        Posto posto = new Posto();
+        var posto = new Posto();
         posto.setDisponibile(postoDTO.isDisponibile());
         posto.setNome(postoDTO.getNome());
         posto.setStanza(stanzaRepository.findById(postoDTO.getStanza()).orElseThrow());

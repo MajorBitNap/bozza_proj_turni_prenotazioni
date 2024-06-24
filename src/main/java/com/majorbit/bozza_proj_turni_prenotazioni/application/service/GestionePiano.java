@@ -2,13 +2,11 @@ package com.majorbit.bozza_proj_turni_prenotazioni.application.service;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PianoDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.PianoMapper;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.SedeMapper;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Piano;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PianoRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.SedeRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,13 +21,13 @@ public class GestionePiano {
     private final PianoMapper pianoMapper;
 
     public PianoDTO createPiano(PianoDTO PianoDTO) {
-        Piano piano = pianoMapper.toEntity(PianoDTO);
-        Piano savedPiano = pianoRepository.save(piano);
+        var piano = pianoMapper.toEntity(PianoDTO);
+        var savedPiano = pianoRepository.save(piano);
         return pianoMapper.toDTO(savedPiano);
     }
 
     public PianoDTO getPianoById(Integer id) {
-        Piano piano = pianoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("resources not found"));
+        var piano = pianoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("resources not found"));
         return pianoMapper.toDTO(piano);
     }
 
@@ -39,16 +37,16 @@ public class GestionePiano {
     }
 
     public PianoDTO updatePiano(Integer id, PianoDTO pianoDTO) {
-        Piano piano = pianoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("resources not found"));
+        var piano = pianoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("resources not found"));
         piano.setNome(pianoDTO.getNome());
         piano.setNumero(pianoDTO.getNumero());
         piano.setSede(sedeRepository.findById(pianoDTO.getSede()).orElseThrow(() -> new ResourceNotFoundException("resources not found")));
-        Piano updatedPiano = pianoRepository.save(piano);
+        var updatedPiano = pianoRepository.save(piano);
         return pianoMapper.toDTO(updatedPiano);
     }
 
     public void deletePiano(Integer id) {
-        Piano piano = pianoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Piano not found"));
+        var piano = pianoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Piano not found"));
         pianoRepository.delete(piano);
     }
 }
