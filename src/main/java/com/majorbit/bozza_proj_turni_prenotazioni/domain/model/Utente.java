@@ -1,6 +1,5 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
