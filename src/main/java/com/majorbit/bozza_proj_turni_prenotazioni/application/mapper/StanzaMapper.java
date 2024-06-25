@@ -23,12 +23,12 @@ public class StanzaMapper {
         List<Posto> posti = stanza.getPosti();
         List<Integer> postiId = new ArrayList<>();
         posti.forEach((posto) -> postiId.add(posto.getId()));
-        return new StanzaDTO(
-                stanza.getNome(),
-                stanza.getCapienza(),
-                stanza.getPiano().getId(),
-                postiId
-        );
+        return StanzaDTO.builder()
+                .nome(stanza.getNome())
+                .capienza(stanza.getCapienza())
+                .piano(stanza.getPiano().getId())
+                .posti(postiId)
+                .build();
     }
 
     public Stanza toEntity(StanzaDTO stanzaDTO) {
@@ -37,12 +37,12 @@ public class StanzaMapper {
         if (!Objects.equals(null, postiId)) {
             postiId.forEach((id) -> posti.add(postoRepository.findById(id).orElseThrow()));
         }
-        var stanza = new Stanza();
-        stanza.setNome(stanzaDTO.getNome());
-        stanza.setCapienza(stanzaDTO.getCapienza());
-        stanza.setPiano(pianoRepository.findById(stanzaDTO.getPiano()).orElseThrow());
-        stanza.setPosti(posti);
-        return stanza;
+        return Stanza.builder()
+                .nome(stanzaDTO.getNome())
+                .capienza(stanzaDTO.getCapienza())
+                .piano(pianoRepository.findById(stanzaDTO.getPiano()).orElseThrow())
+                .posti(posti)
+                .build();
     }
 
 }

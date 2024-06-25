@@ -35,8 +35,9 @@ public class AuthService {
                 "REGISTRAZIONE EFFETTUATA",
                 "registrazione effettuata con successo"
         );
-        var token = new TokenDTO(jwtService.generateToken(utente));
-        return token;
+        return TokenDTO.builder()
+                .token(jwtService.generateToken(utente))
+                .build();
     }
 
     public TokenDTO authenticate(LoginDTO request) {
@@ -47,7 +48,8 @@ public class AuthService {
                 )
         );
         var utente = utenteRepository.findByEmail(request.getUsername()).orElseThrow();
-        var token = new TokenDTO(jwtService.generateToken(utente));
-        return token;
+        return TokenDTO.builder()
+                .token(jwtService.generateToken(utente))
+                .build();
     }
 }

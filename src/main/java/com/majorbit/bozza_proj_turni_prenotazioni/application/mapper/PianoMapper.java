@@ -14,18 +14,18 @@ public class PianoMapper {
     private final SedeRepository sedeRepository;
 
     public PianoDTO toDTO(Piano piano) {
-        return new PianoDTO(
-                piano.getNome(),
-                piano.getNumero(),
-                piano.getSede().getId()
-        );
+        return PianoDTO.builder()
+                .nome(piano.getNome())
+                .numero(piano.getNumero())
+                .sede(piano.getSede().getId())
+                .build();
     }
 
     public Piano toEntity(PianoDTO pianoDTO) {
-        var piano = new Piano();
-        piano.setNome(pianoDTO.getNome());
-        piano.setNumero(pianoDTO.getNumero());
-        piano.setSede(sedeRepository.findById(pianoDTO.getSede()).orElseThrow());
-        return piano;
+        return Piano.builder()
+                .nome(pianoDTO.getNome())
+                .numero(pianoDTO.getNumero())
+                .sede(sedeRepository.findById(pianoDTO.getSede()).orElseThrow())
+                .build();
     }
 }

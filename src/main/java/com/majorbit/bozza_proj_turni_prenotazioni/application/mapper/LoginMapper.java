@@ -8,16 +8,16 @@ import org.springframework.stereotype.Component;
 public class LoginMapper {
 
     public LoginDTO toDTO(Login login) {
-        return new LoginDTO(
-                login.getUsername(),
-                login.getPassword()
-        );
+        return LoginDTO.builder()
+                .username(login.getUsername())
+                .password(login.getPassword())
+                .build();
     }
 
     public Login toEntity(LoginDTO loginDTO) {
-        var login = new Login();
-        login.setUsername(loginDTO.getUsername());
-        login.setPassword(loginDTO.getPassword());
-        return login;
+        return Login.builder()
+                .username(loginDTO.getUsername())
+                .password(loginDTO.getPassword())
+                .build();
     }
 }

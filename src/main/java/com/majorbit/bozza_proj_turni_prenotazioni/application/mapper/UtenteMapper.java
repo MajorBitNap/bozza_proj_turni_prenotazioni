@@ -8,21 +8,22 @@ import org.springframework.stereotype.Component;
 public class UtenteMapper {
 
     public UtenteDTO toDTO(Utente utente) {
-        return new UtenteDTO(
-                utente.getNome(),
-                utente.getCognome(),
-                utente.getEmail(),
-                utente.getPassword(),
-                utente.getRuolo()
-        );
+        return UtenteDTO.builder()
+                .nome(utente.getNome())
+                .cognome(utente.getCognome())
+                .email(utente.getEmail())
+                .password(utente.getPassword())
+                .ruolo(utente.getRuolo())
+                .build();
     }
 
     public Utente toEntity(UtenteDTO utenteDTO) {
-        var utente = new Utente();
-        utente.setNome(utenteDTO.getNome());
-        utente.setCognome(utenteDTO.getCognome());
-        utente.setEmail(utenteDTO.getEmail());
-        utente.setRuolo(utenteDTO.getRuolo());
-        return utente;
+        return Utente.builder()
+                .nome(utenteDTO.getNome())
+                .cognome(utenteDTO.getCognome())
+                .email(utenteDTO.getEmail())
+                .password(utenteDTO.getPassword())
+                .ruolo(utenteDTO.getRuolo())
+                .build();
     }
 }

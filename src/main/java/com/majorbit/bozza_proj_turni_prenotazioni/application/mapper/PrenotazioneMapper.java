@@ -18,22 +18,22 @@ public class PrenotazioneMapper {
     private final PostoRepository postoRepository;
 
     public PrenotazioneDTO toDTO(Prenotazione prenotazione) {
-        return new PrenotazioneDTO(
-                prenotazione.getDataInizio(),
-                prenotazione.getDataFine(),
-                prenotazione.getStato(),
-                prenotazione.getPosto().getId(),
-                prenotazione.getUtente().getId()
-        );
+        return PrenotazioneDTO.builder()
+                .dataInizio(prenotazione.getDataInizio())
+                .dataFine(prenotazione.getDataFine())
+                .stato(prenotazione.getStato())
+                .posto(prenotazione.getPosto().getId())
+                .utente(prenotazione.getUtente().getId())
+                .build();
     }
 
     public Prenotazione toEntity(PrenotazioneDTO prenotazioneDTO) {
-        var prenotazione = new Prenotazione();
-        prenotazione.setDataInizio(prenotazioneDTO.getDataInizio());
-        prenotazione.setDataFine(prenotazioneDTO.getDataFine());
-        prenotazione.setStato(prenotazioneDTO.getStato());
-        prenotazione.setUtente(utenteRepository.findById(prenotazioneDTO.getUtente()).orElseThrow());
-        prenotazione.setPosto(postoRepository.findById(prenotazioneDTO.getPosto()).orElseThrow());
-        return prenotazione;
+        return Prenotazione.builder()
+                .dataInizio(prenotazioneDTO.getDataInizio())
+                .dataFine(prenotazioneDTO.getDataFine())
+                .stato(prenotazioneDTO.getStato())
+                .posto(postoRepository.findById(prenotazioneDTO.getPosto()).orElseThrow())
+                .utente(utenteRepository.findById(prenotazioneDTO.getUtente()).orElseThrow())
+                .build();
     }
 }
