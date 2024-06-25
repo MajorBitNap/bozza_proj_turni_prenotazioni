@@ -12,7 +12,6 @@ public class UtenteMapper {
                 .nome(utente.getNome())
                 .cognome(utente.getCognome())
                 .email(utente.getEmail())
-                .password(utente.getPassword())
                 .ruolo(utente.getRuolo())
                 .build();
     }

@@ -23,13 +23,12 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
 
     public TokenDTO register(UtenteDTO request) {
-        var utente = Utente.builder()
-                .nome(request.getNome())
-                .cognome(request.getCognome())
-                .email(request.getEmail())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .ruolo(request.getRuolo())
-                .build();
+        var utente = new Utente();
+        utente.setNome(request.getNome());
+        utente.setCognome(request.getCognome());
+        utente.setEmail(request.getEmail());
+        utente.setPassword(passwordEncoder.encode(request.getPassword()));
+        utente.setRuolo(request.getRuolo());
         utenteRepository.save(utente);
         emailService.sendEmail(
                 utente.getEmail(),
