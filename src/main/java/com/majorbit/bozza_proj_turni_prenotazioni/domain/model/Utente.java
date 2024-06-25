@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@SecondaryTable(name = "login", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id"))
 public class Utente implements UserDetails {
 
     @Id
@@ -26,11 +27,10 @@ public class Utente implements UserDetails {
     @Column(nullable = false)
     private String cognome;
 
-//  la password viene recuprerata tramite email dalla tabella login dov'è annotata come username
-    @Column(nullable = false)
+    @Column(table = "login", name = "username", nullable = false)
     private String email;
 
-    @Column
+    @Column(table = "login", nullable = false)
     private String password;
 
 //  nella richiesta assicurarsi che il ruolo sia in formato TUTTO MAIUSCOLO
@@ -46,6 +46,11 @@ public class Utente implements UserDetails {
     @Override
     public String getUsername() {
         return email;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     @Override

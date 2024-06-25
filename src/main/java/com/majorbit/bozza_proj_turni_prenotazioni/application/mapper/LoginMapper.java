@@ -1,23 +1,27 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.application.mapper;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.LoginDTO;
-import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Login;
+import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Utente;
+import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.UtenteRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class LoginMapper {
 
-    public LoginDTO toDTO(Login login) {
+    private final UtenteRepository utenteRepository;
+
+    public LoginDTO toDTO(Utente utente) {
         return new LoginDTO(
-                login.getUsername(),
-                login.getPassword()
+                utente.getUsername(),
+                utente.getPassword()
         );
     }
 
-    public Login toEntity(LoginDTO loginDTO) {
-        var login = new Login();
-        login.setUsername(loginDTO.getUsername());
-        login.setPassword(loginDTO.getPassword());
-        return login;
+    public Utente toEntity(LoginDTO loginDTO) {
+        var utente = utenteRepository.findByEmail(loginDTO.getUsername());
+        if (!utente.isPresent()) {}
+        return utente.get();
     }
 }
