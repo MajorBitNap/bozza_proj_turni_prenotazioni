@@ -27,7 +27,8 @@ public class Utente implements UserDetails {
     @Column(nullable = false)
     private String cognome;
 
-    @Column(table = "login", name = "username", nullable = false)
+    @Column(table = "login", name = "username",
+            nullable = false, unique = true)
     private String email;
 
     @Column(table = "login", nullable = false)
