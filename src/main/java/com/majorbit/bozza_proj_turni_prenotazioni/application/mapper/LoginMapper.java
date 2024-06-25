@@ -13,10 +13,10 @@ public class LoginMapper {
     private final UtenteRepository utenteRepository;
 
     public LoginDTO toDTO(Utente utente) {
-        return new LoginDTO(
-                utente.getUsername(),
-                utente.getPassword()
-        );
+        return LoginDTO.builder()
+                        .username(utente.getEmail())
+                        .password(utente.getPassword())
+                        .build();
     }
 
     public Utente toEntity(LoginDTO loginDTO) {

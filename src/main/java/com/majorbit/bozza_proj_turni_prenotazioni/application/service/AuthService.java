@@ -23,20 +23,22 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
 
     public TokenDTO register(UtenteDTO request) {
-        var utente = new Utente();
-        utente.setNome(request.getNome());
-        utente.setCognome(request.getCognome());
-        utente.setEmail(request.getEmail());
-        utente.setPassword(passwordEncoder.encode(request.getPassword()));
-        utente.setRuolo(request.getRuolo());
+        var utente = Utente.builder()
+                .nome(request.getNome())
+                .cognome(request.getCognome())
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .ruolo(request.getRuolo())
+                .build();
         utenteRepository.save(utente);
         emailService.sendEmail(
                 utente.getEmail(),
                 "REGISTRAZIONE EFFETTUATA",
                 "registrazione effettuata con successo"
         );
-        var token = new TokenDTO(jwtService.generateToken(utente));
-        return token;
+        return TokenDTO.builder()
+                .token(jwtService.generateToken(utente))
+                .build();
     }
 
     public TokenDTO authenticate(LoginDTO request) {
@@ -47,7 +49,8 @@ public class AuthService {
                 )
         );
         var utente = utenteRepository.findByEmail(request.getUsername()).orElseThrow();
-        var token = new TokenDTO(jwtService.generateToken(utente));
-        return token;
+        return TokenDTO.builder()
+                .token(jwtService.generateToken(utente))
+                .build();
     }
 }

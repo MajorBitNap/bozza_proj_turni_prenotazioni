@@ -42,12 +42,13 @@ public class IPrenotazioneFissa implements PrenotazioneFissa {
 
         while (cal.getTime().before(prenotazioneDTO.getDataFine()) || cal.get(Calendar.DAY_OF_WEEK) == giornoDellaSettimanaDesiderato) {
             if (cal.get(Calendar.DAY_OF_WEEK) == giornoDellaSettimanaDesiderato) {
-                var prenotazione = new Prenotazione();
-                prenotazione.setDataInizio(new Date(cal.getTimeInMillis()));
-                prenotazione.setDataFine(prenotazioneDTO.getDataFine());
-                prenotazione.setStato("INSERITA");
-                prenotazione.setUtente(utente);
-                prenotazione.setPosto(posto);
+                var prenotazione = Prenotazione.builder()
+                        .dataInizio(new Date(cal.getTimeInMillis()))
+                        .dataFine(prenotazioneDTO.getDataFine())
+                        .stato("INSERITA")
+                        .utente(utente)
+                        .posto(posto)
+                        .build();
                 prenotazioneRepository.save(prenotazione);
                 conteggioPrenotazioni++;
                 var savedPrenotazioneDTO = prenotazioneMapper.toDTO(prenotazione);

@@ -23,14 +23,15 @@ public class IPrenotazioneSingola implements PrenotazioneSingola {
 
     @Override
     public PrenotazioneDTO creaPrenotazione(PrenotazioneDTO prenotazioneDTO){
-        var prenotazione = new Prenotazione();
         var utente = utenteRepository.findById(prenotazioneDTO.getUtente()).orElseThrow();
         var posto = postoRepository.findById(prenotazioneDTO.getPosto()).orElseThrow();
-        prenotazione.setDataInizio(prenotazioneDTO.getDataInizio());
-        prenotazione.setDataFine(prenotazioneDTO.getDataFine());
-        prenotazione.setStato("INSERITA");
-        prenotazione.setUtente(utente);
-        prenotazione.setPosto(posto);
+        var prenotazione = Prenotazione.builder()
+                .dataInizio(prenotazioneDTO.getDataInizio())
+                .dataFine(prenotazioneDTO.getDataFine())
+                .stato("INSERITA")
+                .utente(utente)
+                .posto(posto)
+                .build();
         prenotazioneRepository.save(prenotazione);
         emailService.sendEmail(
                 utente.getEmail(),

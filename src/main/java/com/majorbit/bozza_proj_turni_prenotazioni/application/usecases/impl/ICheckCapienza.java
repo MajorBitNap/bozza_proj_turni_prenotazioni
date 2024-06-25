@@ -30,6 +30,7 @@ public class ICheckCapienza implements CheckCapienza {
             prenotazioni = prenotazioneRepository
                     .findPrenotazioniInDateRange(posti.get(i), dataInizio, datafine);
         }
+//      controllo per capienza superiore o meno all'80%
         if (prenotazioni.size() < (stanza.getCapienza() * 0.8)) {
             return false;
         }

@@ -13,18 +13,18 @@ public class PostoMapper {
     private final StanzaRepository stanzaRepository;
 
     public PostoDTO toDTO(Posto posto) {
-        return new PostoDTO(
-            posto.getNome(),
-            posto.isDisponibile(),
-            posto.getStanza().getId()
-        );
+        return PostoDTO.builder()
+                .nome(posto.getNome())
+                .disponibile(posto.isDisponibile())
+                .stanza(posto.getStanza().getId())
+                .build();
     }
 
     public Posto toEntity(PostoDTO postoDTO) {
-        var posto = new Posto();
-        posto.setDisponibile(postoDTO.isDisponibile());
-        posto.setNome(postoDTO.getNome());
-        posto.setStanza(stanzaRepository.findById(postoDTO.getStanza()).orElseThrow());
-        return posto;
+        return Posto.builder()
+                .nome(postoDTO.getNome())
+                .disponibile(postoDTO.isDisponibile())
+                .stanza(stanzaRepository.findById(postoDTO.getStanza()).orElseThrow())
+                .build();
     }
 }
