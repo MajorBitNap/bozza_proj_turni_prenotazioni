@@ -6,6 +6,7 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.UtenteDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Utente;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.UtenteRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.util.config.JwtService;
+import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -47,7 +48,7 @@ public class AuthService {
                         request.getPassword()
                 )
         );
-        var utente = utenteRepository.findByEmail(request.getUsername()).orElseThrow();
+        var utente = utenteRepository.findByEmail(request.getUsername()).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
         return TokenDTO.builder()
                 .token(jwtService.generateToken(utente))
                 .build();

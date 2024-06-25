@@ -27,7 +27,7 @@ public class GestioneStanza {
     }
 
     public StanzaDTO getStanzaById(Integer id) {
-        var stanza = stanzaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Stanza not found"));
+        var stanza = stanzaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
         return stanzaMapper.toDTO(stanza);
     }
 
@@ -37,17 +37,17 @@ public class GestioneStanza {
     }
 
     public StanzaDTO updateStanza(Integer id, StanzaDTO stanzaDTO) {
-        var stanza = stanzaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Stanza not found"));
+        var stanza = stanzaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
         stanza.setNome(stanzaDTO.getNome());
         stanza.setCapienza(stanzaDTO.getCapienza());
-        var piano = pianoRepository.findById(stanzaDTO.getPiano()).orElseThrow(() -> new ResourceNotFoundException("Stanza not found"));
+        var piano = pianoRepository.findById(stanzaDTO.getPiano()).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
         stanza.setPiano(piano);
         var updatedStanza = stanzaRepository.save(stanza);
         return stanzaMapper.toDTO(updatedStanza);
     }
 
     public void deleteStanza(Integer id) {
-        var stanza = stanzaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Stanza not found"));
+        var stanza = stanzaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
         stanzaRepository.delete(stanza);
     }
 }

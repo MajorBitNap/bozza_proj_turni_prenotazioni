@@ -25,7 +25,7 @@ public class GestioneLogin {
     }
 
     public LoginDTO getLoginById(Integer id) {
-        var login = loginRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Login not found"));
+        var login = loginRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
         return loginMapper.toDTO(login);
     }
 
@@ -35,7 +35,7 @@ public class GestioneLogin {
     }
 
     public LoginDTO updateLogin(Integer id, LoginDTO ILoginDTO) {
-        var login = loginRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Login not found"));
+        var login = loginRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
         login.setPassword(ILoginDTO.getPassword());
         login.setUsername(     ILoginDTO.getUsername());
         var updatedLogin = loginRepository.save(login);
@@ -43,7 +43,7 @@ public class GestioneLogin {
     }
 
     public void deleteLogin(Integer id) {
-        var login = loginRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Login not found"));
+        var login = loginRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
         loginRepository.delete(login);
     }
 }

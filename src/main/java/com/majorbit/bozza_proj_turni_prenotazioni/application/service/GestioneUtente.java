@@ -26,7 +26,7 @@ public class GestioneUtente {
     }
 
     public UtenteDTO getUtenteById(Integer id) {
-        var utente = utenteRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Utente not found"));
+        var utente = utenteRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
         return utenteMapper.toDTO(utente);
     }
 
@@ -36,7 +36,7 @@ public class GestioneUtente {
     }
 
     public UtenteDTO updateUtente(Integer id, UtenteDTO UtenteDTO) {
-        var utente = utenteRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Utente not found"));
+        var utente = utenteRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
         utente.setNome(UtenteDTO.getNome());
         utente.setCognome(UtenteDTO.getCognome());
         utente.setEmail(UtenteDTO.getEmail());
@@ -46,7 +46,7 @@ public class GestioneUtente {
     }
 
     public void deleteUtente(Integer id) {
-        var utente = utenteRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Utente not found"));
+        var utente = utenteRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
         utenteRepository.delete(utente);
     }
 }

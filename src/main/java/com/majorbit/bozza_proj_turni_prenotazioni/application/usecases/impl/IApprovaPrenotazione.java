@@ -19,7 +19,7 @@ public class IApprovaPrenotazione implements ApprovaPrenotazione {
 
     @Override
     public PrenotazioneDTO approvaPrenotazione(Integer id){
-        var prenotazione = prenotazioneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Prenotazione not found"));
+        var prenotazione = prenotazioneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
         prenotazione.setStato("Approvata");
         prenotazioneRepository.save(prenotazione);
         emailService.sendEmail(

@@ -25,7 +25,7 @@ public class GestioneSede {
     }
 
     public SedeDTO getSedeById(Integer id) {
-        var sede = sedeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Sede not found"));
+        var sede = sedeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
         return sedeMapper.toDTO(sede);
     }
 
@@ -35,7 +35,7 @@ public class GestioneSede {
     }
 
     public SedeDTO updateSede(Integer id, SedeDTO SedeDTO) {
-        var sede = sedeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Sede not found"));
+        var sede = sedeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
         sede.setNome(SedeDTO.getNome());
         sede.setIndirizzo(SedeDTO.getIndirizzo());
         var updatedSede = sedeRepository.save(sede);
@@ -43,7 +43,7 @@ public class GestioneSede {
     }
 
     public void deleteSede(Integer id) {
-        var sede = sedeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Sede not found"));
+        var sede = sedeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
         sedeRepository.delete(sede);
     }
 }

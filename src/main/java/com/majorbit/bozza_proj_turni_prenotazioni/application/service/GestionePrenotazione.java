@@ -29,7 +29,7 @@ public class GestionePrenotazione {
     }
 
     public PrenotazioneDTO getPrenotazioneById(Integer id) {
-        var prenotazione = prenotazioneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("resource not found"));
+        var prenotazione = prenotazioneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
         return prenotazioneMapper.toDTO(prenotazione);
     }
 
@@ -39,18 +39,18 @@ public class GestionePrenotazione {
     }
 
     public PrenotazioneDTO updatePrenotazione(Integer id, PrenotazioneDTO prenotazioneDTO) {
-        var prenotazione = prenotazioneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("resource not found"));
+        var prenotazione = prenotazioneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
         prenotazione.setDataInizio(prenotazioneDTO.getDataInizio());
         prenotazione.setDataFine(prenotazioneDTO.getDataFine());
         prenotazione.setStato(prenotazioneDTO.getStato());
-        prenotazione.setPosto(postoRepository.findById(prenotazioneDTO.getPosto()).orElseThrow(() -> new ResourceNotFoundException("resource not found")));
-        prenotazione.setUtente(utenteRepository.findById(prenotazioneDTO.getUtente()).orElseThrow(() -> new ResourceNotFoundException("resource not found")));;
+        prenotazione.setPosto(postoRepository.findById(prenotazioneDTO.getPosto()).orElseThrow(() -> new ResourceNotFoundException("Resource not found")));
+        prenotazione.setUtente(utenteRepository.findById(prenotazioneDTO.getUtente()).orElseThrow(() -> new ResourceNotFoundException("Resource not found")));;
         var updatedPrenotazione = prenotazioneRepository.save(prenotazione);
         return prenotazioneMapper.toDTO(updatedPrenotazione);
     }
 
     public void deletePrenotazione(Integer id) {
-        var prenotazione = prenotazioneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("resource not found"));
+        var prenotazione = prenotazioneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
         prenotazioneRepository.delete(prenotazione);
     }
 }

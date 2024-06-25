@@ -46,7 +46,7 @@ public class GestionePiano {
     }
 
     public void deletePiano(Integer id) {
-        var piano = pianoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Piano not found"));
+        var piano = pianoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
         pianoRepository.delete(piano);
     }
 }

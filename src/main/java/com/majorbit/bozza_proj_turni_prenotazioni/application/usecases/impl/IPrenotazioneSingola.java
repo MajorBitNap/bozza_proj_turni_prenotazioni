@@ -8,6 +8,7 @@ import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Prenotazione;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PostoRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PrenotazioneRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.UtenteRepository;
+import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +24,8 @@ public class IPrenotazioneSingola implements PrenotazioneSingola {
 
     @Override
     public PrenotazioneDTO creaPrenotazione(PrenotazioneDTO prenotazioneDTO){
-        var utente = utenteRepository.findById(prenotazioneDTO.getUtente()).orElseThrow();
-        var posto = postoRepository.findById(prenotazioneDTO.getPosto()).orElseThrow();
+        var utente = utenteRepository.findById(prenotazioneDTO.getUtente()).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
+        var posto = postoRepository.findById(prenotazioneDTO.getPosto()).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
         var prenotazione = Prenotazione.builder()
                 .dataInizio(prenotazioneDTO.getDataInizio())
                 .dataFine(prenotazioneDTO.getDataFine())
