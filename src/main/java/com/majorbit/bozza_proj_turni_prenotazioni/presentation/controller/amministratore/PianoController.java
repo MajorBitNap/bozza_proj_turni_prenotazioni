@@ -1,4 +1,4 @@
-package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller;
+package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller.amministratore;
 
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PianoDTO;
@@ -6,6 +6,7 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.service.GestionePi
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/piani")
+@PreAuthorize("hasRole('AMMINISTRATORE')")
 public class PianoController {
 
     private final GestionePiano gestionePiano;

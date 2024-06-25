@@ -1,15 +1,17 @@
-package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller;
+package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller.amministratore;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PostoDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.service.GestionePosto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@PreAuthorize("hasRole('AMMINISTRATORE')")
 @RequestMapping("/api/v1/posti")
 public class PostoController {
 

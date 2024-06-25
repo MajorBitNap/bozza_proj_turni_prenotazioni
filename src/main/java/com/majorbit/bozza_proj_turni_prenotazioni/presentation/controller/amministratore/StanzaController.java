@@ -1,4 +1,4 @@
-package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller;
+package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller.amministratore;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.DateRequestDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.StanzaDTO;
@@ -7,12 +7,14 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.IChe
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@PreAuthorize("hasRole('AMMINISTRATORE')")
 @RequestMapping("/api/v1/stanze")
 public class StanzaController {
 
