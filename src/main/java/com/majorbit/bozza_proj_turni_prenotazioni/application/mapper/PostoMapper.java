@@ -3,7 +3,6 @@ package com.majorbit.bozza_proj_turni_prenotazioni.application.mapper;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PostoDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Posto;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.StanzaRepository;
-import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -23,9 +22,9 @@ public class PostoMapper {
 
     public Posto toEntity(PostoDTO postoDTO) {
         return Posto.builder()
-                .disponibile(postoDTO.isDisponibile())
                 .nome(postoDTO.getNome())
-                .stanza(stanzaRepository.findById(postoDTO.getStanza()).orElseThrow(() -> new ResourceNotFoundException("Resource not found")))
+                .disponibile(postoDTO.isDisponibile())
+                .stanza(stanzaRepository.findById(postoDTO.getStanza()).orElseThrow())
                 .build();
     }
 }

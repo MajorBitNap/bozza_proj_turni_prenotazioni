@@ -5,7 +5,6 @@ import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Posto;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Stanza;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PianoRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PostoRepository;
-import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -36,12 +35,12 @@ public class StanzaMapper {
         List<Integer> postiId = stanzaDTO.getPosti();
         List<Posto> posti = new ArrayList<>();
         if (!Objects.equals(null, postiId)) {
-            postiId.forEach((id) -> posti.add(postoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"))));
+            postiId.forEach((id) -> posti.add(postoRepository.findById(id).orElseThrow()));
         }
         return Stanza.builder()
                 .nome(stanzaDTO.getNome())
                 .capienza(stanzaDTO.getCapienza())
-                .piano(pianoRepository.findById(stanzaDTO.getPiano()).orElseThrow(() -> new ResourceNotFoundException("Resource not found")))
+                .piano(pianoRepository.findById(stanzaDTO.getPiano()).orElseThrow())
                 .posti(posti)
                 .build();
     }
