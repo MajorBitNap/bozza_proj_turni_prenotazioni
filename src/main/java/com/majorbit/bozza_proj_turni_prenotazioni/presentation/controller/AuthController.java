@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/auth")
-@PreAuthorize("hasRole('AMMINISTRATORE')")
 @RequiredArgsConstructor
 public class AuthController {
 
     private final AuthService authService;
 
+    @PreAuthorize("hasRole('AMMINISTRATORE')")
     @PostMapping("/register")
     public ResponseEntity<TokenDTO> register(
             @RequestBody UtenteDTO request
