@@ -1,6 +1,5 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller;
 
-import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.DateRequestDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PostoDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PrenotazioneDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.IPrenotazioneFissa;
