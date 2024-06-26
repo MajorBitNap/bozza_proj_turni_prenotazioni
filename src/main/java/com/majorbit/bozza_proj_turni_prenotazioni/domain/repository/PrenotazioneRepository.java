@@ -10,6 +10,7 @@ import java.sql.Date;
 import java.util.List;
 
 public interface PrenotazioneRepository extends JpaRepository<Prenotazione, Integer> {
+
     @Query("SELECT p FROM Prenotazione p " + "WHERE p.posto = :posto "
             + "AND p.dataInizio BETWEEN :dataInizio AND :dataFine "
             + "AND p.dataFine BETWEEN :dataInizio AND :dataFine")
