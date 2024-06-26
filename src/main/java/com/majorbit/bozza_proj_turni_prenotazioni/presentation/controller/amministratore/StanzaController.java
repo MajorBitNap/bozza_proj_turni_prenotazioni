@@ -50,7 +50,7 @@ public class StanzaController {
         gestioneStanza.deleteStanza(id);
         return ResponseEntity.noContent().build();
     }
-
+//  chiamata per check capienza stanza
     @PostMapping("/capienza/{id}")
     public ResponseEntity<Boolean> checkCapienza(@PathVariable Integer id, @RequestBody DateRequestDTO dateRequestDTO) {
         return ResponseEntity.ok(checkCapienza.isOver(gestioneStanza.getStanzaById(id), dateRequestDTO.getDataInizio(), dateRequestDTO.getDataFine()));
