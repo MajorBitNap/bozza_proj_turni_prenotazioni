@@ -21,7 +21,7 @@ public class ICheckCapienza implements CheckCapienza {
     private final PrenotazioneRepository prenotazioneRepository;
     private final StanzaMapper stanzaMapper;
     private final EmailService emailService;
-
+//  datainizio e fine in base alla prenotazione dell'utente
     public boolean isOver(StanzaDTO stanzaDTO, Date dataInizio, Date  datafine) {
         var stanza = stanzaMapper.toEntity(stanzaDTO);
         List<Posto> posti = stanza.getPosti();

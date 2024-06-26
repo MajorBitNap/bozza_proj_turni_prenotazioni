@@ -22,6 +22,7 @@ public class Prenotazione {
     @Column(name = "data_fine", nullable = false)
     private Date dataFine;
 
+//  cambia da string a enum
     @Column
     private String stato;
 
