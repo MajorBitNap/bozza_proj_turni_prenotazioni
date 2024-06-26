@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('DIPENDENTE')")
+@PreAuthorize("hasRole('DIPENDENTE') or hadRole('AMMINISTRATORE')")
 @RequestMapping("/api/v1/dipendente")
 public class DipendenteController {
 

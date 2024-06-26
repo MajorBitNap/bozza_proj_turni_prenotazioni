@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/moderatore")
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('MODERATORE')")
+@PreAuthorize("hasRole('MODERATORE') or hadRole('AMMINISTRATORE')")
 public class ModeratoreController {
 
     private final IPrenotazioneFissa prenotazioneFissa;

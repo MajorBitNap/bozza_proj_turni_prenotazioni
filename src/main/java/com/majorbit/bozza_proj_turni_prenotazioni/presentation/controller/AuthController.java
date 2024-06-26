@@ -19,7 +19,7 @@ public class AuthController {
 
     private final AuthService authService;
 
-//    @PreAuthorize("hasRole('AMMINISTRATORE')")
+    @PreAuthorize("hasRole('AMMINISTRATORE')")
     @PostMapping("/register")
     public ResponseEntity<TokenDTO> register(
             @RequestBody UtenteDTO request
