@@ -38,7 +38,7 @@ public class DipendenteController {
     }
 
     @GetMapping("/posti_disponbili")
-    public ResponseEntity<List<PostoDTO>> getPostiDisponibili(@RequestBody DateRequestDTO intervallo) {
+    public ResponseEntity<List<PostoDTO>> getPostiDisponibili() {
         var postiDisponibili = recuperaPostiDisponibili.getPostiDisponibili();
         return ResponseEntity.ok(postiDisponibili);
     }
