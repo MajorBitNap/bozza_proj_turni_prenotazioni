@@ -19,7 +19,9 @@ public class Utente implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(table = "login", name = "id_utente",nullable = false)
     private Integer id;
+
 
     @Column(nullable = false)
     private String nome;
@@ -27,17 +29,17 @@ public class Utente implements UserDetails {
     @Column(nullable = false)
     private String cognome;
 
+    //  nella richiesta assicurarsi che il ruolo sia in formato TUTTO MAIUSCOLO
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Ruolo ruolo;
+
     @Column(table = "login", name = "username",
             nullable = false, unique = true)
     private String email;
 
     @Column(table = "login", nullable = false)
     private String password;
-
-//  nella richiesta assicurarsi che il ruolo sia in formato TUTTO MAIUSCOLO
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Ruolo ruolo;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

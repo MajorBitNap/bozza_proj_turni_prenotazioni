@@ -23,8 +23,9 @@ public class Prenotazione {
     private Date dataFine;
 
 //  cambia da string a enum
-    @Column
-    private String stato;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Stato stato;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
