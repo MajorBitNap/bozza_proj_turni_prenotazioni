@@ -17,7 +17,7 @@ public interface JPAPrenotazioneRepository extends JpaRepository<Prenotazione, I
     @Query("SELECT p FROM Prenotazione p " + "WHERE p.posto = :posto "
             + "AND p.dataInizio BETWEEN :dataInizio AND :dataFine "
             + "AND p.dataFine BETWEEN :dataInizio AND :dataFine")
-    List<Prenotazione> findPrenotazioniInDateRange(
+    List<Prenotazione> findPrenotazioniApprovateInDateRange(
             @Param("posto") Posto posto,
             @Param("dataInizio") Date dataInizio,
             @Param("dataFine") Date dataFine

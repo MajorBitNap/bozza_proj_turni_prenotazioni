@@ -11,10 +11,12 @@ import java.util.List;
 
 public interface PrenotazioneRepository extends JpaRepository<Prenotazione, Integer> {
 
-    @Query("SELECT p FROM Prenotazione p " + "WHERE p.posto = :posto "
-            + "AND p.dataInizio BETWEEN :dataInizio AND :dataFine "
-            + "AND p.dataFine BETWEEN :dataInizio AND :dataFine")
-    List<Prenotazione> findPrenotazioniInDateRange(
+    @Query("SELECT p FROM Prenotazione p " +
+            "WHERE p.posto = :posto " +
+            "AND p.dataInizio BETWEEN :dataInizio AND :dataFine " +
+            "AND p.dataFine BETWEEN :dataInizio AND :dataFine " +
+            "AND p.stato = 'APPROVATA'")
+    List<Prenotazione> findPrenotazioniApprovateInDateRange(
             @Param("posto") Posto posto,
             @Param("dataInizio") Date dataInizio,
             @Param("dataFine") Date dataFine

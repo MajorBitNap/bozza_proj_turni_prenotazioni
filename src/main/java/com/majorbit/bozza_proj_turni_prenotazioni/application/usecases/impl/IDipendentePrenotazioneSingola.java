@@ -41,7 +41,6 @@ public class IDipendentePrenotazioneSingola implements DipendentePrenotazioneSin
                 "E' stata inserita una prenotazione per il " + utente.getRuolo().toString().toLowerCase()
                         + " " + utente.getNome() + " " + utente.getCognome() + " nel giorno "
                         + prenotazioneDTO.getDataInizio());
-        checkCapienza.isOver(posto.getStanza().getId(), prenotazioneDTO.getDataInizio(), prenotazioneDTO.getDataFine());
         return prenotazioneMapper.toDTO(prenotazione);
     }
 }

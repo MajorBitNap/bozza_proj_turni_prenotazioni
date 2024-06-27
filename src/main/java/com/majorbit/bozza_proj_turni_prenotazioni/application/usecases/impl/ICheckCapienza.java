@@ -30,7 +30,7 @@ public class ICheckCapienza implements CheckCapienza {
         List<Prenotazione> prenotazioni = new ArrayList<>();
         for (var posto : posti) {
             List<Prenotazione> prenotazioniPosto = prenotazioneRepository
-                    .findPrenotazioniInDateRange(posto, dataInizio, dataFine);
+                    .findPrenotazioniApprovateInDateRange(posto, dataInizio, dataFine);
             prenotazioni.addAll(prenotazioniPosto);
         }
         int capacitaStanza = stanza.getCapienza();
@@ -47,7 +47,7 @@ public class ICheckCapienza implements CheckCapienza {
             "antola.edoardo@gmail.com",
             "ALLERT CAPIENZA SUPERATA",
             "La stanza " + stanza.getNome() + " nella sede di " + stanza.getPiano().getSede().getNome()
-                    + " nel periodo " + dataInizio + "-" + dataFine + " ha raggiunto una capienza del "
+                    + " nel periodo " + dataInizio + "   " + dataFine + " ha raggiunto una capienza del "
                     + String.format("%.2f", percentualeOccupata) + "%."
                     + " La capacità massima della stanza è di : " + stanza.getCapienza()
         );

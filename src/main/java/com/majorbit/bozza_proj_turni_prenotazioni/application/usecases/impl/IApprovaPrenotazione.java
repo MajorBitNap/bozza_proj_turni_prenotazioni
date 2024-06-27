@@ -16,7 +16,7 @@ public class IApprovaPrenotazione implements ApprovaPrenotazione {
 
     private final PrenotazioneRepository prenotazioneRepository;
     private final EmailService emailService;
-    private final UtenteMapper utenteMapper;
+    private final ICheckCapienza checkCapienza;
 
     @Override
     public PrenotazioneDTO approvaPrenotazione(Integer id){
@@ -30,6 +30,7 @@ public class IApprovaPrenotazione implements ApprovaPrenotazione {
                         + prenotazione.getUtente().getCognome() + ", la sua prenotazione per il giorno "
                         + prenotazione.getDataInizio() + " è stata accettata dal moderatore. \nBuon lavoro!"
         );
+        checkCapienza.isOver(prenotazione.getPosto().getStanza().getId(), prenotazione.getDataInizio(), prenotazione.getDataFine());
         return null;
     }
 

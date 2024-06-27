@@ -65,7 +65,6 @@ public class IDipendentePrenotazioneFissa implements DipendentePrenotazioneFissa
                         + " " + utente.getNome() + " " + utente.getCognome() + " per ogni "
                         + nomeGiornoDellaSettimanaDesiderato + " dal giorno " + prenotazioneDTO.getDataInizio() + " al giorno "
                         + prenotazioneDTO.getDataFine());
-        checkCapienza.isOver(posto.getStanza().getId(), prenotazioneDTO.getDataInizio(), prenotazioneDTO.getDataFine());
         return prenotazioni;
     }
 }
