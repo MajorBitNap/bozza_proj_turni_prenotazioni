@@ -2,7 +2,6 @@ package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller.ammin
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.StanzaDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.service.GestioneStanza;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.ICheckCapienza;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,6 @@ import java.util.List;
 public class StanzaController {
 
     private final GestioneStanza gestioneStanza;
-    private final ICheckCapienza checkCapienza;
 
     @GetMapping("/{id}")
     public ResponseEntity<StanzaDTO> getStanzaById(@PathVariable Integer id) {

@@ -22,12 +22,6 @@ public class GestionePrenotazione {
     private final UtenteRepository utenteRepository;
     private final PrenotazioneMapper prenotazioneMapper;
 
-    public PrenotazioneDTO createPrenotazione(PrenotazioneDTO PrenotazioneDTO) {
-        var prenotazione = prenotazioneMapper.toEntity(PrenotazioneDTO);
-        var savedPrenotazione = prenotazioneRepository.save(prenotazione);
-        return prenotazioneMapper.toDTO(savedPrenotazione);
-    }
-
     public PrenotazioneDTO getPrenotazioneById(Integer id) {
         var prenotazione = prenotazioneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
         return prenotazioneMapper.toDTO(prenotazione);
@@ -44,7 +38,7 @@ public class GestionePrenotazione {
         prenotazione.setDataFine(prenotazioneDTO.getDataFine());
         prenotazione.setStato(prenotazioneDTO.getStato());
         prenotazione.setPosto(postoRepository.findById(prenotazioneDTO.getPosto()).orElseThrow(() -> new ResourceNotFoundException("Resource not found")));
-        prenotazione.setUtente(utenteRepository.findById(prenotazioneDTO.getUtente()).orElseThrow(() -> new ResourceNotFoundException("Resource not found")));;
+        prenotazione.setUtente(utenteRepository.findById(prenotazioneDTO.getUtente()).orElseThrow(() -> new ResourceNotFoundException("Resource not found")));
         var updatedPrenotazione = prenotazioneRepository.save(prenotazione);
         return prenotazioneMapper.toDTO(updatedPrenotazione);
     }

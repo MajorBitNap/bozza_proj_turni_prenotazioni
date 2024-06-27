@@ -1,7 +1,6 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PrenotazioneDTO;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.UtenteMapper;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.service.EmailService;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.spec.ApprovaPrenotazione;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Stato;

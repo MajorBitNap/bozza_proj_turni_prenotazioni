@@ -27,8 +27,6 @@ public class IDipendentePrenotazioneFissa implements DipendentePrenotazioneFissa
     private final PostoRepository postoRepository;
     private final PrenotazioneMapper prenotazioneMapper;
     private final EmailService emailService;
-    private final ICheckCapienza checkCapienza;
-
 //  logica per prenotare un posto per una Data
     @Override
     public List<PrenotazioneDTO> creaPrenotazioniRicorrenti(PrenotazioneDTO prenotazioneDTO) {

@@ -4,6 +4,7 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PianoDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Piano;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.SedeRepository;
 
+import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -26,7 +27,7 @@ public class PianoMapper {
         return Piano.builder()
                 .nome(pianoDTO.getNome())
                 .numero(pianoDTO.getNumero())
-                .sede(sedeRepository.findById(pianoDTO.getSede()).orElseThrow())
+                .sede(sedeRepository.findById(pianoDTO.getSede()).orElseThrow(() -> new ResourceNotFoundException("Resource not found")))
                 .build();
     }
 }

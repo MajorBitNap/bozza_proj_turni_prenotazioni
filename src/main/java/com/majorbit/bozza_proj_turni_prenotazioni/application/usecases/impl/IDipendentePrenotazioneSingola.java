@@ -21,7 +21,6 @@ public class IDipendentePrenotazioneSingola implements DipendentePrenotazioneSin
     private final PostoRepository postoRepository;
     private final PrenotazioneMapper prenotazioneMapper;
     private final EmailService emailService;
-    private final ICheckCapienza checkCapienza;
 
     @Override
     public PrenotazioneDTO creaPrenotazione(PrenotazioneDTO prenotazioneDTO){

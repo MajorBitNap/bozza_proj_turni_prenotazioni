@@ -3,6 +3,7 @@ package com.majorbit.bozza_proj_turni_prenotazioni.application.mapper;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.LoginDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Utente;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.UtenteRepository;
+import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -20,8 +21,6 @@ public class LoginMapper {
     }
 
     public Utente toEntity(LoginDTO loginDTO) {
-        var utente = utenteRepository.findByEmail(loginDTO.getUsername());
-        if (!utente.isPresent()) {}
-        return utente.get();
+        return utenteRepository.findByEmail(loginDTO.getUsername()).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
     }
 }
