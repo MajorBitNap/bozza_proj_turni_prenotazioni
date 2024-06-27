@@ -16,11 +16,10 @@ import java.util.stream.Collectors;
 public class GestioneUtente {
 
     private final UtenteRepository utenteRepository;
-
     private final UtenteMapper utenteMapper;
 
-    public UtenteDTO createUtente(UtenteDTO UtenteDTO) {
-        var utente = utenteMapper.toEntity(UtenteDTO);
+    public UtenteDTO createUtente(UtenteDTO utenteDTO) {
+        var utente = utenteMapper.toEntity(utenteDTO);
         var savedUtente = utenteRepository.save(utente);
         return utenteMapper.toDTO(savedUtente);
     }
@@ -35,12 +34,12 @@ public class GestioneUtente {
         return utenti.stream().map(utenteMapper::toDTO).collect(Collectors.toList());
     }
 
-    public UtenteDTO updateUtente(Integer id, UtenteDTO UtenteDTO) {
+    public UtenteDTO updateUtente(Integer id, UtenteDTO utenteDTO) {
         var utente = utenteRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
-        utente.setNome(UtenteDTO.getNome());
-        utente.setCognome(UtenteDTO.getCognome());
-        utente.setEmail(UtenteDTO.getEmail());
-        utente.setRuolo(UtenteDTO.getRuolo());
+        utente.setNome(utenteDTO.getNome());
+        utente.setCognome(utenteDTO.getCognome());
+        utente.setEmail(utenteDTO.getEmail());
+        utente.setRuolo(utenteDTO.getRuolo());
         var updatedUtente = utenteRepository.save(utente);
         return utenteMapper.toDTO(updatedUtente);
     }

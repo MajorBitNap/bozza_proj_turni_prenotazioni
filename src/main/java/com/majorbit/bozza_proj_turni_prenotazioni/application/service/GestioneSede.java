@@ -18,8 +18,8 @@ public class GestioneSede {
     private final SedeRepository sedeRepository;
     private final SedeMapper sedeMapper;
 
-    public SedeDTO createSede(SedeDTO SedeDTO) {
-        var sede = sedeMapper.toEntity(SedeDTO);
+    public SedeDTO createSede(SedeDTO sedeDTO) {
+        var sede = sedeMapper.toEntity(sedeDTO);
         var savedSede = sedeRepository.save(sede);
         return sedeMapper.toDTO(savedSede);
     }
@@ -34,10 +34,10 @@ public class GestioneSede {
         return sedi.stream().map(sedeMapper::toDTO).collect(Collectors.toList());
     }
 
-    public SedeDTO updateSede(Integer id, SedeDTO SedeDTO) {
+    public SedeDTO updateSede(Integer id, SedeDTO sedeDTO) {
         var sede = sedeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
-        sede.setNome(SedeDTO.getNome());
-        sede.setIndirizzo(SedeDTO.getIndirizzo());
+        sede.setNome(sedeDTO.getNome());
+        sede.setIndirizzo(sedeDTO.getIndirizzo());
         var updatedSede = sedeRepository.save(sede);
         return sedeMapper.toDTO(updatedSede);
     }

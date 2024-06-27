@@ -20,8 +20,8 @@ public class GestioneStanza {
     private final PianoRepository pianoRepository;
     private final StanzaMapper stanzaMapper;
 
-    public StanzaDTO createStanza(StanzaDTO StanzaDTO) {
-        var stanza = stanzaMapper.toEntity(StanzaDTO);
+    public StanzaDTO createStanza(StanzaDTO stanzaDTO) {
+        var stanza = stanzaMapper.toEntity(stanzaDTO);
         var savedStanza = stanzaRepository.save(stanza);
         return stanzaMapper.toDTO(savedStanza);
     }

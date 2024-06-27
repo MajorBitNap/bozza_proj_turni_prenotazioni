@@ -20,8 +20,8 @@ public class GestionePosto {
     private final StanzaRepository stanzaRepository;
     private final PostoMapper postoMapper;
 
-    public PostoDTO createPosto(PostoDTO PostoDTO) {
-        var posto = postoMapper.toEntity(PostoDTO);
+    public PostoDTO createPosto(PostoDTO postoDTO) {
+        var posto = postoMapper.toEntity(postoDTO);
         var savedPosto = postoRepository.save(posto);
         return postoMapper.toDTO(savedPosto);
     }

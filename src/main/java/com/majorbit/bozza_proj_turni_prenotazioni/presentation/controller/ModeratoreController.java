@@ -22,15 +22,15 @@ public class ModeratoreController {
 
     //  prenotazione fissa ciclica per il giorno della settimana corrispondente a quella della prenotazione già approvata poiché creata dal moderatore
     @PostMapping("/prenotazione_fissa")
-    public ResponseEntity<Void> prenotaGiornoFisso(@RequestBody PrenotazioneDTO PrenotazioneDTO) {
-        List<PrenotazioneDTO> prenotazioni = prenotazioneFissa.creaPrenotazioniRicorrenti(PrenotazioneDTO);
+    public ResponseEntity<Void> prenotaGiornoFisso(@RequestBody PrenotazioneDTO prenotazione) {
+        List<PrenotazioneDTO> prenotazioni = prenotazioneFissa.creaPrenotazioniRicorrenti(prenotazione);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     //  logica per effettuare una prenotazione singola per un giorno specifico
     @PostMapping("/prenotazione_singola")
-    public ResponseEntity<PrenotazioneDTO> prenotaPerSingoloGiorno(@RequestBody PrenotazioneDTO prenotazioneDTO) {
-        var newPrenotazione = prenotazioneSingola.creaPrenotazione(prenotazioneDTO);
+    public ResponseEntity<PrenotazioneDTO> prenotaPerSingoloGiorno(@RequestBody PrenotazioneDTO prenotazione) {
+        var newPrenotazione = prenotazioneSingola.creaPrenotazione(prenotazione);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

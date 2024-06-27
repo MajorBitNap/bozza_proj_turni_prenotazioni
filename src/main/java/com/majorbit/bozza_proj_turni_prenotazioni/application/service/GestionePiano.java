@@ -20,8 +20,8 @@ public class GestionePiano {
     private final SedeRepository sedeRepository;
     private final PianoMapper pianoMapper;
 
-    public PianoDTO createPiano(PianoDTO PianoDTO) {
-        var piano = pianoMapper.toEntity(PianoDTO);
+    public PianoDTO createPiano(PianoDTO pianoDTO) {
+        var piano = pianoMapper.toEntity(pianoDTO);
         var savedPiano = pianoRepository.save(piano);
         return pianoMapper.toDTO(savedPiano);
     }
