@@ -1,6 +1,5 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller.amministratore;
 
-import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.DateRequestDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.StanzaDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.service.GestioneStanza;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.ICheckCapienza;
@@ -49,11 +48,6 @@ public class StanzaController {
     public ResponseEntity<Void> deleteStanza(@PathVariable Integer id) {
         gestioneStanza.deleteStanza(id);
         return ResponseEntity.noContent().build();
-    }
-//  chiamata per check capienza stanza
-    @PostMapping("/capienza/{id}")
-    public ResponseEntity<Boolean> checkCapienza(@PathVariable Integer id, @RequestBody DateRequestDTO dateRequestDTO) {
-        return ResponseEntity.ok(checkCapienza.isOver(id, dateRequestDTO.getDataInizio(), dateRequestDTO.getDataFine()));
     }
 
 }
