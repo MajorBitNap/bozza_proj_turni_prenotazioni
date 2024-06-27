@@ -14,14 +14,14 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "utente")
 @SecondaryTable(name = "login", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id"))
 public class Utente implements UserDetails {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(table = "login", name = "id_utente",nullable = false)
     private Integer id;
-
 
     @Column(nullable = false)
     private String nome;
