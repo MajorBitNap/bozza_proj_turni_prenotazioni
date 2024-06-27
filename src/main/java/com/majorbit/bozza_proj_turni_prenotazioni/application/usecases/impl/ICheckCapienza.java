@@ -6,7 +6,6 @@ import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Posto;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Prenotazione;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Stanza;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PrenotazioneRepository;
-import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.SedeRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.StanzaRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -39,18 +38,18 @@ public class ICheckCapienza implements CheckCapienza {
         if (percentualeOccupata < 80.0) {
             return false;
         }
-        sendCapacityAlertEmail(stanza, percentualeOccupata);
+        sendCapacityAlertEmail(stanza, percentualeOccupata, dataInizio, dataFine);
         return true;
     }
 
-    private void sendCapacityAlertEmail(Stanza stanza, double percentualeOccupata) {
+    private void sendCapacityAlertEmail(Stanza stanza, double percentualeOccupata, Date dataInizio, Date dataFine) {
         emailService.sendEmail(
-                "antola.edoardo@gmail.com",
-                "ALLERT CAPIENZA SUPERATA",
-                "La stanza " + stanza.getNome() + " della di sede " + stanza.getPiano().getSede().getNome()
-                        + " ha superato la sua capienza massima. Attualmente è occupata al "
-                        + String.format("%.2f", percentualeOccupata) + "%."
-                        + " La capacità massima della stanza è di : " + stanza.getCapienza()
+            "antola.edoardo@gmail.com",
+            "ALLERT CAPIENZA SUPERATA",
+            "La stanza " + stanza.getNome() + " nella sede di " + stanza.getPiano().getSede().getNome()
+                    + " nel periodo " + dataInizio + "-" + dataFine + " ha raggiunto una capienza del "
+                    + String.format("%.2f", percentualeOccupata) + "%."
+                    + " La capacità massima della stanza è di : " + stanza.getCapienza()
         );
     }
 
