@@ -1,10 +1,10 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl;
-
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PrenotazioneDTO;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.PrenotazioneMapper;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.service.EmailService;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.spec.PrenotazioneFissa;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.spec.ModeratorePrenotazioneFissa;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Prenotazione;
+import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Stato;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PostoRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PrenotazioneRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.UtenteRepository;
@@ -19,15 +19,16 @@ import java.util.Locale;
 
 @Service
 @RequiredArgsConstructor
-public class IPrenotazioneFissa implements PrenotazioneFissa {
+public class IModeratorePrenotazioneFissa implements ModeratorePrenotazioneFissa {
 
     private final PrenotazioneRepository prenotazioneRepository;
     private final UtenteRepository utenteRepository;
     private final PostoRepository postoRepository;
     private final PrenotazioneMapper prenotazioneMapper;
     private final EmailService emailService;
+    private final ICheckCapienza checkCapienza;
 
-//  logica per prenotare un posto per una Data
+    //  logica per prenotare un posto per una Data
     @Override
     public List<PrenotazioneDTO> creaPrenotazioniRicorrenti(PrenotazioneDTO prenotazioneDTO) {
 
@@ -45,7 +46,7 @@ public class IPrenotazioneFissa implements PrenotazioneFissa {
                 var prenotazione = Prenotazione.builder()
                         .dataInizio(new Date(cal.getTimeInMillis()))
                         .dataFine(prenotazioneDTO.getDataFine())
-                        .stato("INSERITA")
+                        .stato(Stato.APPROVATA)
                         .utente(utente)
                         .posto(posto)
                         .build();
@@ -59,10 +60,12 @@ public class IPrenotazioneFissa implements PrenotazioneFissa {
         emailService.sendEmail(
                 utente.getEmail(),
                 "Prenotazione Ripetuta Effettuata",
-                "Sono appena state inserite " + conteggioPrenotazioni + " prenotazioni per il " + utente.getRuolo().toString().toLowerCase()
-                        + " " + utente.getNome() + " " + utente.getCognome() + " per ogni "
-                        + nomeGiornoDellaSettimanaDesiderato + " dal giorno "+ prenotazioneDTO.getDataInizio() + " al giorno "
+                "Sono appena state inserite " + conteggioPrenotazioni + " prenotazioni per il "
+                        + utente.getRuolo().toString().toLowerCase() + " " + utente.getNome() + " "
+                        + utente.getCognome() + " per ogni " + nomeGiornoDellaSettimanaDesiderato
+                        + " dal giorno " + prenotazioneDTO.getDataInizio() + " al giorno "
                         + prenotazioneDTO.getDataFine());
+        checkCapienza.isOver(posto.getStanza().getId(), prenotazioneDTO.getDataInizio(), prenotazioneDTO.getDataFine());
         return prenotazioni;
     }
 }

@@ -1,5 +1,6 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.application.dto;
 
+import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Stato;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,7 +21,7 @@ public class PrenotazioneDTO implements Serializable {
 
     private Date dataInizio;
     private Date dataFine;
-    private String stato;
+    private Stato stato;
     private Integer posto;
     private Integer utente;
 

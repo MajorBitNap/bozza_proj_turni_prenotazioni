@@ -27,7 +27,6 @@ public class Prenotazione {
     @Column(nullable = false)
     private Stato stato;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "posto_id")
     private Posto posto;

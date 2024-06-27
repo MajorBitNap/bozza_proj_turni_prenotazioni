@@ -6,5 +6,5 @@ import org.springframework.stereotype.Component;
 import java.sql.Date;
 @Component
 public interface CheckCapienza {
-    boolean isOver(StanzaDTO stanzaDTO, Date dataInizio, Date  datafine);
+    boolean isOver(Integer idStanza, Date dataInizio, Date  datafine);
 }

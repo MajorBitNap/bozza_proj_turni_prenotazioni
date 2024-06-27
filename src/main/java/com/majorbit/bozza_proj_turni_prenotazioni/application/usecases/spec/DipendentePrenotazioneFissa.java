@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 @Component
-public interface PrenotazioneFissa {
-    public List<PrenotazioneDTO> creaPrenotazioniRicorrenti(PrenotazioneDTO PrenotazioneDTO);
-
+public interface DipendentePrenotazioneFissa {
+    List<PrenotazioneDTO> creaPrenotazioniRicorrenti(PrenotazioneDTO PrenotazioneDTO);
 }

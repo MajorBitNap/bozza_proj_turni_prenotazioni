@@ -1,12 +1,14 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl;
 
-import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.StanzaDTO;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.StanzaMapper;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.service.EmailService;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.spec.CheckCapienza;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Posto;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Prenotazione;
+import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Stanza;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PrenotazioneRepository;
+import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.SedeRepository;
+import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.StanzaRepository;
+import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -19,28 +21,37 @@ import java.util.List;
 public class ICheckCapienza implements CheckCapienza {
 
     private final PrenotazioneRepository prenotazioneRepository;
-    private final StanzaMapper stanzaMapper;
+    private final StanzaRepository stanzaRepository;
     private final EmailService emailService;
-//  datainizio e fine in base alla prenotazione dell'utente
-    public boolean isOver(StanzaDTO stanzaDTO, Date dataInizio, Date  datafine) {
-        var stanza = stanzaMapper.toEntity(stanzaDTO);
+
+    public boolean isOver(Integer idStanza, Date dataInizio, Date dataFine) {
+        var stanza = stanzaRepository.findById(idStanza)
+                .orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
         List<Posto> posti = stanza.getPosti();
         List<Prenotazione> prenotazioni = new ArrayList<>();
-        for (int i = 0; i < posti.size(); i++) {
-            prenotazioni = prenotazioneRepository
-                    .findPrenotazioniInDateRange(posti.get(i), dataInizio, datafine);
+        for (var posto : posti) {
+            List<Prenotazione> prenotazioniPosto = prenotazioneRepository
+                    .findPrenotazioniInDateRange(posto, dataInizio, dataFine);
+            prenotazioni.addAll(prenotazioniPosto);
         }
-//      controllo per capienza superiore o meno all'80%
-        if (prenotazioni.size() < (stanza.getCapienza() * 0.8)) {
+        int capacitaStanza = stanza.getCapienza();
+        double percentualeOccupata = (double) prenotazioni.size() / capacitaStanza * 100;
+        if (percentualeOccupata < 80.0) {
             return false;
         }
-        emailService.sendEmail(
-                "email.amministratore@majorbit.com",
-                "ALLERT CAPIENZA 80% SUPERATA",
-                "La stanza " + stanza.getNome() + " con id: " + stanza.getId()
-                        + " ha superato l'80% della sua capienza massima che corrisponde a : "
-                        + stanza.getCapienza()
-        );
+        sendCapacityAlertEmail(stanza, percentualeOccupata);
         return true;
     }
+
+    private void sendCapacityAlertEmail(Stanza stanza, double percentualeOccupata) {
+        emailService.sendEmail(
+                "antola.edoardo@gmail.com",
+                "ALLERT CAPIENZA SUPERATA",
+                "La stanza " + stanza.getNome() + " della di sede " + stanza.getPiano().getSede().getNome()
+                        + " ha superato la sua capienza massima. Attualmente è occupata al "
+                        + String.format("%.2f", percentualeOccupata) + "%."
+                        + " La capacità massima della stanza è di : " + stanza.getCapienza()
+        );
+    }
+
 }

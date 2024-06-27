@@ -2,7 +2,8 @@ package com.majorbit.bozza_proj_turni_prenotazioni.domain.model;
 
 public enum Stato {
 
-    INSERTITA,
-    APPROVATA
+    INSERITA,
+    APPROVATA,
+    CANCELLATA
 
 }

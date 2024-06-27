@@ -1,8 +1,8 @@
 package com.majorbit.bozza_proj_turni_prenotazioni.presentation.controller.amministratore;
 
 import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PrenotazioneDTO;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.IPrenotazioneFissa;
-import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.IPrenotazioneSingola;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.IDipendentePrenotazioneFissa;
+import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.impl.IDipendentePrenotazioneSingola;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +20,8 @@ import java.util.List;
 @RequestMapping("/api/v1/amministratore")
 public class AmministratoreController {
 
-    private final IPrenotazioneFissa prenotazioneFissa;
-    private final IPrenotazioneSingola prenotazioneSingola;
+    private final IDipendentePrenotazioneFissa prenotazioneFissa;
+    private final IDipendentePrenotazioneSingola prenotazioneSingola;
 
     //  logica per effettuare una prenotazione singola per un giorno specifico
     @PostMapping("/prenotazione_singola")

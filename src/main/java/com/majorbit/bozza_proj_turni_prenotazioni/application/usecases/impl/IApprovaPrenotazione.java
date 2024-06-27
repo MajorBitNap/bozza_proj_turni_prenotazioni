@@ -4,6 +4,7 @@ import com.majorbit.bozza_proj_turni_prenotazioni.application.dto.PrenotazioneDT
 import com.majorbit.bozza_proj_turni_prenotazioni.application.mapper.UtenteMapper;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.service.EmailService;
 import com.majorbit.bozza_proj_turni_prenotazioni.application.usecases.spec.ApprovaPrenotazione;
+import com.majorbit.bozza_proj_turni_prenotazioni.domain.model.Stato;
 import com.majorbit.bozza_proj_turni_prenotazioni.domain.repository.PrenotazioneRepository;
 import com.majorbit.bozza_proj_turni_prenotazioni.util.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class IApprovaPrenotazione implements ApprovaPrenotazione {
     @Override
     public PrenotazioneDTO approvaPrenotazione(Integer id){
         var prenotazione = prenotazioneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
-        prenotazione.setStato("APPROVATA");
+        prenotazione.setStato(Stato.APPROVATA);
         prenotazioneRepository.save(prenotazione);
         emailService.sendEmail(
                 prenotazione.getUtente().getEmail(),
